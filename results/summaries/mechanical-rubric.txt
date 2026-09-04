@@ -7,7 +7,7 @@ PASS binary reward + CTRF
 PASS execution isolation
 PASS oracle-compared outcomes, not source greps
 PASS instruction names artifacts with absolute paths
-PASS 10 hidden books stay in the verifier image
+PASS 16 hidden books stay in the verifier image
 PASS pytest does not import agent modules
 All mechanical rubric gates passed
 Still required: harbor check with ANTHROPIC_API_KEY for the LLM judge.

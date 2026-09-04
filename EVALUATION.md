@@ -26,7 +26,7 @@ Harbor version: `0.22.0`.
 | Nop reward 0.0 | **PASS** (HSMJ job `2026-09-04__19-20-04`) | [nop.json](results/summaries/nop.json) |
 | Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **FAIL on two prior genres; HSMJ re-run pending** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json) |
+| `/run` × 3 Codex genuinely fail | **FAIL — 3/3, then 3/3, then 3/3 after HSMJ** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json) |
 | `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
 | `/cheat` Codex reward 0 | **not a valid 0** | `AgentSafetyRefusalError` on old task |
 | `/cheat` Claude reward 0 | **not counted** | no token |
@@ -156,7 +156,7 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 
 | Config | Trial | Reward | Error? | Notes |
 |--------|-------|--------|--------|-------|
-| codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0 × 3** | none | Job `2026-09-04__18-00-05` (HSM 1.0 spec). Then overlays harden, job `2026-09-04__18-37-45`, another **1.0 × 3** in 29m (~$3.98). The model transcribes a complete written methodology. **Hiring bar requires all three to fail.** |
+| codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0 × 3** (three jobs) | none | HSM 1.0 (`18-00-05`), overlays (`18-37-45`), HSMJ journals (`19-21-22`, 41m, ~$4.65). All genuine. **Hiring bar requires all three to fail.** |
 | claude-code / anthropic/claude-opus-5 / max | 1–3 | not run | n/a | `claude auth status` → loggedIn false. No `CLAUDE_CODE_OAUTH_TOKEN`. |
 
 Earlier Codex jobs (`4960ffb6-…`, `2026-09-04__17-53-20`) died on `NetworkConnectionError` during `apt-get` inside Harbor’s Compose network. That is infra. This host’s user-defined Docker networks cannot NAT IPv4; the default `docker0` bridge can. `scripts/run_trials.sh` now passes `scripts/docker-compose.bridge.yaml` (`network_mode: bridge`). After that overlay, Codex installed and called the API.
@@ -225,8 +225,12 @@ Both completed `/run` jobs were genuine model trials (agent installed, `gpt-5.6-
 
 Conclusion: a complete, fair, written methodology for a deterministic engine is not enough to fail this config. A further overlay cookbook will not meet the hiring bar.
 
-### Genre change: HSMJ journals (in progress)
+### Genre change: HSMJ journals — still 3/3
 
 Positions now arrive as House Scan Margin Journals. The sample is a v1 POS_V1 tape the starter already decodes. Hidden books are v2 tapes: mixed-endian chunk lengths, packed quantities, packed-BCD strikes, CRC-skipped frames, combo expansion, voids, and patches. The methodology overlays stay fully specified (fairness / instruction alignment). Oracle still recomputes from JSON equivalents and does not share the agent's decoder.
+
+Job `2026-09-04__19-21-22` (`53628d4d-…`): **3/3 reward 1.0**, 41m, ~$4.65, no infra errors. Codex read `hsmj.h` / `FORMAT.md` / `ERRATA.txt` and wrote a v1+v2 decoder plus the overlay engine in ~12 minutes per trial.
+
+Three genuine `/run` jobs, three genres, nine trials, nine rewards of 1.0. A complete, fair written spec — math or on-wire format — is not enough to fail `gpt-5.6-sol` + `xhigh`. `/cheat` was not started on this genre: a model that solves the task will score 1 if it just solves it again.
 
 Old-task `/cheat` (`2026-09-04__18-29-49`) ended in `AgentSafetyRefusalError` — not a valid verifier zero.
