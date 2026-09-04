@@ -20,6 +20,7 @@ run_variant() {
   local name="$1"
   local engine_src="${2:-}"
   local expect="$3"
+  local cli_src="${4:-}"
   local agent_id ver_id reward status
 
   echo "===== variant ${name} (expect reward ${expect}) ====="
@@ -29,8 +30,12 @@ run_variant() {
   if [ -n "$engine_src" ]; then
     docker cp "$engine_src" "${agent_id}:/app/hsm/engine.py"
   fi
+  if [ -n "$cli_src" ]; then
+    docker cp "$cli_src/run_margin.py" "${agent_id}:/app/hsm/run_margin.py"
+    docker cp "$cli_src/journal.py" "${agent_id}:/app/hsm/journal.py"
+  fi
   docker exec "$agent_id" python /app/hsm/run_margin.py \
-    --portfolio /app/hsm/data/portfolio.json \
+    --journal /app/hsm/data/sample_book.hsmj \
     --market /app/hsm/data/market.json \
     --config /app/hsm/data/config.json \
     --output /app/output/margin_report.json
@@ -62,9 +67,10 @@ run_variant() {
   fi
 }
 
+SOL="$ROOT/tasks/scan-margin/solution"
 FAILED=0
-run_variant official-solution "$ROOT/tasks/scan-margin/solution/engine.py" 1 || FAILED=1
-run_variant alt-dataclass "$ROOT/scripts/alt-hsm/engine.py" 1 || FAILED=1
+run_variant official-solution "$SOL/engine.py" 1 "$SOL" || FAILED=1
+run_variant alt-dataclass "$ROOT/scripts/alt-hsm/engine.py" 1 "$SOL" || FAILED=1
 run_variant starter "" 0 || FAILED=1
 run_variant hardcoded-sample "$ROOT/scripts/wrong-hsm/hardcoded.py" 0 || FAILED=1
 
@@ -79,7 +85,7 @@ run_variant hardcoded-sample "$ROOT/scripts/wrong-hsm/hardcoded.py" 0 || FAILED=
   echo "|---------|--------|--------|----------|"
   echo "| official-solution | \`tasks/scan-margin/solution/engine.py\` | $(cat "$OUT_DIR/official-solution.reward") | 1 |"
   echo "| alt-dataclass | \`scripts/alt-hsm/engine.py\` | $(cat "$OUT_DIR/alt-dataclass.reward") | 1 |"
-  echo "| starter | bundled futures-only scanner | $(cat "$OUT_DIR/starter.reward") | 0 |"
+  echo "| starter | bundled futures-only scanner + v1 journal | $(cat "$OUT_DIR/starter.reward") | 0 |"
   echo "| hardcoded-sample | always \$5000 / scenario 13 | $(cat "$OUT_DIR/hardcoded-sample.reward") | 0 |"
 } >"$OUT_DIR/README.md"
 

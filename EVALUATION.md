@@ -19,16 +19,16 @@ Harbor version: `0.22.0`.
 
 | Requirement | Status | Evidence |
 |-------------|--------|----------|
-| Static checks | **PASS** (re-run 2026-09-04T17:30Z) | this file |
+| Static checks | **PASS** (re-run after HSMJ) | this file |
 | Implementation-rubric (`harbor check`) | **blocked** — needs `ANTHROPIC_API_KEY` | mechanical subset **PASS** |
-| Docker build | **PASS** | oracle / nop / local matrix |
-| Oracle reward 1.0 | **PASS** (two Harbor jobs) | [oracle.json](results/summaries/oracle.json) |
-| Nop reward 0.0 | **PASS** (two Harbor jobs) | [nop.json](results/summaries/nop.json) |
-| Any correct engine scores 1 | **PASS** | official solution **and** dataclass rewrite |
-| Incomplete / hardcoded engines score 0 | **PASS** | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **FAIL — 3/3 then 3/3 after overlays** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json) |
+| Docker build | pending re-run after HSMJ | — |
+| Oracle reward 1.0 | pending re-run after HSMJ | prior jobs were pre-journal |
+| Nop reward 0.0 | pending re-run after HSMJ | prior jobs were pre-journal |
+| Any correct engine scores 1 | pending local matrix after HSMJ | — |
+| Incomplete / hardcoded engines score 0 | pending local matrix after HSMJ | — |
+| `/run` × 3 Codex genuinely fail | **FAIL on two prior genres; HSMJ re-run pending** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json) |
 | `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
-| `/cheat` Codex reward 0 | **in progress** | started after `/run` |
+| `/cheat` Codex reward 0 | **not a valid 0** | `AgentSafetyRefusalError` on old task |
 | `/cheat` Claude reward 0 | **not counted** | no token |
 
 Crashes, API/rate-limit, container, timeout, and network errors do **not** count as model failures. They are recorded below so they are not mistaken for verifier zeros.
@@ -197,7 +197,7 @@ Anti-cheat surface the verifier actually closes:
 
 The intended failure is **partial implementation of a house methodology**, not formatting.
 
-The starter already emits a correct report for `/app/hsm/data/portfolio.json` (two long CL futures → $5,000, worst scenario 13). An agent that treats that file as the test suite, or that ports SPAN defaults (0.35 extreme cover, ATM delta for spreading, SOM before credits, credits for same-sign energy books), will match the sample and fail the hidden books:
+The starter already emits a correct report for `/app/hsm/data/sample_book.hsmj` (v1 tape, two long CL futures → $5,000, worst scenario 13). An agent that treats that file as the test suite, implements only the v1 blotter, or ports SPAN defaults, will match the sample and fail the hidden v2 tapes:
 
 | Hidden book | Isolates |
 |-------------|----------|
@@ -215,3 +215,18 @@ The starter already emits a correct report for `/app/hsm/data/portfolio.json` (t
 A cheat agent cannot write `reward.txt` (root-only, other container), cannot read `/tests` (mode 700 while the CLI runs), and cannot hardcode the sample: `som_otm` and `sample` totals must differ, and ten other books must match the oracle.
 
 Once `/run` and `/cheat` jobs finish with a live model, this section will be updated with per-trial traces (`harbor analyze`) and whether failures matched this crux.
+
+### Codex traces (2026-09-04)
+
+Both completed `/run` jobs were genuine model trials (agent installed, `gpt-5.6-sol` + `xhigh`, no infra exception).
+
+1. **HSM 1.0 spec** — job `2026-09-04__18-00-05` — 3/3 reward 1.0. Codex rewrote `/app/hsm/engine.py` from `methodology.md` in ~9 minutes per trial.
+2. **Overlays added** (delivery-month PSR scale, log vs linear shocks, asymmetric vol, strip credit, ICS ρ, NOV cap, post-ICS concentration, post-SOM LAO, six new hidden books) — job `2026-09-04__18-37-45` — **again 3/3 reward 1.0**.
+
+Conclusion: a complete, fair, written methodology for a deterministic engine is not enough to fail this config. A further overlay cookbook will not meet the hiring bar.
+
+### Genre change: HSMJ journals (in progress)
+
+Positions now arrive as House Scan Margin Journals. The sample is a v1 POS_V1 tape the starter already decodes. Hidden books are v2 tapes: mixed-endian chunk lengths, packed quantities, packed-BCD strikes, CRC-skipped frames, combo expansion, voids, and patches. The methodology overlays stay fully specified (fairness / instruction alignment). Oracle still recomputes from JSON equivalents and does not share the agent's decoder.
+
+Old-task `/cheat` (`2026-09-04__18-29-49`) ended in `AgentSafetyRefusalError` — not a valid verifier zero.

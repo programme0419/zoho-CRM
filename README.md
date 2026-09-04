@@ -8,9 +8,9 @@ This repository is a self-contained submission. It is not a PR to the Terminal-B
 
 Path: [`tasks/scan-margin`](tasks/scan-margin)
 
-The agent is dropped into `/app/hsm` with a methodology, schemas, market/config data, one sample book, and a starter engine that already margins that sample. The starter is a futures-only scanner. A correct engine has to implement the 16-scenario array, composite-delta intra-month charges, priority-ordered intercommodity credits, an OTM-only net-option-value credit, a moneyness-scaled short-option minimum, and FX conversion — in that order.
+The agent is dropped into `/app/hsm` with a methodology, an HSMJ journal spec, schemas, market/config data, one sample tape, and a starter that already margins that v1 sample. The starter is a v1-only blotter plus a futures-only scanner. A correct engine has to decode production journals and implement the 16-scenario array, house overlays, and FX conversion — in that order.
 
-The verifier never grades the sample book alone. After the agent finishes, a separate verifier container runs the submitted CLI as `nobody` on the sample book plus ten hidden books and compares each report to an independent oracle.
+The verifier never grades the sample book alone. After the agent finishes, a separate verifier container runs the submitted CLI as `nobody` on the sample tape plus sixteen hidden HSMJ books and compares each report to an independent oracle.
 
 ## Layout
 

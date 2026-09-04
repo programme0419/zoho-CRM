@@ -66,7 +66,9 @@ Paths below are examples. The CLI accepts any paths that contain objects of thes
 
 Every option in a portfolio must have `atm_vol` and `option_expiry`. Every futures month referenced by a position (including as an option underlying) must have `futures_price`. `fx_to_usd` must include every product currency and `USD`.
 
-## Portfolio (`portfolio.json`)
+## Portfolio (decoded journal)
+
+Books arrive as HSMJ files (`--journal`). The on-wire format, CRCs, and blotter operations are specified under `/app/hsm/journal/`. After decoding, the engine sees:
 
 ```
 {
@@ -76,7 +78,7 @@ Every option in a portfolio must have `atm_vol` and `option_expiry`. Every futur
 }
 ```
 
-`qty` is a signed contract count. It may be fractional. Duplicate `instrument_id` rows net.
+`qty` is a signed contract count. It may be fractional. Duplicate `instrument_id` rows net. A worked v1 decode of the sample tape is `/app/hsm/journal/examples/sample.positions.json`.
 
 ## Margin report (CLI `--output`)
 
@@ -108,6 +110,6 @@ Every option in a portfolio must have `atm_vol` and `option_expiry`. Every futur
 
 The CLI is:
 
-`python /app/hsm/run_margin.py --portfolio <path> --market <path> --config <path> --output <path>`
+`python /app/hsm/run_margin.py --journal <path> --market <path> --config <path> --output <path>`
 
 It must not consult any other files for inputs. It must overwrite `--output`.

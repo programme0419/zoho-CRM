@@ -83,6 +83,7 @@ def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
 @pytest.mark.parametrize("name,filename", CASES)
 def test_case_matches_oracle(name: str, filename: str) -> None:
     """Each book must match the HSM oracle within calibrated cent tolerances."""
+    # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
     portfolio = INPUTS / filename
     got = _load_agent(name)
     exp = _expected(portfolio)
