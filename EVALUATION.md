@@ -26,7 +26,7 @@ Harbor version: `0.22.0`.
 | Nop reward 0.0 | **PASS** (two Harbor jobs) | [nop.json](results/summaries/nop.json) |
 | Any correct engine scores 1 | **PASS** | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **FAIL — 3/3 reward 1.0** | [run-codex.json](results/summaries/run-codex.json) |
+| `/run` × 3 Codex genuinely fail | **FAIL — 3/3 then 3/3 after overlays** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json) |
 | `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
 | `/cheat` Codex reward 0 | **in progress** | started after `/run` |
 | `/cheat` Claude reward 0 | **not counted** | no token |
@@ -156,7 +156,7 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 
 | Config | Trial | Reward | Error? | Notes |
 |--------|-------|--------|--------|-------|
-| codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0, 1.0, 1.0** | none | Job `2026-09-04__18-00-05`, 29m, ~$4.59. Real model runs after pinning Harbor to docker0. **Hiring bar requires all three to fail.** |
+| codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0 × 3** | none | Job `2026-09-04__18-00-05` (HSM 1.0 spec). Then overlays harden, job `2026-09-04__18-37-45`, another **1.0 × 3** in 29m (~$3.98). The model transcribes a complete written methodology. **Hiring bar requires all three to fail.** |
 | claude-code / anthropic/claude-opus-5 / max | 1–3 | not run | n/a | `claude auth status` → loggedIn false. No `CLAUDE_CODE_OAUTH_TOKEN`. |
 
 Earlier Codex jobs (`4960ffb6-…`, `2026-09-04__17-53-20`) died on `NetworkConnectionError` during `apt-get` inside Harbor’s Compose network. That is infra. This host’s user-defined Docker networks cannot NAT IPv4; the default `docker0` bridge can. `scripts/run_trials.sh` now passes `scripts/docker-compose.bridge.yaml` (`network_mode: bridge`). After that overlay, Codex installed and called the API.

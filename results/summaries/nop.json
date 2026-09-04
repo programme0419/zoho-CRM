@@ -1,8 +1,8 @@
 {
-    "id": "658d305d-102f-4fa3-a28d-41ad97b20266",
-    "started_at": "2026-09-04T17:31:32.384965",
-    "updated_at": "2026-09-04T17:32:01.837961",
-    "finished_at": "2026-09-04T17:32:01.837961",
+    "id": "529c1c10-48b6-4bce-a4d3-3fe557ed86a1",
+    "started_at": "2026-09-04T18:36:41.387814",
+    "updated_at": "2026-09-04T18:37:12.296487",
+    "finished_at": "2026-09-04T18:37:12.296487",
     "n_total_trials": 1,
     "stats": {
         "n_completed_trials": 1,
@@ -24,7 +24,7 @@
                 "reward_stats": {
                     "reward": {
                         "0.0": [
-                            "scan-margin__C8EM2rs"
+                            "scan-margin__ya8FnEG"
                         ]
                     }
                 },
