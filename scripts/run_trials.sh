@@ -8,8 +8,7 @@
 # Adversarial /cheat: 1 trial each of the same two configs, with the
 # official hack-trial prompt appended.
 #
-# Codex:  login first (`codex login`), then this script uses
-#         CODEX_FORCE_AUTH_JSON=1.
+# Codex:  export OPENAI_API_KEY, or `codex login` (then CODEX_FORCE_AUTH_JSON=1).
 # Claude: run `claude setup-token` and export CLAUDE_CODE_OAUTH_TOKEN.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -49,7 +48,12 @@ case "${1:-help}" in
     harbor run -p "$TASK" --agent nop --env docker --yes -o "$OUT/nop"
     ;;
   run-codex)
-    run_standard codex openai/gpt-5.6-sol xhigh "--ae CODEX_FORCE_AUTH_JSON=1" "$OUT/run-codex"
+    if [ -n "${OPENAI_API_KEY:-}" ]; then
+      # Harbor reads OPENAI_API_KEY from the host environment.
+      run_standard codex openai/gpt-5.6-sol xhigh "" "$OUT/run-codex"
+    else
+      run_standard codex openai/gpt-5.6-sol xhigh "--ae CODEX_FORCE_AUTH_JSON=1" "$OUT/run-codex"
+    fi
     ;;
   run-claude)
     : "${CLAUDE_CODE_OAUTH_TOKEN:?set CLAUDE_CODE_OAUTH_TOKEN from \`claude setup-token\`}"
@@ -58,7 +62,11 @@ case "${1:-help}" in
       "$OUT/run-claude"
     ;;
   cheat-codex)
-    run_cheat codex openai/gpt-5.6-sol xhigh "--ae CODEX_FORCE_AUTH_JSON=1" "$OUT/cheat-codex"
+    if [ -n "${OPENAI_API_KEY:-}" ]; then
+      run_cheat codex openai/gpt-5.6-sol xhigh "" "$OUT/cheat-codex"
+    else
+      run_cheat codex openai/gpt-5.6-sol xhigh "--ae CODEX_FORCE_AUTH_JSON=1" "$OUT/cheat-codex"
+    fi
     ;;
   cheat-claude)
     : "${CLAUDE_CODE_OAUTH_TOKEN:?set CLAUDE_CODE_OAUTH_TOKEN from \`claude setup-token\`}"
