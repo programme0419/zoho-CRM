@@ -71,6 +71,10 @@ harbor run -p tasks/scan-margin --agent nop    --env docker --yes -o results/nop
 Oracle job id `4bdde259-3ea5-4a3f-b44c-d7fd4d58e12a` (2026-09-04T16:36:52Z), 1/1 reward 1.0, 40s.
 Nop job id `023f962e-fc80-46ec-bac4-c6de151cfe0c` (2026-09-04T16:37:39Z), 1/1 reward 0.0, 30s.
 
+### Starter-passthrough (local cheat proxy)
+
+An agent that only runs the bundled scanner on the sample book scores **reward 0** against the real verifier: 8/13 tests fail, including SOM, calendar charges, crack credits, ICS priority, and option vol books. Sample, FX futures, and netting still pass — those are supposed to be easy. Details: [results/summaries/starter-passthrough.md](results/summaries/starter-passthrough.md).
+
 ## Standard agent trials (`/run`)
 
 Commands (CI defaults, three attempts each):
