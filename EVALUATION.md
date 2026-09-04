@@ -26,9 +26,9 @@ Harbor version: `0.22.0`.
 | Nop reward 0.0 | **PASS** (two Harbor jobs) | [nop.json](results/summaries/nop.json) |
 | Any correct engine scores 1 | **PASS** | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **not counted** | install `NetworkConnectionError`, then no login |
+| `/run` × 3 Codex genuinely fail | **FAIL — 3/3 reward 1.0** | [run-codex.json](results/summaries/run-codex.json) |
 | `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
-| `/cheat` Codex reward 0 | **not counted** | same install error |
+| `/cheat` Codex reward 0 | **in progress** | started after `/run` |
 | `/cheat` Claude reward 0 | **not counted** | no token |
 
 Crashes, API/rate-limit, container, timeout, and network errors do **not** count as model failures. They are recorded below so they are not mistaken for verifier zeros.
@@ -156,12 +156,12 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 
 | Config | Trial | Reward | Error? | Notes |
 |--------|-------|--------|--------|-------|
-| codex / openai/gpt-5.6-sol / xhigh | 1–3 | none | **NetworkConnectionError** | Harbor `apt-get install curl bash nodejs npm ripgrep` inside the task container timed out on `deb.debian.org`. Job `4960ffb6-3793-474f-9a7f-1a67733d8941`. **Infra — not a model fail.** |
+| codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0, 1.0, 1.0** | none | Job `2026-09-04__18-00-05`, 29m, ~$4.59. Real model runs after pinning Harbor to docker0. **Hiring bar requires all three to fail.** |
 | claude-code / anthropic/claude-opus-5 / max | 1–3 | not run | n/a | `claude auth status` → loggedIn false. No `CLAUDE_CODE_OAUTH_TOKEN`. |
 
-`codex login status` is still **Not logged in** (`~/.codex/auth.json` missing). `CODEX_FORCE_AUTH_JSON=1` cannot inject credentials that do not exist. Harbor can also take `OPENAI_API_KEY`; that is unset here too.
+Earlier Codex jobs (`4960ffb6-…`, `2026-09-04__17-53-20`) died on `NetworkConnectionError` during `apt-get` inside Harbor’s Compose network. That is infra. This host’s user-defined Docker networks cannot NAT IPv4; the default `docker0` bridge can. `scripts/run_trials.sh` now passes `scripts/docker-compose.bridge.yaml` (`network_mode: bridge`). After that overlay, Codex installed and called the API.
 
-Agent-install preflight after the Codex failures: **PASS**. See [preflight-agent-network.md](results/summaries/preflight-agent-network.md). A logged-in retry should get past apt-get.
+Auth used a host `OPENAI_API_KEY` (not committed). `codex login` is still unused.
 
 To complete the table on a subscribed machine:
 
