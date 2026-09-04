@@ -49,6 +49,12 @@ run_one ics_priority ics_priority.json
 run_one netting netting.json
 run_one multi_cc multi_cc.json
 run_one vol_mix vol_mix.json
+run_one back_month back_month.json
+run_one log_equity log_equity.json
+run_one strip3 strip3.json
+run_one conc conc.json
+run_one lao_deep lao_deep.json
+run_one order_mix order_mix.json
 
 # Root-only pytest; it reads JSON reports and never imports agent modules.
 CTRF="${LOG_DIR}/ctrf.json"

@@ -1,0 +1,11 @@
+{
+  "positions": [
+    { "instrument_id": "CL-2026-04", "qty": 12 },
+    { "instrument_id": "CL-2026-05", "qty": 12 },
+    { "instrument_id": "CL-2026-06", "qty": 12 },
+    { "instrument_id": "CL-2026-12", "qty": -6 },
+    { "instrument_id": "HO-2026-06", "qty": -10 },
+    { "instrument_id": "CL-2026-06-C-90.00", "qty": -4 },
+    { "instrument_id": "ES-2026-06", "qty": 8 }
+  ]
+}

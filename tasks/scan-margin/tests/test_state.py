@@ -24,6 +24,9 @@ MONEY_KEYS = (
     "inter_credit",
     "nov_credit",
     "som",
+    "strip_credit",
+    "concentration_charge",
+    "liquidity_addon",
     "raw_margin",
     "cc_margin_native",
     "cc_margin_usd",
@@ -43,6 +46,12 @@ CASES = [
     ("netting", "netting.json"),
     ("multi_cc", "multi_cc.json"),
     ("vol_mix", "vol_mix.json"),
+    ("back_month", "back_month.json"),
+    ("log_equity", "log_equity.json"),
+    ("strip3", "strip3.json"),
+    ("conc", "conc.json"),
+    ("lao_deep", "lao_deep.json"),
+    ("order_mix", "order_mix.json"),
 ]
 
 

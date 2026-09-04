@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from collections import defaultdict
 from datetime import date, datetime
@@ -109,12 +110,55 @@ def option_value_delta(
     )
 
 
-def shocked_forward(f: float, m: float, psr: float) -> float:
+def shocked_forward(f: float, m: float, psr: float, mode: str) -> float:
+    if mode == "log":
+        if f <= 0.0:
+            return 1e-8
+        return max(f * math.exp(m * psr / f), 1e-8)
     return max(f + m * psr, 1e-8)
 
 
-def shocked_vol(vol: float, vsign: int, vsf: float) -> float:
-    return max(vol * (1.0 + vsign * vsf), 1e-6)
+def shocked_vol(vol: float, vsign: int, vsf_up: float, vsf_down: float) -> float:
+    frac = vsf_up if vsign > 0 else vsf_down
+    return max(vol * (1.0 + vsign * frac), 1e-6)
+
+
+def delivery_scale(val_date: date, month: str, days_cut: int, floor: float) -> float:
+    d = (month_first(month) - val_date).days
+    if d <= days_cut:
+        return 1.0
+    return max(math.sqrt(d / 365.0), floor)
+
+
+def month_key(month: str) -> int:
+    y, m = month.split("-")
+    return int(y) * 12 + int(m)
+
+
+def strip_credit(remaining: dict[str, float], rate: Decimal) -> Decimal:
+    months = sorted(
+        (m for m, d in remaining.items() if abs(d) > 1e-12),
+        key=month_key,
+    )
+    if len(months) < 3:
+        return Decimal("0.00")
+    runs: list[list[str]] = []
+    cur: list[str] = []
+    for m in months:
+        if not cur or month_key(m) == month_key(cur[-1]) + 1:
+            cur.append(m)
+        else:
+            runs.append(cur)
+            cur = [m]
+    if cur:
+        runs.append(cur)
+    total = Decimal("0")
+    for run in runs:
+        if len(run) < 3:
+            continue
+        q = min(abs(remaining[m]) for m in run)
+        total += D(len(run) - 2) * rate * D(q)
+    return q2(total)
 
 
 def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
@@ -134,7 +178,16 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
         spec["F"] = float(market["futures_price"][spec["futures_id"]])
         spec["mult"] = float(prod["multiplier"])
         spec["psr"] = float(prod["price_scan_range"])
-        spec["vsf"] = float(prod["vol_scan_fraction"])
+        spec["vsf_up"] = float(prod["vol_scan_fraction"])
+        spec["vsf_down"] = float(prod["vsf_down"])
+        spec["shock_mode"] = prod["shock_mode"]
+        house = config["house"]
+        spec["psr_eff"] = spec["psr"] * delivery_scale(
+            val_date,
+            spec["month"],
+            int(house["delivery_scale_days"]),
+            float(house["delivery_scale_floor"]),
+        )
         if spec["is_option"]:
             spec["vol"] = float(market["atm_vol"][iid])
             spec["expiry"] = parse_date(market["option_expiry"][iid])
@@ -161,8 +214,8 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
         if spec["is_option"]:
             base = spec["V"]
             for sid, m, vsign, w in SCENARIOS:
-                fp = shocked_forward(spec["F"], m, spec["psr"])
-                vp = shocked_vol(spec["vol"], vsign, spec["vsf"])
+                fp = shocked_forward(spec["F"], m, spec["psr_eff"], spec["shock_mode"])
+                vp = shocked_vol(spec["vol"], vsign, spec["vsf_up"], spec["vsf_down"])
                 v_s, d_s = option_value_delta(spec, market, fp, vp, spec["T"])
                 raw = qty * (v_s - base) * mult * w
                 pos_pl[iid][sid] = money_from_float(raw)
@@ -170,9 +223,10 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
         else:
             sign = 1.0 if qty > 0 else -1.0
             for sid, m, vsign, w in SCENARIOS:
-                raw = qty * (m * spec["psr"]) * mult * w
+                fp = shocked_forward(spec["F"], m, spec["psr_eff"], spec["shock_mode"])
+                raw = qty * (fp - spec["F"]) * mult * w
                 pos_pl[iid][sid] = money_from_float(raw)
-                pos_delta[iid][sid] = sign  # per contract; qty applied later
+                pos_delta[iid][sid] = sign
 
     cc_rows: list[dict] = []
     outright: dict[str, float] = {}
@@ -246,6 +300,7 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
         intra = q2(intra)
         leftover = sum(remaining.values())
         outright[cc_id] = leftover
+        strip = strip_credit(remaining, D(parsed[iids[0]]["prod"]["strip_rate"]))
 
         # SOM
         som = Decimal("0")
@@ -258,7 +313,7 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
             som += D(spec["prod"]["som_rate"]) * D(abs(spec["qty"])) * D(scalar)
         som = q2(som)
 
-        # NOV
+        # NOV, then cap to scanning risk
         nov = Decimal("0")
         for iid in iids:
             spec = parsed[iid]
@@ -269,7 +324,20 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
             contrib = spec["qty"] * spec["V"] * spec["mult"]
             if contrib > 0:
                 nov += money_from_float(contrib)
-        nov = q2(nov)
+        nov = q2(min(nov, scan))
+
+        lao = Decimal("0")
+        for iid in iids:
+            spec = parsed[iid]
+            if not spec["is_option"] or spec["qty"] >= 0:
+                continue
+            atm = abs(spec["atm_delta"])
+            lao += (
+                D(spec["prod"]["lao_rate"])
+                * D(abs(spec["qty"]))
+                * D(max(0.0, float(spec["prod"]["lao_otm"]) - atm))
+            )
+        lao = q2(lao)
 
         cc_rows.append(
             {
@@ -280,6 +348,9 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
                 "inter_credit": Decimal("0.00"),
                 "nov_credit": nov,
                 "som": som,
+                "strip_credit": strip,
+                "liquidity_addon": lao,
+                "concentration_charge": Decimal("0.00"),
                 "worst_scenario_id": worst_sid,
                 "_outright": leftover,
             }
@@ -312,7 +383,7 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
         if ua * ub >= 0:
             continue
         p = min(abs(ua), abs(ub))
-        C = q2(D(p) * D(sp["credit_per_unit"]))
+        C = q2(D(p) * D(sp["credit_per_unit"]) * (D(1) - D(sp["rho"])))
         half_b = q2(C / 2)
         half_a = C - half_b
         by_id[a]["inter_credit"] = q2(by_id[a]["inter_credit"] + half_a)
@@ -328,8 +399,22 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
     out_ccs = []
     total = Decimal("0.00")
     for r in sorted(cc_rows, key=lambda x: x["cc_id"]):
-        raw = q2(r["scanning_risk"] + r["intra_charge"] - r["inter_credit"] - r["nov_credit"])
-        native = max(raw, r["som"])
+        prod = cc_meta[r["cc_id"]]
+        residual = abs(deltas.get(r["cc_id"], r["_outright"]))
+        thresh = float(prod["concentration_threshold"])
+        conc = Decimal("0.00")
+        if residual > thresh:
+            conc = q2(D(residual - thresh) * D(prod["concentration_rate"]))
+        r["concentration_charge"] = conc
+        raw = q2(
+            r["scanning_risk"]
+            + r["intra_charge"]
+            + conc
+            - r["inter_credit"]
+            - r["nov_credit"]
+            - r["strip_credit"]
+        )
+        native = max(raw, r["som"]) + r["liquidity_addon"]
         usd = q2(native * fx[r["currency"]])
         total += usd
         out_ccs.append(
@@ -341,6 +426,9 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
                 "inter_credit": _num(r["inter_credit"]),
                 "nov_credit": _num(r["nov_credit"]),
                 "som": _num(r["som"]),
+                "strip_credit": _num(r["strip_credit"]),
+                "concentration_charge": _num(conc),
+                "liquidity_addon": _num(r["liquidity_addon"]),
                 "raw_margin": _num(raw),
                 "cc_margin_native": _num(native),
                 "cc_margin_usd": _num(usd),
@@ -354,11 +442,6 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
         "total_margin_usd": _num(total),
         "combined_commodities": out_ccs,
     }
-
-
-def _month_key(month: str) -> int:
-    y, m = month.split("-")
-    return int(y) * 12 + int(m)
 
 
 def _num(x: Decimal) -> float:
