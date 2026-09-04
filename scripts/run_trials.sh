@@ -17,6 +17,10 @@ export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-0}"
 TASK="${TASK:-tasks/scan-margin}"
 OUT="${OUT:-$ROOT/results}"
 
+# Nested Docker here: Harbor's default Compose network cannot NAT IPv4.
+# Pin the agent container to docker0. Harmless on hosts where Compose NAT works.
+BRIDGE_COMPOSE="$ROOT/scripts/docker-compose.bridge.yaml"
+
 run_standard() {
   local agent="$1" model="$2" effort="$3" extra_ae="$4" dest="$5"
   # shellcheck disable=SC2086
@@ -24,6 +28,7 @@ run_standard() {
     --agent "$agent" --model "$model" \
     --env docker --yes -k 3 -n 1 \
     --ak "reasoning_effort=${effort}" \
+    --extra-docker-compose "$BRIDGE_COMPOSE" \
     $extra_ae \
     -o "$dest"
 }
@@ -36,6 +41,7 @@ run_cheat() {
     --env docker --yes -k 1 -n 1 \
     --ak "reasoning_effort=${effort}" \
     --extra-instruction-path "$ROOT/docs/hack-trial-prompt.md" \
+    --extra-docker-compose "$BRIDGE_COMPOSE" \
     $extra_ae \
     -o "$dest"
 }

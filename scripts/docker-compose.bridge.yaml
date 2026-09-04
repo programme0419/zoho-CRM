@@ -1,0 +1,6 @@
+# Local Docker overlay only. User-defined Compose networks in this nested
+# Docker have no working IPv4 NAT (apt-get and api.openai.com time out).
+# The default docker0 bridge does. Official TB3 CI uses Modal, not this file.
+services:
+  main:
+    network_mode: bridge
