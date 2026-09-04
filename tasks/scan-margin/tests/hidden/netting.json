@@ -1,0 +1,7 @@
+{
+  "positions": [
+    { "instrument_id": "CL-2026-06", "qty": 4 },
+    { "instrument_id": "CL-2026-06", "qty": -4 },
+    { "instrument_id": "CL-2026-06", "qty": 2 }
+  ]
+}
