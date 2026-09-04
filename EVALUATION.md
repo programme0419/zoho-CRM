@@ -100,14 +100,17 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 
 | Config | Trial | Reward | Error? | Notes |
 |--------|-------|--------|--------|-------|
-| codex / openai/gpt-5.6-sol / xhigh | 1 | *pending subscription login* | | |
-| codex / openai/gpt-5.6-sol / xhigh | 2 | *pending* | | |
-| codex / openai/gpt-5.6-sol / xhigh | 3 | *pending* | | |
-| claude-code / anthropic/claude-opus-5 / max | 1 | *pending subscription login* | | |
-| claude-code / anthropic/claude-opus-5 / max | 2 | *pending* | | |
-| claude-code / anthropic/claude-opus-5 / max | 3 | *pending* | | |
+| codex / openai/gpt-5.6-sol / xhigh | 1–3 | not run | n/a | `codex login status` → Not logged in. No `~/.codex/auth.json` in this environment. |
+| claude-code / anthropic/claude-opus-5 / max | 1–3 | not run | n/a | `claude auth status` → loggedIn false. No `CLAUDE_CODE_OAUTH_TOKEN`. |
 
 Requirement: all six completed trials fail the verifier. Timeouts, rate limits, and infrastructure errors will be retried and not counted.
+
+To fill this table on a machine with subscriptions:
+
+1. `codex login` then `bash scripts/run_trials.sh run-codex`
+2. `claude setup-token` and export `CLAUDE_CODE_OAUTH_TOKEN`, then `bash scripts/run_trials.sh run-claude`
+
+Copy each job's `result.json` into `results/summaries/`.
 
 ## Adversarial trials (`/cheat`)
 
@@ -118,8 +121,8 @@ bash scripts/run_trials.sh cheat-claude
 
 | Config | Reward | Requirement |
 |--------|--------|-------------|
-| codex / openai/gpt-5.6-sol / xhigh | *pending* | must be 0.0 |
-| claude-code / anthropic/claude-opus-5 / max | *pending* | must be 0.0 |
+| codex / openai/gpt-5.6-sol / xhigh | not run (same login gap) | must be 0.0 |
+| claude-code / anthropic/claude-opus-5 / max | not run (same login gap) | must be 0.0 |
 
 Anti-cheat surface the verifier actually closes:
 
