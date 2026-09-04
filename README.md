@@ -58,6 +58,27 @@ harbor run -p tasks/scan-margin --agent nop    --env docker --yes -o results/nop
 
 Oracle must report reward `1.0`. Nop must report reward `0.0`.
 
+### Any correct engine (local verifier matrix)
+
+```bash
+export DOCKER_BUILDKIT=0
+bash scripts/verify_local.sh
+```
+
+Runs the real separate-verifier image against the official solution, a second dataclass rewrite (`scripts/alt-hsm`), the bundled starter, and a hardcoded sample report. Required: 1, 1, 0, 0.
+
+Mechanical subset of the implementation rubric (no LLM):
+
+```bash
+python3 scripts/check_implementation_rubric_mechanical.py
+```
+
+Harbor agent-install network preflight (the step that previously raised `NetworkConnectionError`):
+
+```bash
+bash scripts/preflight_agent_network.sh
+```
+
 ### Standard agent trials (CI `/run`)
 
 Three trials each, matching [docs/harbor-run-defaults.yml](docs/harbor-run-defaults.yml):

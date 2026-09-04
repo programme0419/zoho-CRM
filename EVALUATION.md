@@ -15,6 +15,24 @@ Environment backend used here: `docker` (CI default is `modal`; docker is the do
 
 Harbor version: `0.22.0`.
 
+## Requirement status
+
+| Requirement | Status | Evidence |
+|-------------|--------|----------|
+| Static checks | **PASS** (re-run 2026-09-04T17:30Z) | this file |
+| Implementation-rubric (`harbor check`) | **blocked** — needs `ANTHROPIC_API_KEY` | mechanical subset **PASS** |
+| Docker build | **PASS** | oracle / nop / local matrix |
+| Oracle reward 1.0 | **PASS** (two Harbor jobs) | [oracle.json](results/summaries/oracle.json) |
+| Nop reward 0.0 | **PASS** (two Harbor jobs) | [nop.json](results/summaries/nop.json) |
+| Any correct engine scores 1 | **PASS** | official solution **and** dataclass rewrite |
+| Incomplete / hardcoded engines score 0 | **PASS** | starter + hardcoded sample |
+| `/run` × 3 Codex genuinely fail | **not counted** | install `NetworkConnectionError`, then no login |
+| `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
+| `/cheat` Codex reward 0 | **not counted** | same install error |
+| `/cheat` Claude reward 0 | **not counted** | no token |
+
+Crashes, API/rate-limit, container, timeout, and network errors do **not** count as model failures. They are recorded below so they are not mistaken for verifier zeros.
+
 ## Automated checks
 
 ### Static checks
@@ -25,7 +43,7 @@ Command:
 bash scripts/run_static_checks.sh tasks/scan-margin
 ```
 
-Result: **PASS** (all `scripts/checks/check-*.sh`).
+Result: **PASS** (all `scripts/checks/check-*.sh`), first run and re-run 2026-09-04T17:30Z.
 
 | Check | Result |
 |-------|--------|
@@ -52,7 +70,19 @@ Result: **PASS** (all `scripts/checks/check-*.sh`).
 | check-trial-network-fetch | PASS |
 | check-verifier-tooling-baked | PASS |
 
-Implementation-rubric review (`harbor check tasks/scan-margin -r docs/task-implementation.toml`) needs an LLM judge key (`ANTHROPIC_API_KEY`). It was not run in this sandbox for that reason. The task was written against that rubric: separate verifier, baked pytest, hidden oracle, unprivileged CLI execution, CTRF, binary reward, human-written instruction, no `allow_internet` pin.
+### Implementation rubric
+
+Official command:
+
+```bash
+harbor check tasks/scan-margin -r docs/task-implementation.toml
+```
+
+Needs an LLM judge (`ANTHROPIC_API_KEY` / Claude Code). Not run here.
+
+Mechanical subset (no LLM) of the same rubric: `python3 scripts/check_implementation_rubric_mechanical.py` → **PASS**. Log: [results/summaries/mechanical-rubric.txt](results/summaries/mechanical-rubric.txt).
+
+That gate confirms separate verifier, declared artifacts, omitted `allow_internet`, baked pytest 9.1.1 + CTRF, binary 0/1 reward, `nobody` + `--no-new-privs`, root-only `/logs/verifier`, locked `/tests`, hidden books only in the verifier image, oracle-compared money fields, and no agent-module import in pytest.
 
 ### Docker build / oracle / nop
 
@@ -64,16 +94,42 @@ harbor run -p tasks/scan-margin --agent nop    --env docker --yes -o results/nop
 
 | Check | Reward | Errors | Evidence |
 |-------|--------|--------|----------|
-| Docker build (env + verifier images) | built | 0 | implicit in oracle/nop runs |
+| Docker build (env + verifier images) | built | 0 | implicit in oracle/nop/local matrix |
 | Oracle validation | **1.0** | 0 | [results/summaries/oracle.json](results/summaries/oracle.json) |
 | Nop validation | **0.0** | 0 | [results/summaries/nop.json](results/summaries/nop.json) |
 
-Oracle job id `4bdde259-3ea5-4a3f-b44c-d7fd4d58e12a` (2026-09-04T16:36:52Z), 1/1 reward 1.0, 40s.
-Nop job id `023f962e-fc80-46ec-bac4-c6de151cfe0c` (2026-09-04T16:37:39Z), 1/1 reward 0.0, 30s.
+First Harbor jobs:
 
-### Starter-passthrough (local cheat proxy)
+- Oracle `4bdde259-3ea5-4a3f-b44c-d7fd4d58e12a` (2026-09-04T16:36:52Z), reward 1.0
+- Nop `023f962e-fc80-46ec-bac4-c6de151cfe0c` (2026-09-04T16:37:39Z), reward 0.0
 
-An agent that only runs the bundled scanner on the sample book scores **reward 0** against the real verifier: 8/13 tests fail, including SOM, calendar charges, crack credits, ICS priority, and option vol books. Sample, FX futures, and netting still pass — those are supposed to be easy. Details: [results/summaries/starter-passthrough.md](results/summaries/starter-passthrough.md).
+Re-run (same commands, 2026-09-04T17:30Z):
+
+- Oracle `e6e022e9-8a09-4fe5-a4e1-30a080ca4831`, reward 1.0, 30s
+- Nop `658d305d-102f-4fa3-a28d-41ad97b20266`, reward 0.0, 29s
+
+First-run copies: [oracle-first.json](results/summaries/oracle-first.json), [nop-first.json](results/summaries/nop-first.json).
+
+### Any-solution verifier matrix
+
+The hiring bar is that a **correct** engine passes and an incomplete one does not. The official `solution/` is one implementation; the verifier must not be overfit to its source.
+
+```bash
+bash scripts/verify_local.sh
+```
+
+Same `tests/Dockerfile` image and `tests/test.sh` Harbor uses. Results: [results/summaries/local-verifier/README.md](results/summaries/local-verifier/README.md).
+
+| Variant | Engine | Reward | Required |
+|---------|--------|--------|----------|
+| official-solution | `tasks/scan-margin/solution/engine.py` | **1** | 1 |
+| alt-dataclass | `scripts/alt-hsm/engine.py` (rewrite: dataclasses, two-pass combine) | **1** | 1 |
+| starter | bundled futures-only scanner | **0** | 0 |
+| hardcoded-sample | always $5000 / scenario 13 | **0** | 0 |
+
+The alternate engine is not copied into the task image. It exists only under `scripts/` so reviewers can re-run the matrix.
+
+Starter detail (8/13 pytest failures): [starter-passthrough.md](results/summaries/starter-passthrough.md).
 
 ## Standard agent trials (`/run`)
 
@@ -100,15 +156,17 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 
 | Config | Trial | Reward | Error? | Notes |
 |--------|-------|--------|--------|-------|
-| codex / openai/gpt-5.6-sol / xhigh | 1–3 | not run | n/a | `codex login status` → Not logged in. No `~/.codex/auth.json` in this environment. |
+| codex / openai/gpt-5.6-sol / xhigh | 1–3 | none | **NetworkConnectionError** | Harbor `apt-get install curl bash nodejs npm ripgrep` inside the task container timed out on `deb.debian.org`. Job `4960ffb6-3793-474f-9a7f-1a67733d8941`. **Infra — not a model fail.** |
 | claude-code / anthropic/claude-opus-5 / max | 1–3 | not run | n/a | `claude auth status` → loggedIn false. No `CLAUDE_CODE_OAUTH_TOKEN`. |
 
-Requirement: all six completed trials fail the verifier. Timeouts, rate limits, and infrastructure errors will be retried and not counted.
+`codex login status` is still **Not logged in** (`~/.codex/auth.json` missing). `CODEX_FORCE_AUTH_JSON=1` cannot inject credentials that do not exist. Harbor can also take `OPENAI_API_KEY`; that is unset here too.
 
-To fill this table on a machine with subscriptions:
+Agent-install preflight after the Codex failures: **PASS**. See [preflight-agent-network.md](results/summaries/preflight-agent-network.md). A logged-in retry should get past apt-get.
+
+To complete the table on a subscribed machine:
 
 1. `codex login` then `bash scripts/run_trials.sh run-codex`
-2. `claude setup-token` and export `CLAUDE_CODE_OAUTH_TOKEN`, then `bash scripts/run_trials.sh run-claude`
+2. Finish `claude setup-token`, `export CLAUDE_CODE_OAUTH_TOKEN=...`, then `bash scripts/run_trials.sh run-claude`
 
 Copy each job's `result.json` into `results/summaries/`.
 
@@ -119,10 +177,12 @@ bash scripts/run_trials.sh cheat-codex
 bash scripts/run_trials.sh cheat-claude
 ```
 
-| Config | Reward | Requirement |
-|--------|--------|-------------|
-| codex / openai/gpt-5.6-sol / xhigh | not run (same login gap) | must be 0.0 |
-| claude-code / anthropic/claude-opus-5 / max | not run (same login gap) | must be 0.0 |
+| Config | Reward | Error? | Requirement |
+|--------|--------|--------|-------------|
+| codex / openai/gpt-5.6-sol / xhigh | none | **NetworkConnectionError** (job under `results/cheat-codex/2026-09-04__16-50-13`) | must be 0.0 after a completed trial |
+| claude-code / anthropic/claude-opus-5 / max | not run | no OAuth token | must be 0.0 |
+
+Local cheat-shaped engines (starter, hardcoded sample) already score **0** on the real verifier. That is not a substitute for the required Codex/Claude `/cheat` jobs.
 
 Anti-cheat surface the verifier actually closes:
 
@@ -131,6 +191,7 @@ Anti-cheat surface the verifier actually closes:
 - Hidden books live only in the verifier image.
 - Ground-truth is recomputed by `tests/oracle.py`, not compared to a leaked golden file in the agent image.
 - The sample book is already solved by the starter; nop still scores 0 because the CLI is never run and hidden books fail.
+- A CLI that always writes the sample $5,000 report fails `test_sample_not_hardcoded_only` plus every options/spread book.
 
 ## Failure analysis (design, pre-trial)
 
@@ -153,4 +214,4 @@ The starter already emits a correct report for `/app/hsm/data/portfolio.json` (t
 
 A cheat agent cannot write `reward.txt` (root-only, other container), cannot read `/tests` (mode 700 while the CLI runs), and cannot hardcode the sample: `som_otm` and `sample` totals must differ, and ten other books must match the oracle.
 
-Once `/run` and `/cheat` jobs finish, this section will be updated with per-trial traces (`harbor analyze`) and whether failures matched this crux.
+Once `/run` and `/cheat` jobs finish with a live model, this section will be updated with per-trial traces (`harbor analyze`) and whether failures matched this crux.

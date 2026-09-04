@@ -1,8 +1,8 @@
 {
-    "id": "e6e022e9-8a09-4fe5-a4e1-30a080ca4831",
-    "started_at": "2026-09-04T17:30:50.879025",
-    "updated_at": "2026-09-04T17:31:21.058611",
-    "finished_at": "2026-09-04T17:31:21.058611",
+    "id": "023f962e-fc80-46ec-bac4-c6de151cfe0c",
+    "started_at": "2026-09-04T16:37:39.566412",
+    "updated_at": "2026-09-04T16:38:09.659934",
+    "finished_at": "2026-09-04T16:38:09.659934",
     "n_total_trials": 1,
     "stats": {
         "n_completed_trials": 1,
@@ -12,19 +12,19 @@
         "n_cancelled_trials": 0,
         "n_retries": 0,
         "evals": {
-            "oracle__adhoc": {
+            "nop__adhoc": {
                 "n_trials": 1,
                 "n_errors": 0,
                 "metrics": [
                     {
-                        "mean": 1.0
+                        "mean": 0.0
                     }
                 ],
                 "pass_at_k": {},
                 "reward_stats": {
                     "reward": {
-                        "1.0": [
-                            "scan-margin__ZTnY9ko"
+                        "0.0": [
+                            "scan-margin__mbbig2o"
                         ]
                     }
                 },

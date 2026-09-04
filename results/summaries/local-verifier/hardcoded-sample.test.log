@@ -1,0 +1,375 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected 13 items
+
+tests/test_state.py FFFFFFFFFFFFF                                        [100%]
+
+=================================== FAILURES ===================================
+_______________ test_case_matches_oracle[sample-portfolio.json] ________________
+
+name = 'sample', filename = 'portfolio.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+        _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+    
+        got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
+        exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
+>       assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
+E       AssertionError: sample: CC set ['CL'] != ['ENERGY_CL']
+E       assert {'CL'} == {'ENERGY_CL'}
+E         
+E         Extra items in the left set:
+E         'CL'
+E         Extra items in the right set:
+E         'ENERGY_CL'
+E         Use -v to get more diff
+
+tests/test_state.py:87: AssertionError
+________________ test_case_matches_oracle[som_otm-som_otm.json] ________________
+
+name = 'som_otm', filename = 'som_otm.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'som_otm', key = 'total_margin_usd', got = 5000.0, exp = 50898.39
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: som_otm.total_margin_usd: got 5000.0 expected 50898.39 (tol 1.00)
+E       assert Decimal('45898.39') <= Decimal('1.00')
+E        +  where Decimal('45898.39') = abs((Decimal('5000.0') - Decimal('50898.39')))
+
+tests/test_state.py:71: AssertionError
+_______________ test_case_matches_oracle[calendar-calendar.json] _______________
+
+name = 'calendar', filename = 'calendar.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'calendar', key = 'total_margin_usd', got = 5000.0, exp = 449.69
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: calendar.total_margin_usd: got 5000.0 expected 449.69 (tol 1.00)
+E       assert Decimal('4550.31') <= Decimal('1.00')
+E        +  where Decimal('4550.31') = abs((Decimal('5000.0') - Decimal('449.69')))
+
+tests/test_state.py:71: AssertionError
+__________________ test_case_matches_oracle[crack-crack.json] __________________
+
+name = 'crack', filename = 'crack.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'crack', key = 'total_margin_usd', got = 5000.0, exp = 33760.0
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: crack.total_margin_usd: got 5000.0 expected 33760.0 (tol 1.00)
+E       assert Decimal('28760.0') <= Decimal('1.00')
+E        +  where Decimal('28760.0') = abs((Decimal('5000.0') - Decimal('33760.0')))
+
+tests/test_state.py:71: AssertionError
+_______________ test_case_matches_oracle[nov_long-nov_long.json] _______________
+
+name = 'nov_long', filename = 'nov_long.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'nov_long', key = 'total_margin_usd', got = 5000.0, exp = 0.0
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: nov_long.total_margin_usd: got 5000.0 expected 0.0 (tol 1.00)
+E       assert Decimal('5000.0') <= Decimal('1.00')
+E        +  where Decimal('5000.0') = abs((Decimal('5000.0') - Decimal('0.0')))
+
+tests/test_state.py:71: AssertionError
+______________ test_case_matches_oracle[fx_equity-fx_equity.json] ______________
+
+name = 'fx_equity', filename = 'fx_equity.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'fx_equity', key = 'total_margin_usd', got = 5000.0, exp = 19530.0
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: fx_equity.total_margin_usd: got 5000.0 expected 19530.0 (tol 1.00)
+E       assert Decimal('14530.0') <= Decimal('1.00')
+E        +  where Decimal('14530.0') = abs((Decimal('5000.0') - Decimal('19530.0')))
+
+tests/test_state.py:71: AssertionError
+______________ test_case_matches_oracle[mixed_opt-mixed_opt.json] ______________
+
+name = 'mixed_opt', filename = 'mixed_opt.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'mixed_opt', key = 'total_margin_usd', got = 5000.0, exp = 20490.35
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: mixed_opt.total_margin_usd: got 5000.0 expected 20490.35 (tol 1.00)
+E       assert Decimal('15490.35') <= Decimal('1.00')
+E        +  where Decimal('15490.35') = abs((Decimal('5000.0') - Decimal('20490.35')))
+
+tests/test_state.py:71: AssertionError
+___________ test_case_matches_oracle[ics_priority-ics_priority.json] ___________
+
+name = 'ics_priority', filename = 'ics_priority.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'ics_priority', key = 'total_margin_usd', got = 5000.0, exp = 50560.0
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: ics_priority.total_margin_usd: got 5000.0 expected 50560.0 (tol 1.00)
+E       assert Decimal('45560.0') <= Decimal('1.00')
+E        +  where Decimal('45560.0') = abs((Decimal('5000.0') - Decimal('50560.0')))
+
+tests/test_state.py:71: AssertionError
+________________ test_case_matches_oracle[netting-netting.json] ________________
+
+name = 'netting', filename = 'netting.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+        _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+    
+        got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
+        exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
+>       assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
+E       AssertionError: netting: CC set ['CL'] != ['ENERGY_CL']
+E       assert {'CL'} == {'ENERGY_CL'}
+E         
+E         Extra items in the left set:
+E         'CL'
+E         Extra items in the right set:
+E         'ENERGY_CL'
+E         Use -v to get more diff
+
+tests/test_state.py:87: AssertionError
+_______________ test_case_matches_oracle[multi_cc-multi_cc.json] _______________
+
+name = 'multi_cc', filename = 'multi_cc.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'multi_cc', key = 'total_margin_usd', got = 5000.0, exp = 103284.66
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: multi_cc.total_margin_usd: got 5000.0 expected 103284.66 (tol 1.00)
+E       assert Decimal('98284.66') <= Decimal('1.00')
+E        +  where Decimal('98284.66') = abs((Decimal('5000.0') - Decimal('103284.66')))
+
+tests/test_state.py:71: AssertionError
+________________ test_case_matches_oracle[vol_mix-vol_mix.json] ________________
+
+name = 'vol_mix', filename = 'vol_mix.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'vol_mix', key = 'total_margin_usd', got = 5000.0, exp = 23994.84
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: vol_mix.total_margin_usd: got 5000.0 expected 23994.84 (tol 1.00)
+E       assert Decimal('18994.84') <= Decimal('1.00')
+E        +  where Decimal('18994.84') = abs((Decimal('5000.0') - Decimal('23994.84')))
+
+tests/test_state.py:71: AssertionError
+_____________________ test_visible_artifact_matches_sample _____________________
+
+    def test_visible_artifact_matches_sample() -> None:
+        """The required sample report at /app/output/margin_report.json matches the sample book."""
+        artifact = Path("/app/output/margin_report.json")
+        assert artifact.is_file(), "missing /app/output/margin_report.json"
+        got = json.loads(artifact.read_text())
+        exp = _expected(INPUTS / "portfolio.json")
+        _assert_money("artifact", "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+        got_ids = [r["cc_id"] for r in got.get("combined_commodities", [])]
+        exp_ids = [r["cc_id"] for r in exp["combined_commodities"]]
+>       assert got_ids == exp_ids, "artifact combined_commodities must be sorted by cc_id"
+E       AssertionError: artifact combined_commodities must be sorted by cc_id
+E       assert ['CL'] == ['ENERGY_CL']
+E         
+E         At index 0 diff: 'CL' != 'ENERGY_CL'
+E         Use -v to get more diff
+
+tests/test_state.py:108: AssertionError
+________________________ test_sample_not_hardcoded_only ________________________
+
+    def test_sample_not_hardcoded_only() -> None:
+        """A CLI that only reproduces the sample book must fail a second book."""
+        sample = _load_agent("sample")
+        som = _load_agent("som_otm")
+>       assert _dec(sample["total_margin_usd"]) != _dec(som["total_margin_usd"]), (
+            "sample and som_otm totals are identical; engine is not consuming the portfolio"
+        )
+E       AssertionError: sample and som_otm totals are identical; engine is not consuming the portfolio
+E       assert Decimal('5000.0') != Decimal('5000.0')
+E        +  where Decimal('5000.0') = _dec(5000.0)
+E        +  and   Decimal('5000.0') = _dec(5000.0)
+
+tests/test_state.py:115: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_state.py::test_case_matches_oracle[sample-portfolio.json]
+FAILED tests/test_state.py::test_case_matches_oracle[som_otm-som_otm.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[calendar-calendar.json]
+FAILED tests/test_state.py::test_case_matches_oracle[crack-crack.json] - Asse...
+FAILED tests/test_state.py::test_case_matches_oracle[nov_long-nov_long.json]
+FAILED tests/test_state.py::test_case_matches_oracle[fx_equity-fx_equity.json]
+FAILED tests/test_state.py::test_case_matches_oracle[mixed_opt-mixed_opt.json]
+FAILED tests/test_state.py::test_case_matches_oracle[ics_priority-ics_priority.json]
+FAILED tests/test_state.py::test_case_matches_oracle[netting-netting.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[multi_cc-multi_cc.json]
+FAILED tests/test_state.py::test_case_matches_oracle[vol_mix-vol_mix.json] - ...
+FAILED tests/test_state.py::test_visible_artifact_matches_sample - AssertionE...
+FAILED tests/test_state.py::test_sample_not_hardcoded_only - AssertionError: ...
+============================== 13 failed in 0.12s ==============================
