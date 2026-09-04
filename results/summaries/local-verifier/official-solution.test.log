@@ -2,9 +2,9 @@
 platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
 rootdir: /tests
 plugins: json-ctrf-0.5.2
-collected 13 items
+collected 19 items
 
-tests/test_state.py .............                                        [100%]
+tests/test_state.py ...................                                  [100%]
 
 ==================================== PASSES ====================================
 =========================== short test summary info ============================
@@ -19,6 +19,12 @@ PASSED tests/test_state.py::test_case_matches_oracle[ics_priority-ics_priority.j
 PASSED tests/test_state.py::test_case_matches_oracle[netting-netting.json]
 PASSED tests/test_state.py::test_case_matches_oracle[multi_cc-multi_cc.json]
 PASSED tests/test_state.py::test_case_matches_oracle[vol_mix-vol_mix.json]
+PASSED tests/test_state.py::test_case_matches_oracle[back_month-back_month.json]
+PASSED tests/test_state.py::test_case_matches_oracle[log_equity-log_equity.json]
+PASSED tests/test_state.py::test_case_matches_oracle[strip3-strip3.json]
+PASSED tests/test_state.py::test_case_matches_oracle[conc-conc.json]
+PASSED tests/test_state.py::test_case_matches_oracle[lao_deep-lao_deep.json]
+PASSED tests/test_state.py::test_case_matches_oracle[order_mix-order_mix.json]
 PASSED tests/test_state.py::test_visible_artifact_matches_sample
 PASSED tests/test_state.py::test_sample_not_hardcoded_only
-============================== 13 passed in 0.07s ==============================
+============================== 19 passed in 0.08s ==============================

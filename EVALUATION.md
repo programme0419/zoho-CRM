@@ -21,11 +21,11 @@ Harbor version: `0.22.0`.
 |-------------|--------|----------|
 | Static checks | **PASS** (re-run after HSMJ) | this file |
 | Implementation-rubric (`harbor check`) | **blocked** — needs `ANTHROPIC_API_KEY` | mechanical subset **PASS** |
-| Docker build | pending re-run after HSMJ | — |
-| Oracle reward 1.0 | pending re-run after HSMJ | prior jobs were pre-journal |
-| Nop reward 0.0 | pending re-run after HSMJ | prior jobs were pre-journal |
-| Any correct engine scores 1 | pending local matrix after HSMJ | — |
-| Incomplete / hardcoded engines score 0 | pending local matrix after HSMJ | — |
+| Docker build | **PASS** | oracle / nop / local matrix |
+| Oracle reward 1.0 | **PASS** (HSMJ job `2026-09-04__19-19-26`) | [oracle.json](results/summaries/oracle.json) |
+| Nop reward 0.0 | **PASS** (HSMJ job `2026-09-04__19-20-04`) | [nop.json](results/summaries/nop.json) |
+| Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
+| Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
 | `/run` × 3 Codex genuinely fail | **FAIL on two prior genres; HSMJ re-run pending** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json) |
 | `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
 | `/cheat` Codex reward 0 | **not a valid 0** | `AgentSafetyRefusalError` on old task |
