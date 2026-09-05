@@ -1,0 +1,8 @@
+{
+    "jobs_dir": "results/refcalc/oracle3",
+    "tasks": [
+        {
+            "path": "tasks/refcalc-clone"
+        }
+    ]
+}

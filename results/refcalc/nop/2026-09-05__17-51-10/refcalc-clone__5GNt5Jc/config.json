@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "tasks/refcalc-clone"
+    },
+    "trial_name": "refcalc-clone__5GNt5Jc",
+    "trials_dir": "results/refcalc/nop/2026-09-05__17-51-10",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "c1f9e50b-cfa2-420a-b4e3-d2ace1ebc019"
+}

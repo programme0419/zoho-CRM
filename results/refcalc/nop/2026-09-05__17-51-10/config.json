@@ -1,0 +1,13 @@
+{
+    "jobs_dir": "results/refcalc/nop",
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/refcalc-clone"
+        }
+    ]
+}
