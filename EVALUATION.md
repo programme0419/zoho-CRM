@@ -27,7 +27,7 @@ Harbor version: `0.22.0`.
 | Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
 | `/run` × 3 Codex genuinely fail | **not met — 3/3 across four genres** (spec, overlays, HSMJ, optimization) | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json), [run-codex-optimize.json](results/summaries/run-codex-optimize.json) |
-| `/run` × 3 Claude genuinely fail | **not met** — every quota-complete trial solved (3 passes across 2 sessions) | [run-claude.json](results/summaries/run-claude.json), [run-claude-2.json](results/summaries/run-claude-2.json) |
+| `/run` × 3 Claude genuinely fail | **not met** — every quota-complete trial solved across all four genres (incl. genre-4 optimization `jsr6hts`=1.0); only zeros are session-window rate limits | [run-claude.json](results/summaries/run-claude.json), [run-claude-2.json](results/summaries/run-claude-2.json), [run-claude-optimize.json](results/summaries/run-claude-optimize.json) |
 | `/cheat` Codex reward 0 | **reward 0, via refusal** — `AgentSafetyRefusalError`, not a blocked cheat attempt | [cheat-codex.json](results/summaries/cheat-codex.json) |
 | `/cheat` Claude reward 0 | **reward 0, but infra** — `ApiRateLimitError` at 1m14s (session quota exhausted) | [cheat-claude.json](results/summaries/cheat-claude.json) |
 
@@ -249,11 +249,9 @@ Job `2026-09-05__07-57-03`: **3/3 reward 1.0, 0 errors**, 33m. `gpt-5.6-sol` + `
 
 **Four genres, twelve genuine Codex trials, twelve rewards of 1.0.** The lever changed each time — written math spec, a nastier binary input codec, and finally a hard combinatorial optimization where the "obvious" implementation is wrong — and the result did not.
 
-Claude genre-4 attempts (subscription OAuth, not paid API): both blocked by the Opus **5-hour session window**, not by the model.
-- Job `2026-09-05__09-45-40` ([summary](results/summaries/run-claude-optimize-ratelimited.json)): 3/3 `ApiRateLimitError` in 3m49s — window already exhausted.
-- Job `2026-09-05__10-53-50` ([summary](results/summaries/run-claude-optimize-ratelimited-2.json)), started right after a window reset: trial 1 (`gbd4FY3`) ran **84 turns / ~47 min** and was cut off by the session cap (429, "resets 3:50pm UTC") **before finishing**; the other two could not start. All three → reward 0 via `ApiRateLimitError`.
+Claude genre-4 (subscription OAuth, not paid API): **solved.** Job `2026-09-05__16-06-31` ([summary](results/summaries/run-claude-optimize.json)) on a fresh Opus window: trial `jsr6hts` completed in ~28 min with **reward 1.0** — a genuine solve of the hard optimization. The other two trials (`fd4HFsh`, `Jzihs6i`) hit `ApiRateLimitError` because that one trial consumed the 5-hour session window (Codex/xhigh does a trial in ~11 min); those are infra zeros, not model failures. Earlier attempts (`2026-09-05__09-45-40`, `2026-09-05__10-53-50`) were fully window-blocked and are recorded for completeness.
 
-These are infra zeros (interrupted mid-work), not clean capability failures. Notable difficulty signal: a single Opus/max trial on genre 4 consumes the entire 5-hour session window (Codex/xhigh finishes a trial in ~11 min), so a clean Claude 3/3 needs ~3 separate windows. Codex solving genre 4 3/3 plus Claude solving genres 1–3 is already sufficient to establish the conclusion below.
+**Both configs solve all four genres.** `claude-opus-5`/max recognized the global-optimization requirement and implemented it correctly, exactly like `gpt-5.6-sol`/xhigh — it just needs far more time/tokens per trial.
 
 ## Conclusion — the "must-fail" bar is structural, not a tuning gap
 
