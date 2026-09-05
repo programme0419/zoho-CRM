@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "/tmp/harbor-check-jrg2h0h6/check-scan-margin"
+    },
+    "trial_name": "check-scan-margin__zTG6UFQ",
+    "trials_dir": "results/harbor-check/2026-09-05__01-46-12",
+    "agent": {
+        "name": "claude-code",
+        "model_name": "claude-sonnet-4-6",
+        "env": {
+            "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+        }
+    },
+    "job_id": "ac63efe6-33bf-451f-9fa2-4fa27f02347b"
+}

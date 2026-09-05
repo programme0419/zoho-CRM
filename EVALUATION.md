@@ -27,9 +27,9 @@ Harbor version: `0.22.0`.
 | Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
 | `/run` × 3 Codex genuinely fail | **FAIL — 3/3, then 3/3, then 3/3 after HSMJ** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json) |
-| `/run` × 3 Claude genuinely fail | **not met** — 1 genuine **1.0**, 2× `ApiRateLimitError` | [run-claude.json](results/summaries/run-claude.json) |
-| `/cheat` Codex reward 0 | **not a valid 0** | `AgentSafetyRefusalError` on old task |
-| `/cheat` Claude reward 0 | **not run** | session limit after `/run` |
+| `/run` × 3 Claude genuinely fail | **not met** — every quota-complete trial solved (3 passes across 2 sessions) | [run-claude.json](results/summaries/run-claude.json), [run-claude-2.json](results/summaries/run-claude-2.json) |
+| `/cheat` Codex reward 0 | **reward 0, via refusal** — `AgentSafetyRefusalError`, not a blocked cheat attempt | [cheat-codex.json](results/summaries/cheat-codex.json) |
+| `/cheat` Claude reward 0 | **reward 0, but infra** — `ApiRateLimitError` at 1m14s (session quota exhausted) | [cheat-claude.json](results/summaries/cheat-claude.json) |
 
 Crashes, API/rate-limit, container, timeout, and network errors do **not** count as model failures. They are recorded below so they are not mistaken for verifier zeros.
 
@@ -159,6 +159,11 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 | codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0 × 3** (three jobs) | none | HSM 1.0 (`18-00-05`), overlays (`18-37-45`), HSMJ journals (`19-21-22`, 41m, ~$4.65). All genuine. **Hiring bar requires all three to fail.** |
 | claude-code / anthropic/claude-opus-5 / max | 1 | **1.0** | none | Job `2026-09-05__00-49-40` trial `fcmSBjt`. Genuine solve. |
 | claude-code / anthropic/claude-opus-5 / max | 2–3 | 0.0 | **ApiRateLimitError** | Session limit: “resets 5:50am (UTC)”. Infra, not a model fail. |
+| claude-code / anthropic/claude-opus-5 / max (rerun after reset) | 1 | **1.0** | none | Job `2026-09-05__05-51-58` trial `aJ2TqSS`. Genuine solve. |
+| claude-code / anthropic/claude-opus-5 / max (rerun) | 2 | **1.0** | late `ApiRateLimitError` | Trial `EUpi3rs`. Solution already correct; verifier scored 1. Effective solve. |
+| claude-code / anthropic/claude-opus-5 / max (rerun) | 3 | 0.0 | **ApiRateLimitError** | Trial `QWCatED`. Rate-limited before solving. Infra, not a model fail. |
+
+Across both Claude sessions, every trial that had enough Opus session quota to finish **solved** the task (3 genuine passes). The only zeros are rate-limit cutoffs. Claude, like Codex, is not failing this task for model reasons.
 
 Earlier Codex jobs (`4960ffb6-…`, `2026-09-04__17-53-20`) died on `NetworkConnectionError` during `apt-get` inside Harbor’s Compose network. That is infra. This host’s user-defined Docker networks cannot NAT IPv4; the default `docker0` bridge can. `scripts/run_trials.sh` now passes `scripts/docker-compose.bridge.yaml` (`network_mode: bridge`). After that overlay, Codex installed and called the API.
 
@@ -180,8 +185,10 @@ bash scripts/run_trials.sh cheat-claude
 
 | Config | Reward | Error? | Requirement |
 |--------|--------|--------|-------------|
-| codex / openai/gpt-5.6-sol / xhigh | none | **NetworkConnectionError** (job under `results/cheat-codex/2026-09-04__16-50-13`) | must be 0.0 after a completed trial |
-| claude-code / anthropic/claude-opus-5 / max | not run | no OAuth token | must be 0.0 |
+| codex / openai/gpt-5.6-sol / xhigh | **0.0** | `AgentSafetyRefusalError` (job `2026-09-05__05-53-03`) | must be 0.0 |
+| claude-code / anthropic/claude-opus-5 / max | **0.0** | `ApiRateLimitError` at 1m14s (job `2026-09-05__06-35-07`) | must be 0.0 |
+
+Both `/cheat` trials report reward **0.0**, so the literal bar ("reward exactly 0") is met. But neither is a clean demonstration that the hardened verifier caught a real cheat attempt: Codex **refused** the hack prompt on safety grounds, and Claude **rate-limited** before doing anything (Opus session quota exhausted by the `/run` trials just before). A convincing `/cheat=0` — model attempts a shortcut and the separate verifier rejects it — still needs a config that (a) does not refuse and (b) has quota to run. The local cheat-shaped engines below already show the verifier rejects the obvious shortcuts.
 
 Local cheat-shaped engines (starter, hardcoded sample) already score **0** on the real verifier. That is not a substitute for the required Codex/Claude `/cheat` jobs.
 
@@ -232,6 +239,21 @@ Positions now arrive as House Scan Margin Journals. The sample is a v1 POS_V1 ta
 
 Job `2026-09-04__19-21-22` (`53628d4d-…`): **3/3 reward 1.0**, 41m, ~$4.65, no infra errors. Codex read `hsmj.h` / `FORMAT.md` / `ERRATA.txt` and wrote a v1+v2 decoder plus the overlay engine in ~12 minutes per trial.
 
-Three genuine `/run` jobs, three genres, nine trials, nine rewards of 1.0. A complete, fair written spec — math or on-wire format — is not enough to fail `gpt-5.6-sol` + `xhigh`. `/cheat` was not started on this genre: a model that solves the task will score 1 if it just solves it again.
+Three genuine `/run` jobs, three genres, nine trials, nine rewards of 1.0. A complete, fair written spec — math or on-wire format — is not enough to fail `gpt-5.6-sol` + `xhigh`.
+
+### Claude, same result
+
+`claude-opus-5` + `max` was run twice (2026-09-05 `00-49-40` and `05-51-58`). Every trial that had enough Opus session quota to finish solved the task (3 genuine reward-1.0 passes: `fcmSBjt`, `aJ2TqSS`, `EUpi3rs`). The only Claude zeros are `ApiRateLimitError` cutoffs, which are infra, not model failures.
+
+### Why the hiring bar is unmet, and what it implies
+
+Every bar in this exercise reduces to one thing: **these two frontier configs must be unable to solve the task.**
+
+- `/run` requires all trials to fail. Both models solve it.
+- `/cheat` requires reward 0. But if a model can solve the task, the natural `/cheat` outcome is that it just solves it (reward 1). The two `/cheat=0` results we have came from a refusal (Codex) and a rate-limit (Claude), not from the verifier catching a real cheat on an unsolvable task.
+
+"Implement this fully-specified deterministic engine" is one of the easiest task categories for current frontier models, and TB3 fairness (documented methodology, instruction/test alignment, reviewability, no process grading) forces the spec to be complete. Adding more rules or a harder input codec does not change the category — it is still transcription plus careful bookkeeping, which both models do inside the time limit. This has now been shown across three genres and both required configs.
+
+Getting both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max to fail 3/3 on a task that is also fair and solvable by an expert in a few hours almost certainly requires leaving the "implement a spec" genre entirely — e.g. deep debugging of a large, underdocumented system, or a genuinely hard search/optimization target with a strict threshold — where reading cannot substitute for iterative, feedback-driven work. That is a task-type change, not another hardening pass, and it carries its own fairness tradeoffs to work through. Note TB3's own rubric explicitly accepts tasks that current models can solve; the "must fail" bar here is stricter than TB3 itself.
 
 Old-task `/cheat` (`2026-09-04__18-29-49`) ended in `AgentSafetyRefusalError` — not a valid verifier zero.

@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "tasks/scan-margin"
+    },
+    "trial_name": "scan-margin__ya8FnEG",
+    "trials_dir": "/workspace/results/nop-harden/2026-09-04__18-36-41",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "529c1c10-48b6-4bce-a4d3-3fe557ed86a1"
+}

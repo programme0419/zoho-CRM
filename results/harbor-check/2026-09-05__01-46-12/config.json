@@ -1,0 +1,17 @@
+{
+    "jobs_dir": "results/harbor-check",
+    "agents": [
+        {
+            "name": "claude-code",
+            "model_name": "claude-sonnet-4-6",
+            "env": {
+                "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "/tmp/harbor-check-jrg2h0h6/check-scan-margin"
+        }
+    ]
+}

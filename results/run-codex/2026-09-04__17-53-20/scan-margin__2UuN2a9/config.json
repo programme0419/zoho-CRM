@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "tasks/scan-margin"
+    },
+    "trial_name": "scan-margin__2UuN2a9",
+    "trials_dir": "/workspace/results/run-codex/2026-09-04__17-53-20",
+    "agent": {
+        "name": "codex",
+        "model_name": "openai/gpt-5.6-sol",
+        "kwargs": {
+            "reasoning_effort": "xhigh"
+        }
+    },
+    "job_id": "26d7f965-9772-490b-a038-7afa0732ca13"
+}

@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.[REDACTED]3.[REDACTED]5, pytest-9.[REDACTED].[REDACTED], pluggy-[REDACTED].6.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected [REDACTED]9 items
+
+tests/test_state.py ...................                                  [[REDACTED]00%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_state.py::test_case_matches_oracle[sample-portfolio.json]
+PASSED tests/test_state.py::test_case_matches_oracle[som_otm-som_otm.json]
+PASSED tests/test_state.py::test_case_matches_oracle[calendar-calendar.json]
+PASSED tests/test_state.py::test_case_matches_oracle[crack-crack.json]
+PASSED tests/test_state.py::test_case_matches_oracle[nov_long-nov_long.json]
+PASSED tests/test_state.py::test_case_matches_oracle[fx_equity-fx_equity.json]
+PASSED tests/test_state.py::test_case_matches_oracle[mixed_opt-mixed_opt.json]
+PASSED tests/test_state.py::test_case_matches_oracle[ics_priority-ics_priority.json]
+PASSED tests/test_state.py::test_case_matches_oracle[netting-netting.json]
+PASSED tests/test_state.py::test_case_matches_oracle[multi_cc-multi_cc.json]
+PASSED tests/test_state.py::test_case_matches_oracle[vol_mix-vol_mix.json]
+PASSED tests/test_state.py::test_case_matches_oracle[back_month-back_month.json]
+PASSED tests/test_state.py::test_case_matches_oracle[log_equity-log_equity.json]
+PASSED tests/test_state.py::test_case_matches_oracle[strip3-strip3.json]
+PASSED tests/test_state.py::test_case_matches_oracle[conc-conc.json]
+PASSED tests/test_state.py::test_case_matches_oracle[lao_deep-lao_deep.json]
+PASSED tests/test_state.py::test_case_matches_oracle[order_mix-order_mix.json]
+PASSED tests/test_state.py::test_visible_artifact_matches_sample
+PASSED tests/test_state.py::test_sample_not_hardcoded_only
+============================== [REDACTED]9 passed in 0.08s ==============================

@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "tasks/scan-margin"
+    },
+    "trial_name": "scan-margin__C8EM2rs",
+    "trials_dir": "/workspace/results/nop-rerun/2026-09-04__17-31-32",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "658d305d-102f-4fa3-a28d-41ad97b20266"
+}

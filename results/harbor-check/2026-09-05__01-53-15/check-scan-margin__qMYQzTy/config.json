@@ -1,0 +1,23 @@
+{
+    "task": {
+        "path": "/tmp/harbor-check-2kq5xhou/check-scan-margin"
+    },
+    "trial_name": "check-scan-margin__qMYQzTy",
+    "trials_dir": "results/harbor-check/2026-09-05__01-53-15",
+    "agent": {
+        "name": "claude-code",
+        "model_name": "claude-sonnet-4-6",
+        "env": {
+            "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+        }
+    },
+    "environment": {
+        "type": "docker",
+        "kwargs": {
+            "extra_docker_compose": [
+                "/workspace/scripts/docker-compose.bridge.yaml"
+            ]
+        }
+    },
+    "job_id": "336bdd57-caff-425d-99ce-8edce17a47be"
+}

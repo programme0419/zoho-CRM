@@ -1,0 +1,23 @@
+{
+  "valuation_date": "2026-03-20",
+  "currency": "USD",
+  "total_margin_usd": 5000.00,
+  "combined_commodities": [
+    {
+      "cc_id": "ENERGY_CL",
+      "currency": "USD",
+      "scanning_risk": 5000.00,
+      "intra_charge": 0.00,
+      "inter_credit": 0.00,
+      "nov_credit": 0.00,
+      "som": 0.00,
+      "strip_credit": 0.00,
+      "concentration_charge": 0.00,
+      "liquidity_addon": 0.00,
+      "raw_margin": 5000.00,
+      "cc_margin_native": 5000.00,
+      "cc_margin_usd": 5000.00,
+      "worst_scenario_id": 13
+    }
+  ]
+}

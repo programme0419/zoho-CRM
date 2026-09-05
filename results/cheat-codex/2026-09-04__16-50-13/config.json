@@ -1,0 +1,24 @@
+{
+    "jobs_dir": "/workspace/results/cheat-codex",
+    "n_concurrent_trials": 1,
+    "agents": [
+        {
+            "name": "codex",
+            "model_name": "openai/gpt-5.6-sol",
+            "kwargs": {
+                "reasoning_effort": "xhigh"
+            },
+            "env": {
+                "CODEX_FORCE_AUTH_JSON": "****"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/scan-margin"
+        }
+    ],
+    "extra_instruction_paths": [
+        "/workspace/docs/hack-trial-prompt.md"
+    ]
+}

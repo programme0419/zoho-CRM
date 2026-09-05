@@ -1,0 +1,23 @@
+[
+  {
+    "source": "/logs/artifacts",
+    "destination": "artifacts/logs/artifacts",
+    "type": "directory",
+    "status": "empty",
+    "service": null
+  },
+  {
+    "source": "/app/hsm",
+    "destination": "artifacts/app/hsm",
+    "type": "directory",
+    "status": "ok",
+    "service": null
+  },
+  {
+    "source": "/app/output/margin_report.json",
+    "destination": "artifacts/app/output/margin_report.json",
+    "type": "file",
+    "status": "failed",
+    "service": null
+  }
+]

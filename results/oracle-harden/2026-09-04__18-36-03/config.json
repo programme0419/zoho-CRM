@@ -1,0 +1,8 @@
+{
+    "jobs_dir": "/workspace/results/oracle-harden",
+    "tasks": [
+        {
+            "path": "tasks/scan-margin"
+        }
+    ]
+}

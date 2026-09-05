@@ -1,0 +1,13 @@
+{
+    "jobs_dir": "/workspace/results/nop-harden",
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/scan-margin"
+        }
+    ]
+}

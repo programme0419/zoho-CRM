@@ -1,0 +1,23 @@
+{
+    "jobs_dir": "results/harbor-check",
+    "environment": {
+        "type": "docker",
+        "kwargs": {
+            "extra_docker_compose": "/workspace/scripts/docker-compose.bridge.yaml"
+        }
+    },
+    "agents": [
+        {
+            "name": "claude-code",
+            "model_name": "claude-sonnet-4-6",
+            "env": {
+                "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "/tmp/harbor-check-rpsqh340/check-scan-margin"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "checks": {},
+      "cost_usd": null,
+      "task_name": "scan-margin",
+      "error": "Check trial failed with NetworkConnectionError: Command failed (exit 100): apt-get update && apt-get install -y curl bash nodejs npm procps\nstdout: Ign:1 http://deb.debian.org/debian trixie InRelease\nIgn:2 http://deb.debian.org/debian trixie-updates InRelease\nIgn:3 http://deb.debian.org/debian-security trixie-security InRelease\nIgn:3 http://deb.debian.org/debian-security trixie-security InReleas ... [693 chars truncated] ... http:\n  Unable to connect to deb.debian.org:http:\nReading package lists...\nW: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  Unable to connect to deb.debian.org:http:\nW: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  Unable to connect to deb.debian.org:http:\nW: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  Unable to connect to deb.debian.org:http:\nW: Some index files failed to download. They have been ignored, or old ones used instead.\nReading package lists...\nBuilding dependency tree...\nReading state information...\nE: Unable to locate package curl\nE: Unable to locate package nodejs\nE: Unable to locate package npm\nE: Unable to locate package procps\n\nstderr: None\nTrial artifacts: results/harbor-check/2026-09-05__01-46-12/check-scan-margin__zTG6UFQ"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "tasks/scan-margin"
+    },
+    "trial_name": "scan-margin__RAkSUE4",
+    "trials_dir": "/workspace/results/nop/2026-09-04__19-20-04",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "b038596f-8161-46b5-af0e-1386ebdc7be6"
+}
