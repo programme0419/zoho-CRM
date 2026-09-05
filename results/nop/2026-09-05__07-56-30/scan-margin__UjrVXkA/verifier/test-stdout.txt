@@ -4,7 +4,7 @@ rootdir: /tests
 plugins: json-ctrf-0.5.2
 collected 19 items
 
-tests/test_state.py FFFFFFFFFFFFFFFFFFF                                  [100%]
+tests/test_state.py FFFFFFFFFFFFFFFFFF.                                  [100%]
 
 =================================== FAILURES ===================================
 _______________ test_case_matches_oracle[sample-portfolio.json] ________________
@@ -25,17 +25,20 @@ name = 'sample', filename = 'portfolio.json'
     
         got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
         exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
->       assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
-E       AssertionError: sample: CC set ['CL'] != ['ENERGY_CL']
-E       assert {'CL'} == {'ENERGY_CL'}
-E         
-E         Extra items in the left set:
-E         'CL'
-E         Extra items in the right set:
-E         'ENERGY_CL'
-E         Use -v to get more diff
+        assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
+    
+        for cc_id, erow in exp_ccs.items():
+            grow = got_ccs[cc_id]
+            assert grow.get("currency") == erow["currency"], f"{name}.{cc_id}.currency"
+            assert int(grow["worst_scenario_id"]) == int(erow["worst_scenario_id"]), (
+                f"{name}.{cc_id}.worst_scenario_id: {grow.get('worst_scenario_id')} != {erow['worst_scenario_id']}"
+            )
+            for key in MONEY_KEYS:
+>               _assert_money(f"{name}.{cc_id}", key, grow[key], erow[key], COMP_TOL)
+                                                      ^^^^^^^^^
+E               KeyError: 'strip_credit'
 
-tests/test_state.py:97: AssertionError
+tests/test_state.py:106: KeyError
 ________________ test_case_matches_oracle[som_otm-som_otm.json] ________________
 
 name = 'som_otm', filename = 'som_otm.json'
@@ -55,15 +58,15 @@ name = 'som_otm', filename = 'som_otm.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'som_otm', key = 'total_margin_usd', got = 5000.0, exp = 51040.39
+name = 'som_otm', key = 'total_margin_usd', got = 0.0, exp = 51040.39
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: som_otm.total_margin_usd: got 5000.0 expected 51040.39 (tol 1.00)
-E       assert Decimal('46040.39') <= Decimal('1.00')
-E        +  where Decimal('46040.39') = abs((Decimal('5000.0') - Decimal('51040.39')))
+E       AssertionError: som_otm.total_margin_usd: got 0.0 expected 51040.39 (tol 1.00)
+E       assert Decimal('51040.39') <= Decimal('1.00')
+E        +  where Decimal('51040.39') = abs((Decimal('0.0') - Decimal('51040.39')))
 
 tests/test_state.py:80: AssertionError
 _______________ test_case_matches_oracle[calendar-calendar.json] _______________
@@ -85,15 +88,15 @@ name = 'calendar', filename = 'calendar.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'calendar', key = 'total_margin_usd', got = 5000.0, exp = 2481.21
+name = 'calendar', key = 'total_margin_usd', got = 0.0, exp = 2481.21
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: calendar.total_margin_usd: got 5000.0 expected 2481.21 (tol 1.00)
-E       assert Decimal('2518.79') <= Decimal('1.00')
-E        +  where Decimal('2518.79') = abs((Decimal('5000.0') - Decimal('2481.21')))
+E       AssertionError: calendar.total_margin_usd: got 0.0 expected 2481.21 (tol 1.00)
+E       assert Decimal('2481.21') <= Decimal('1.00')
+E        +  where Decimal('2481.21') = abs((Decimal('0.0') - Decimal('2481.21')))
 
 tests/test_state.py:80: AssertionError
 __________________ test_case_matches_oracle[crack-crack.json] __________________
@@ -115,15 +118,15 @@ name = 'crack', filename = 'crack.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'crack', key = 'total_margin_usd', got = 5000.0, exp = 36540.0
+name = 'crack', key = 'total_margin_usd', got = 0.0, exp = 36540.0
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: crack.total_margin_usd: got 5000.0 expected 36540.0 (tol 1.00)
-E       assert Decimal('31540.0') <= Decimal('1.00')
-E        +  where Decimal('31540.0') = abs((Decimal('5000.0') - Decimal('36540.0')))
+E       AssertionError: crack.total_margin_usd: got 0.0 expected 36540.0 (tol 1.00)
+E       assert Decimal('36540.0') <= Decimal('1.00')
+E        +  where Decimal('36540.0') = abs((Decimal('0.0') - Decimal('36540.0')))
 
 tests/test_state.py:80: AssertionError
 _______________ test_case_matches_oracle[nov_long-nov_long.json] _______________
@@ -140,22 +143,19 @@ name = 'nov_long', filename = 'nov_long.json'
     
         assert got.get("valuation_date") == exp["valuation_date"]
         assert got.get("currency") == "USD"
->       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+        _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+    
+        got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
+        exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
+>       assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
+E       AssertionError: nov_long: CC set [] != ['ENERGY_CL']
+E       assert set() == {'ENERGY_CL'}
+E         
+E         Extra items in the right set:
+E         'ENERGY_CL'
+E         Use -v to get more diff
 
-tests/test_state.py:93: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-name = 'nov_long', key = 'total_margin_usd', got = 5000.0, exp = 0.0
-tol = Decimal('1.00')
-
-    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
-        g, e = _dec(got), _dec(exp)
->       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: nov_long.total_margin_usd: got 5000.0 expected 0.0 (tol 1.00)
-E       assert Decimal('5000.0') <= Decimal('1.00')
-E        +  where Decimal('5000.0') = abs((Decimal('5000.0') - Decimal('0.0')))
-
-tests/test_state.py:80: AssertionError
+tests/test_state.py:97: AssertionError
 ______________ test_case_matches_oracle[fx_equity-fx_equity.json] ______________
 
 name = 'fx_equity', filename = 'fx_equity.json'
@@ -175,15 +175,15 @@ name = 'fx_equity', filename = 'fx_equity.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'fx_equity', key = 'total_margin_usd', got = 5000.0, exp = 19315.39
+name = 'fx_equity', key = 'total_margin_usd', got = 0.0, exp = 19315.39
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: fx_equity.total_margin_usd: got 5000.0 expected 19315.39 (tol 1.00)
-E       assert Decimal('14315.39') <= Decimal('1.00')
-E        +  where Decimal('14315.39') = abs((Decimal('5000.0') - Decimal('19315.39')))
+E       AssertionError: fx_equity.total_margin_usd: got 0.0 expected 19315.39 (tol 1.00)
+E       assert Decimal('19315.39') <= Decimal('1.00')
+E        +  where Decimal('19315.39') = abs((Decimal('0.0') - Decimal('19315.39')))
 
 tests/test_state.py:80: AssertionError
 ______________ test_case_matches_oracle[mixed_opt-mixed_opt.json] ______________
@@ -205,15 +205,15 @@ name = 'mixed_opt', filename = 'mixed_opt.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'mixed_opt', key = 'total_margin_usd', got = 5000.0, exp = 20502.79
+name = 'mixed_opt', key = 'total_margin_usd', got = 0.0, exp = 20502.79
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: mixed_opt.total_margin_usd: got 5000.0 expected 20502.79 (tol 1.00)
-E       assert Decimal('15502.79') <= Decimal('1.00')
-E        +  where Decimal('15502.79') = abs((Decimal('5000.0') - Decimal('20502.79')))
+E       AssertionError: mixed_opt.total_margin_usd: got 0.0 expected 20502.79 (tol 1.00)
+E       assert Decimal('20502.79') <= Decimal('1.00')
+E        +  where Decimal('20502.79') = abs((Decimal('0.0') - Decimal('20502.79')))
 
 tests/test_state.py:80: AssertionError
 ___________ test_case_matches_oracle[ics_priority-ics_priority.json] ___________
@@ -235,15 +235,15 @@ name = 'ics_priority', filename = 'ics_priority.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'ics_priority', key = 'total_margin_usd', got = 5000.0, exp = 12180.0
+name = 'ics_priority', key = 'total_margin_usd', got = 0.0, exp = 12180.0
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: ics_priority.total_margin_usd: got 5000.0 expected 12180.0 (tol 1.00)
-E       assert Decimal('7180.0') <= Decimal('1.00')
-E        +  where Decimal('7180.0') = abs((Decimal('5000.0') - Decimal('12180.0')))
+E       AssertionError: ics_priority.total_margin_usd: got 0.0 expected 12180.0 (tol 1.00)
+E       assert Decimal('12180.0') <= Decimal('1.00')
+E        +  where Decimal('12180.0') = abs((Decimal('0.0') - Decimal('12180.0')))
 
 tests/test_state.py:80: AssertionError
 ________________ test_case_matches_oracle[netting-netting.json] ________________
@@ -260,21 +260,22 @@ name = 'netting', filename = 'netting.json'
     
         assert got.get("valuation_date") == exp["valuation_date"]
         assert got.get("currency") == "USD"
-        _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
-    
-        got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
-        exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
->       assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
-E       AssertionError: netting: CC set ['CL'] != ['ENERGY_CL']
-E       assert {'CL'} == {'ENERGY_CL'}
-E         
-E         Extra items in the left set:
-E         'CL'
-E         Extra items in the right set:
-E         'ENERGY_CL'
-E         Use -v to get more diff
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
 
-tests/test_state.py:97: AssertionError
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'netting', key = 'total_margin_usd', got = 0.0, exp = 5000.0
+tol = Decimal('1.00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: netting.total_margin_usd: got 0.0 expected 5000.0 (tol 1.00)
+E       assert Decimal('5000.0') <= Decimal('1.00')
+E        +  where Decimal('5000.0') = abs((Decimal('0.0') - Decimal('5000.0')))
+
+tests/test_state.py:80: AssertionError
 _______________ test_case_matches_oracle[multi_cc-multi_cc.json] _______________
 
 name = 'multi_cc', filename = 'multi_cc.json'
@@ -294,15 +295,15 @@ name = 'multi_cc', filename = 'multi_cc.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'multi_cc', key = 'total_margin_usd', got = 5000.0, exp = 101110.01
+name = 'multi_cc', key = 'total_margin_usd', got = 0.0, exp = 101110.01
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: multi_cc.total_margin_usd: got 5000.0 expected 101110.01 (tol 1.00)
-E       assert Decimal('96110.01') <= Decimal('1.00')
-E        +  where Decimal('96110.01') = abs((Decimal('5000.0') - Decimal('101110.01')))
+E       AssertionError: multi_cc.total_margin_usd: got 0.0 expected 101110.01 (tol 1.00)
+E       assert Decimal('101110.01') <= Decimal('1.00')
+E        +  where Decimal('101110.01') = abs((Decimal('0.0') - Decimal('101110.01')))
 
 tests/test_state.py:80: AssertionError
 ________________ test_case_matches_oracle[vol_mix-vol_mix.json] ________________
@@ -324,15 +325,15 @@ name = 'vol_mix', filename = 'vol_mix.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'vol_mix', key = 'total_margin_usd', got = 5000.0, exp = 24003.64
+name = 'vol_mix', key = 'total_margin_usd', got = 0.0, exp = 24003.64
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: vol_mix.total_margin_usd: got 5000.0 expected 24003.64 (tol 1.00)
-E       assert Decimal('19003.64') <= Decimal('1.00')
-E        +  where Decimal('19003.64') = abs((Decimal('5000.0') - Decimal('24003.64')))
+E       AssertionError: vol_mix.total_margin_usd: got 0.0 expected 24003.64 (tol 1.00)
+E       assert Decimal('24003.64') <= Decimal('1.00')
+E        +  where Decimal('24003.64') = abs((Decimal('0.0') - Decimal('24003.64')))
 
 tests/test_state.py:80: AssertionError
 _____________ test_case_matches_oracle[back_month-back_month.json] _____________
@@ -354,15 +355,15 @@ name = 'back_month', filename = 'back_month.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'back_month', key = 'total_margin_usd', got = 5000.0, exp = 8374.78
+name = 'back_month', key = 'total_margin_usd', got = 0.0, exp = 8374.78
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: back_month.total_margin_usd: got 5000.0 expected 8374.78 (tol 1.00)
-E       assert Decimal('3374.78') <= Decimal('1.00')
-E        +  where Decimal('3374.78') = abs((Decimal('5000.0') - Decimal('8374.78')))
+E       AssertionError: back_month.total_margin_usd: got 0.0 expected 8374.78 (tol 1.00)
+E       assert Decimal('8374.78') <= Decimal('1.00')
+E        +  where Decimal('8374.78') = abs((Decimal('0.0') - Decimal('8374.78')))
 
 tests/test_state.py:80: AssertionError
 _____________ test_case_matches_oracle[log_equity-log_equity.json] _____________
@@ -384,15 +385,15 @@ name = 'log_equity', filename = 'log_equity.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'log_equity', key = 'total_margin_usd', got = 5000.0, exp = 79439.26
+name = 'log_equity', key = 'total_margin_usd', got = 0.0, exp = 79439.26
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: log_equity.total_margin_usd: got 5000.0 expected 79439.26 (tol 1.00)
-E       assert Decimal('74439.26') <= Decimal('1.00')
-E        +  where Decimal('74439.26') = abs((Decimal('5000.0') - Decimal('79439.26')))
+E       AssertionError: log_equity.total_margin_usd: got 0.0 expected 79439.26 (tol 1.00)
+E       assert Decimal('79439.26') <= Decimal('1.00')
+E        +  where Decimal('79439.26') = abs((Decimal('0.0') - Decimal('79439.26')))
 
 tests/test_state.py:80: AssertionError
 _________________ test_case_matches_oracle[strip3-strip3.json] _________________
@@ -414,15 +415,15 @@ name = 'strip3', filename = 'strip3.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'strip3', key = 'total_margin_usd', got = 5000.0, exp = 44892.0
+name = 'strip3', key = 'total_margin_usd', got = 0.0, exp = 44892.0
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: strip3.total_margin_usd: got 5000.0 expected 44892.0 (tol 1.00)
-E       assert Decimal('39892.0') <= Decimal('1.00')
-E        +  where Decimal('39892.0') = abs((Decimal('5000.0') - Decimal('44892.0')))
+E       AssertionError: strip3.total_margin_usd: got 0.0 expected 44892.0 (tol 1.00)
+E       assert Decimal('44892.0') <= Decimal('1.00')
+E        +  where Decimal('44892.0') = abs((Decimal('0.0') - Decimal('44892.0')))
 
 tests/test_state.py:80: AssertionError
 ___________________ test_case_matches_oracle[conc-conc.json] ___________________
@@ -444,15 +445,15 @@ name = 'conc', filename = 'conc.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'conc', key = 'total_margin_usd', got = 5000.0, exp = 100600.0
+name = 'conc', key = 'total_margin_usd', got = 0.0, exp = 100600.0
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: conc.total_margin_usd: got 5000.0 expected 100600.0 (tol 1.00)
-E       assert Decimal('95600.0') <= Decimal('1.00')
-E        +  where Decimal('95600.0') = abs((Decimal('5000.0') - Decimal('100600.0')))
+E       AssertionError: conc.total_margin_usd: got 0.0 expected 100600.0 (tol 1.00)
+E       assert Decimal('100600.0') <= Decimal('1.00')
+E        +  where Decimal('100600.0') = abs((Decimal('0.0') - Decimal('100600.0')))
 
 tests/test_state.py:80: AssertionError
 _______________ test_case_matches_oracle[lao_deep-lao_deep.json] _______________
@@ -474,15 +475,15 @@ name = 'lao_deep', filename = 'lao_deep.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'lao_deep', key = 'total_margin_usd', got = 5000.0, exp = 8166.46
+name = 'lao_deep', key = 'total_margin_usd', got = 0.0, exp = 8166.46
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: lao_deep.total_margin_usd: got 5000.0 expected 8166.46 (tol 1.00)
-E       assert Decimal('3166.46') <= Decimal('1.00')
-E        +  where Decimal('3166.46') = abs((Decimal('5000.0') - Decimal('8166.46')))
+E       AssertionError: lao_deep.total_margin_usd: got 0.0 expected 8166.46 (tol 1.00)
+E       assert Decimal('8166.46') <= Decimal('1.00')
+E        +  where Decimal('8166.46') = abs((Decimal('0.0') - Decimal('8166.46')))
 
 tests/test_state.py:80: AssertionError
 ______________ test_case_matches_oracle[order_mix-order_mix.json] ______________
@@ -504,15 +505,15 @@ name = 'order_mix', filename = 'order_mix.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'order_mix', key = 'total_margin_usd', got = 5000.0, exp = 130758.46
+name = 'order_mix', key = 'total_margin_usd', got = 0.0, exp = 130758.46
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: order_mix.total_margin_usd: got 5000.0 expected 130758.46 (tol 1.00)
-E       assert Decimal('125758.46') <= Decimal('1.00')
-E        +  where Decimal('125758.46') = abs((Decimal('5000.0') - Decimal('130758.46')))
+E       AssertionError: order_mix.total_margin_usd: got 0.0 expected 130758.46 (tol 1.00)
+E       assert Decimal('130758.46') <= Decimal('1.00')
+E        +  where Decimal('130758.46') = abs((Decimal('0.0') - Decimal('130758.46')))
 
 tests/test_state.py:80: AssertionError
 _____________________ test_visible_artifact_matches_sample _____________________
@@ -520,36 +521,16 @@ _____________________ test_visible_artifact_matches_sample _____________________
     def test_visible_artifact_matches_sample() -> None:
         """The required sample report at /app/output/margin_report.json matches the sample book."""
         artifact = Path("/app/output/margin_report.json")
-        assert artifact.is_file(), "missing /app/output/margin_report.json"
-        got = json.loads(artifact.read_text())
-        exp = _expected(INPUTS / "portfolio.json")
-        _assert_money("artifact", "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
-        got_ids = [r["cc_id"] for r in got.get("combined_commodities", [])]
-        exp_ids = [r["cc_id"] for r in exp["combined_commodities"]]
->       assert got_ids == exp_ids, "artifact combined_commodities must be sorted by cc_id"
-E       AssertionError: artifact combined_commodities must be sorted by cc_id
-E       assert ['CL'] == ['ENERGY_CL']
-E         
-E         At index 0 diff: 'CL' != 'ENERGY_CL'
-E         Use -v to get more diff
+>       assert artifact.is_file(), "missing /app/output/margin_report.json"
+E       AssertionError: missing /app/output/margin_report.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/app/output/margin_report.json').is_file
 
-tests/test_state.py:118: AssertionError
-________________________ test_sample_not_hardcoded_only ________________________
-
-    def test_sample_not_hardcoded_only() -> None:
-        """A CLI that only reproduces the sample book must fail a second book."""
-        sample = _load_agent("sample")
-        som = _load_agent("som_otm")
->       assert _dec(sample["total_margin_usd"]) != _dec(som["total_margin_usd"]), (
-            "sample and som_otm totals are identical; engine is not consuming the portfolio"
-        )
-E       AssertionError: sample and som_otm totals are identical; engine is not consuming the portfolio
-E       assert Decimal('5000.0') != Decimal('5000.0')
-E        +  where Decimal('5000.0') = _dec(5000.0)
-E        +  and   Decimal('5000.0') = _dec(5000.0)
-
-tests/test_state.py:125: AssertionError
+tests/test_state.py:112: AssertionError
+==================================== PASSES ====================================
 =========================== short test summary info ============================
+PASSED tests/test_state.py::test_sample_not_hardcoded_only
 FAILED tests/test_state.py::test_case_matches_oracle[sample-portfolio.json]
 FAILED tests/test_state.py::test_case_matches_oracle[som_otm-som_otm.json] - ...
 FAILED tests/test_state.py::test_case_matches_oracle[calendar-calendar.json]
@@ -568,5 +549,4 @@ FAILED tests/test_state.py::test_case_matches_oracle[conc-conc.json] - Assert...
 FAILED tests/test_state.py::test_case_matches_oracle[lao_deep-lao_deep.json]
 FAILED tests/test_state.py::test_case_matches_oracle[order_mix-order_mix.json]
 FAILED tests/test_state.py::test_visible_artifact_matches_sample - AssertionE...
-FAILED tests/test_state.py::test_sample_not_hardcoded_only - AssertionError: ...
-============================== 19 failed in 0.14s ==============================
+========================= 18 failed, 1 passed in 0.14s =========================

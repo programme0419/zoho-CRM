@@ -1,7 +1,7 @@
 {
     "reportFormat": "CTRF",
     "specVersion": "0.0.0",
-    "timestamp": "2026-09-04T19:21:07.076578+00:00",
+    "timestamp": "2026-09-05T07:55:14.177938+00:00",
     "generatedBy": "pytest",
     "results": {
         "tool": {
@@ -15,8 +15,8 @@
             "skipped": 0,
             "pending": 0,
             "other": 0,
-            "start": 1788549666936,
-            "stop": 1788549667076
+            "start": 1788594914036,
+            "stop": 1788594914177
         },
         "environment": {
             "buildName": "Pytest JSON CTRF Report",
@@ -28,9 +28,9 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 17,
-                "start": 1788549666989,
-                "stop": 1788549667006,
+                "duration": 16,
+                "start": 1788594914090,
+                "stop": 1788594914106,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -44,8 +44,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667006,
-                "stop": 1788549667010,
+                "start": 1788594914106,
+                "stop": 1788594914110,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -59,8 +59,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667010,
-                "stop": 1788549667014,
+                "start": 1788594914110,
+                "stop": 1788594914114,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -73,15 +73,15 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 4,
-                "start": 1788549667014,
-                "stop": 1788549667018,
+                "duration": 5,
+                "start": 1788594914114,
+                "stop": 1788594914119,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
                     "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
                 ],
-                "trace": "name = 'crack', filename = 'crack.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n        got = _load_agent(name)\n        exp = _expected(portfolio)\n    \n        assert got.get(\"valuation_date\") == exp[\"valuation_date\"]\n        assert got.get(\"currency\") == \"USD\"\n>       _assert_money(name, \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n\ntests/test_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'crack', key = 'total_margin_usd', got = 5000.0, exp = 35360.0\ntol = Decimal('1.00')\n\n    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:\n        g, e = _dec(got), _dec(exp)\n>       assert abs(g - e) <= tol, f\"{name}.{key}: got {g} expected {e} (tol {tol})\"\nE       AssertionError: crack.total_margin_usd: got 5000.0 expected 35360.0 (tol 1.00)\nE       assert Decimal('30360.0') <= Decimal('1.00')\nE        +  where Decimal('30360.0') = abs((Decimal('5000.0') - Decimal('35360.0')))\n\ntests/test_state.py:80: AssertionError",
+                "trace": "name = 'crack', filename = 'crack.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n        got = _load_agent(name)\n        exp = _expected(portfolio)\n    \n        assert got.get(\"valuation_date\") == exp[\"valuation_date\"]\n        assert got.get(\"currency\") == \"USD\"\n>       _assert_money(name, \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n\ntests/test_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'crack', key = 'total_margin_usd', got = 5000.0, exp = 36540.0\ntol = Decimal('1.00')\n\n    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:\n        g, e = _dec(got), _dec(exp)\n>       assert abs(g - e) <= tol, f\"{name}.{key}: got {g} expected {e} (tol {tol})\"\nE       AssertionError: crack.total_margin_usd: got 5000.0 expected 36540.0 (tol 1.00)\nE       assert Decimal('31540.0') <= Decimal('1.00')\nE        +  where Decimal('31540.0') = abs((Decimal('5000.0') - Decimal('36540.0')))\n\ntests/test_state.py:80: AssertionError",
                 "message": "The test failed in the call phase due to an assertion error"
             },
             {
@@ -89,8 +89,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667018,
-                "stop": 1788549667022,
+                "start": 1788594914119,
+                "stop": 1788594914123,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -104,8 +104,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667022,
-                "stop": 1788549667026,
+                "start": 1788594914123,
+                "stop": 1788594914127,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -119,8 +119,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667026,
-                "stop": 1788549667030,
+                "start": 1788594914127,
+                "stop": 1788594914131,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -134,23 +134,23 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667030,
-                "stop": 1788549667034,
+                "start": 1788594914131,
+                "stop": 1788594914135,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
                     "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
                 ],
-                "trace": "name = 'ics_priority', filename = 'ics_priority.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n        got = _load_agent(name)\n        exp = _expected(portfolio)\n    \n        assert got.get(\"valuation_date\") == exp[\"valuation_date\"]\n        assert got.get(\"currency\") == \"USD\"\n>       _assert_money(name, \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n\ntests/test_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'ics_priority', key = 'total_margin_usd', got = 5000.0, exp = 52240.0\ntol = Decimal('1.00')\n\n    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:\n        g, e = _dec(got), _dec(exp)\n>       assert abs(g - e) <= tol, f\"{name}.{key}: got {g} expected {e} (tol {tol})\"\nE       AssertionError: ics_priority.total_margin_usd: got 5000.0 expected 52240.0 (tol 1.00)\nE       assert Decimal('47240.0') <= Decimal('1.00')\nE        +  where Decimal('47240.0') = abs((Decimal('5000.0') - Decimal('52240.0')))\n\ntests/test_state.py:80: AssertionError",
+                "trace": "name = 'ics_priority', filename = 'ics_priority.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n        got = _load_agent(name)\n        exp = _expected(portfolio)\n    \n        assert got.get(\"valuation_date\") == exp[\"valuation_date\"]\n        assert got.get(\"currency\") == \"USD\"\n>       _assert_money(name, \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n\ntests/test_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'ics_priority', key = 'total_margin_usd', got = 5000.0, exp = 12180.0\ntol = Decimal('1.00')\n\n    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:\n        g, e = _dec(got), _dec(exp)\n>       assert abs(g - e) <= tol, f\"{name}.{key}: got {g} expected {e} (tol {tol})\"\nE       AssertionError: ics_priority.total_margin_usd: got 5000.0 expected 12180.0 (tol 1.00)\nE       assert Decimal('7180.0') <= Decimal('1.00')\nE        +  where Decimal('7180.0') = abs((Decimal('5000.0') - Decimal('12180.0')))\n\ntests/test_state.py:80: AssertionError",
                 "message": "The test failed in the call phase due to an assertion error"
             },
             {
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 3,
-                "start": 1788549667034,
-                "stop": 1788549667037,
+                "duration": 4,
+                "start": 1788594914135,
+                "stop": 1788594914139,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -164,8 +164,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667038,
-                "stop": 1788549667042,
+                "start": 1788594914139,
+                "stop": 1788594914143,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -179,8 +179,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667042,
-                "stop": 1788549667046,
+                "start": 1788594914143,
+                "stop": 1788594914147,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -194,8 +194,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667046,
-                "stop": 1788549667050,
+                "start": 1788594914147,
+                "stop": 1788594914151,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -209,8 +209,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667050,
-                "stop": 1788549667054,
+                "start": 1788594914151,
+                "stop": 1788594914155,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -224,8 +224,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667054,
-                "stop": 1788549667058,
+                "start": 1788594914155,
+                "stop": 1788594914159,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -239,8 +239,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667058,
-                "stop": 1788549667062,
+                "start": 1788594914159,
+                "stop": 1788594914163,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -254,8 +254,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788549667062,
-                "stop": 1788549667066,
+                "start": 1788594914163,
+                "stop": 1788594914167,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -268,15 +268,15 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 4,
-                "start": 1788549667066,
-                "stop": 1788549667070,
+                "duration": 5,
+                "start": 1788594914167,
+                "stop": 1788594914172,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
                     "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
                 ],
-                "trace": "name = 'order_mix', filename = 'order_mix.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n        got = _load_agent(name)\n        exp = _expected(portfolio)\n    \n        assert got.get(\"valuation_date\") == exp[\"valuation_date\"]\n        assert got.get(\"currency\") == \"USD\"\n>       _assert_money(name, \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n\ntests/test_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'order_mix', key = 'total_margin_usd', got = 5000.0, exp = 128758.46\ntol = Decimal('1.00')\n\n    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:\n        g, e = _dec(got), _dec(exp)\n>       assert abs(g - e) <= tol, f\"{name}.{key}: got {g} expected {e} (tol {tol})\"\nE       AssertionError: order_mix.total_margin_usd: got 5000.0 expected 128758.46 (tol 1.00)\nE       assert Decimal('123758.46') <= Decimal('1.00')\nE        +  where Decimal('123758.46') = abs((Decimal('5000.0') - Decimal('128758.46')))\n\ntests/test_state.py:80: AssertionError",
+                "trace": "name = 'order_mix', filename = 'order_mix.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n        got = _load_agent(name)\n        exp = _expected(portfolio)\n    \n        assert got.get(\"valuation_date\") == exp[\"valuation_date\"]\n        assert got.get(\"currency\") == \"USD\"\n>       _assert_money(name, \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n\ntests/test_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'order_mix', key = 'total_margin_usd', got = 5000.0, exp = 130758.46\ntol = Decimal('1.00')\n\n    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:\n        g, e = _dec(got), _dec(exp)\n>       assert abs(g - e) <= tol, f\"{name}.{key}: got {g} expected {e} (tol {tol})\"\nE       AssertionError: order_mix.total_margin_usd: got 5000.0 expected 130758.46 (tol 1.00)\nE       assert Decimal('125758.46') <= Decimal('1.00')\nE        +  where Decimal('125758.46') = abs((Decimal('5000.0') - Decimal('130758.46')))\n\ntests/test_state.py:80: AssertionError",
                 "message": "The test failed in the call phase due to an assertion error"
             },
             {
@@ -284,8 +284,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 3,
-                "start": 1788549667070,
-                "stop": 1788549667073,
+                "start": 1788594914172,
+                "stop": 1788594914175,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "trace": "def test_visible_artifact_matches_sample() -> None:\n        \"\"\"The required sample report at /app/output/margin_report.json matches the sample book.\"\"\"\n        artifact = Path(\"/app/output/margin_report.json\")\n        assert artifact.is_file(), \"missing /app/output/margin_report.json\"\n        got = json.loads(artifact.read_text())\n        exp = _expected(INPUTS / \"portfolio.json\")\n        _assert_money(\"artifact\", \"total_margin_usd\", got[\"total_margin_usd\"], exp[\"total_margin_usd\"], TOTAL_TOL)\n        got_ids = [r[\"cc_id\"] for r in got.get(\"combined_commodities\", [])]\n        exp_ids = [r[\"cc_id\"] for r in exp[\"combined_commodities\"]]\n>       assert got_ids == exp_ids, \"artifact combined_commodities must be sorted by cc_id\"\nE       AssertionError: artifact combined_commodities must be sorted by cc_id\nE       assert ['CL'] == ['ENERGY_CL']\nE         \nE         At index 0 diff: 'CL' != 'ENERGY_CL'\nE         Use -v to get more diff\n\ntests/test_state.py:118: AssertionError",
@@ -295,9 +295,9 @@
                 "name": "test_state.py::test_sample_not_hardcoded_only",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 3,
-                "start": 1788549667073,
-                "stop": 1788549667076,
+                "duration": 2,
+                "start": 1788594914175,
+                "stop": 1788594914177,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "trace": "def test_sample_not_hardcoded_only() -> None:\n        \"\"\"A CLI that only reproduces the sample book must fail a second book.\"\"\"\n        sample = _load_agent(\"sample\")\n        som = _load_agent(\"som_otm\")\n>       assert _dec(sample[\"total_margin_usd\"]) != _dec(som[\"total_margin_usd\"]), (\n            \"sample and som_otm totals are identical; engine is not consuming the portfolio\"\n        )\nE       AssertionError: sample and som_otm totals are identical; engine is not consuming the portfolio\nE       assert Decimal('5000.0') != Decimal('5000.0')\nE        +  where Decimal('5000.0') = _dec(5000.0)\nE        +  and   Decimal('5000.0') = _dec(5000.0)\n\ntests/test_state.py:125: AssertionError",

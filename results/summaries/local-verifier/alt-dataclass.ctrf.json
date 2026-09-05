@@ -1,7 +1,7 @@
 {
     "reportFormat": "CTRF",
     "specVersion": "0.0.0",
-    "timestamp": "2026-09-04T19:20:57.948693+00:00",
+    "timestamp": "2026-09-05T07:55:04.892690+00:00",
     "generatedBy": "pytest",
     "results": {
         "tool": {
@@ -15,8 +15,8 @@
             "skipped": 0,
             "pending": 0,
             "other": 0,
-            "start": 1788549657870,
-            "stop": 1788549657948
+            "start": 1788594904812,
+            "stop": 1788594904892
         },
         "environment": {
             "buildName": "Pytest JSON CTRF Report",
@@ -28,8 +28,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 9,
-                "start": 1788549657923,
-                "stop": 1788549657932,
+                "start": 1788594904867,
+                "stop": 1788594904876,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -40,8 +40,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657932,
-                "stop": 1788549657933,
+                "start": 1788594904876,
+                "stop": 1788594904877,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -52,8 +52,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657933,
-                "stop": 1788549657934,
+                "start": 1788594904877,
+                "stop": 1788594904878,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -64,8 +64,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657934,
-                "stop": 1788549657935,
+                "start": 1788594904878,
+                "stop": 1788594904879,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -76,20 +76,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657935,
-                "stop": 1788549657936,
-                "retries": 0,
-                "file_path": "test_state.py",
-                "tags": [
-                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
-                ]
-            },
-            {
-                "name": "test_state.py::test_case_matches_oracle",
-                "status": "passed",
-                "duration": 1,
-                "start": 1788549657936,
-                "stop": 1788549657937,
+                "start": 1788594904879,
+                "stop": 1788594904880,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -100,8 +88,68 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 0,
-                "start": 1788549657937,
-                "stop": 1788549657937,
+                "start": 1788594904880,
+                "stop": 1788594904880,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788594904880,
+                "stop": 1788594904881,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788594904881,
+                "stop": 1788594904882,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788594904882,
+                "stop": 1788594904883,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788594904883,
+                "stop": 1788594904884,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788594904885,
+                "stop": 1788594904886,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -112,20 +160,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 0,
-                "start": 1788549657938,
-                "stop": 1788549657938,
-                "retries": 0,
-                "file_path": "test_state.py",
-                "tags": [
-                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
-                ]
-            },
-            {
-                "name": "test_state.py::test_case_matches_oracle",
-                "status": "passed",
-                "duration": 0,
-                "start": 1788549657939,
-                "stop": 1788549657939,
+                "start": 1788594904886,
+                "stop": 1788594904886,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -136,8 +172,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657939,
-                "stop": 1788549657940,
+                "start": 1788594904886,
+                "stop": 1788594904887,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -148,8 +184,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657940,
-                "stop": 1788549657941,
+                "start": 1788594904887,
+                "stop": 1788594904888,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -160,8 +196,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657941,
-                "stop": 1788549657942,
+                "start": 1788594904888,
+                "stop": 1788594904889,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -172,8 +208,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657942,
-                "stop": 1788549657943,
+                "start": 1788594904889,
+                "stop": 1788594904890,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -184,44 +220,8 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657943,
-                "stop": 1788549657944,
-                "retries": 0,
-                "file_path": "test_state.py",
-                "tags": [
-                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
-                ]
-            },
-            {
-                "name": "test_state.py::test_case_matches_oracle",
-                "status": "passed",
-                "duration": 1,
-                "start": 1788549657944,
-                "stop": 1788549657945,
-                "retries": 0,
-                "file_path": "test_state.py",
-                "tags": [
-                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
-                ]
-            },
-            {
-                "name": "test_state.py::test_case_matches_oracle",
-                "status": "passed",
-                "duration": 0,
-                "start": 1788549657945,
-                "stop": 1788549657945,
-                "retries": 0,
-                "file_path": "test_state.py",
-                "tags": [
-                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
-                ]
-            },
-            {
-                "name": "test_state.py::test_case_matches_oracle",
-                "status": "passed",
-                "duration": 1,
-                "start": 1788549657946,
-                "stop": 1788549657947,
+                "start": 1788594904890,
+                "stop": 1788594904891,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -232,8 +232,8 @@
                 "name": "test_state.py::test_visible_artifact_matches_sample",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788549657947,
-                "stop": 1788549657948,
+                "start": 1788594904891,
+                "stop": 1788594904892,
                 "retries": 0,
                 "file_path": "test_state.py"
             },
@@ -241,8 +241,8 @@
                 "name": "test_state.py::test_sample_not_hardcoded_only",
                 "status": "passed",
                 "duration": 0,
-                "start": 1788549657948,
-                "stop": 1788549657948,
+                "start": 1788594904892,
+                "stop": 1788594904892,
                 "retries": 0,
                 "file_path": "test_state.py"
             }

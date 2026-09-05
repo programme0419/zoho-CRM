@@ -1,0 +1,14 @@
+{
+    "job_name": "2026-09-05__07-56-30",
+    "jobs_dir": "/workspace/results/nop",
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/scan-margin"
+        }
+    ]
+}

@@ -118,15 +118,15 @@ name = 'crack', filename = 'crack.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'crack', key = 'total_margin_usd', got = 0.0, exp = 35360.0
+name = 'crack', key = 'total_margin_usd', got = 0.0, exp = 36540.0
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: crack.total_margin_usd: got 0.0 expected 35360.0 (tol 1.00)
-E       assert Decimal('35360.0') <= Decimal('1.00')
-E        +  where Decimal('35360.0') = abs((Decimal('0.0') - Decimal('35360.0')))
+E       AssertionError: crack.total_margin_usd: got 0.0 expected 36540.0 (tol 1.00)
+E       assert Decimal('36540.0') <= Decimal('1.00')
+E        +  where Decimal('36540.0') = abs((Decimal('0.0') - Decimal('36540.0')))
 
 tests/test_state.py:80: AssertionError
 _______________ test_case_matches_oracle[nov_long-nov_long.json] _______________
@@ -235,15 +235,15 @@ name = 'ics_priority', filename = 'ics_priority.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'ics_priority', key = 'total_margin_usd', got = 0.0, exp = 52240.0
+name = 'ics_priority', key = 'total_margin_usd', got = 0.0, exp = 12180.0
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: ics_priority.total_margin_usd: got 0.0 expected 52240.0 (tol 1.00)
-E       assert Decimal('52240.0') <= Decimal('1.00')
-E        +  where Decimal('52240.0') = abs((Decimal('0.0') - Decimal('52240.0')))
+E       AssertionError: ics_priority.total_margin_usd: got 0.0 expected 12180.0 (tol 1.00)
+E       assert Decimal('12180.0') <= Decimal('1.00')
+E        +  where Decimal('12180.0') = abs((Decimal('0.0') - Decimal('12180.0')))
 
 tests/test_state.py:80: AssertionError
 ________________ test_case_matches_oracle[netting-netting.json] ________________
@@ -505,15 +505,15 @@ name = 'order_mix', filename = 'order_mix.json'
 tests/test_state.py:93: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-name = 'order_mix', key = 'total_margin_usd', got = 0.0, exp = 128758.46
+name = 'order_mix', key = 'total_margin_usd', got = 0.0, exp = 130758.46
 tol = Decimal('1.00')
 
     def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
         g, e = _dec(got), _dec(exp)
 >       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
-E       AssertionError: order_mix.total_margin_usd: got 0.0 expected 128758.46 (tol 1.00)
-E       assert Decimal('128758.46') <= Decimal('1.00')
-E        +  where Decimal('128758.46') = abs((Decimal('0.0') - Decimal('128758.46')))
+E       AssertionError: order_mix.total_margin_usd: got 0.0 expected 130758.46 (tol 1.00)
+E       assert Decimal('130758.46') <= Decimal('1.00')
+E        +  where Decimal('130758.46') = abs((Decimal('0.0') - Decimal('130758.46')))
 
 tests/test_state.py:80: AssertionError
 ==================================== PASSES ====================================

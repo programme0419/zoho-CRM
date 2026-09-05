@@ -1,7 +1,7 @@
 {
     "reportFormat": "CTRF",
     "specVersion": "0.0.0",
-    "timestamp": "2026-09-05T07:55:09.559370+00:00",
+    "timestamp": "2026-09-05T07:56:50.625596+00:00",
     "generatedBy": "pytest",
     "results": {
         "tool": {
@@ -10,13 +10,13 @@
         },
         "summary": {
             "tests": 19,
-            "passed": 2,
-            "failed": 17,
+            "passed": 1,
+            "failed": 18,
             "skipped": 0,
             "pending": 0,
             "other": 0,
-            "start": 1788594909422,
-            "stop": 1788594909559
+            "start": 1788595010487,
+            "stop": 1788595010625
         },
         "environment": {
             "buildName": "Pytest JSON CTRF Report",
@@ -28,9 +28,9 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 17,
-                "start": 1788594909476,
-                "stop": 1788594909493,
+                "duration": 16,
+                "start": 1788595010541,
+                "stop": 1788595010557,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -44,8 +44,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909493,
-                "stop": 1788594909497,
+                "start": 1788595010557,
+                "stop": 1788595010561,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -59,8 +59,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909497,
-                "stop": 1788594909501,
+                "start": 1788595010561,
+                "stop": 1788595010565,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -74,8 +74,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909501,
-                "stop": 1788594909505,
+                "start": 1788595010565,
+                "stop": 1788595010569,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -88,9 +88,9 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 4,
-                "start": 1788594909505,
-                "stop": 1788594909509,
+                "duration": 3,
+                "start": 1788595010570,
+                "stop": 1788595010573,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -104,8 +104,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909509,
-                "stop": 1788594909513,
+                "start": 1788595010573,
+                "stop": 1788595010577,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -119,8 +119,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909513,
-                "stop": 1788594909517,
+                "start": 1788595010577,
+                "stop": 1788595010581,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -134,8 +134,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909517,
-                "stop": 1788594909521,
+                "start": 1788595010581,
+                "stop": 1788595010585,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -149,8 +149,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909521,
-                "stop": 1788594909525,
+                "start": 1788595010585,
+                "stop": 1788595010589,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -163,9 +163,9 @@
                 "name": "test_state.py::test_case_matches_oracle",
                 "status": "failed",
                 "raw_status": "call_failed",
-                "duration": 4,
-                "start": 1788594909525,
-                "stop": 1788594909529,
+                "duration": 5,
+                "start": 1788595010589,
+                "stop": 1788595010594,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -179,8 +179,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909529,
-                "stop": 1788594909533,
+                "start": 1788595010594,
+                "stop": 1788595010598,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -194,8 +194,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909533,
-                "stop": 1788594909537,
+                "start": 1788595010598,
+                "stop": 1788595010602,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -209,8 +209,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909537,
-                "stop": 1788594909541,
+                "start": 1788595010602,
+                "stop": 1788595010606,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -224,8 +224,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909541,
-                "stop": 1788594909545,
+                "start": 1788595010606,
+                "stop": 1788595010610,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -239,8 +239,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909545,
-                "stop": 1788594909549,
+                "start": 1788595010610,
+                "stop": 1788595010614,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -254,8 +254,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909549,
-                "stop": 1788594909553,
+                "start": 1788595010614,
+                "stop": 1788595010618,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -269,8 +269,8 @@
                 "status": "failed",
                 "raw_status": "call_failed",
                 "duration": 4,
-                "start": 1788594909553,
-                "stop": 1788594909557,
+                "start": 1788595010618,
+                "stop": 1788595010622,
                 "retries": 0,
                 "file_path": "test_state.py",
                 "tags": [
@@ -281,19 +281,22 @@
             },
             {
                 "name": "test_state.py::test_visible_artifact_matches_sample",
-                "status": "passed",
-                "duration": 0,
-                "start": 1788594909558,
-                "stop": 1788594909558,
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788595010622,
+                "stop": 1788595010624,
                 "retries": 0,
-                "file_path": "test_state.py"
+                "file_path": "test_state.py",
+                "trace": "def test_visible_artifact_matches_sample() -> None:\n        \"\"\"The required sample report at /app/output/margin_report.json matches the sample book.\"\"\"\n        artifact = Path(\"/app/output/margin_report.json\")\n>       assert artifact.is_file(), \"missing /app/output/margin_report.json\"\nE       AssertionError: missing /app/output/margin_report.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/app/output/margin_report.json').is_file\n\ntests/test_state.py:112: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
             },
             {
                 "name": "test_state.py::test_sample_not_hardcoded_only",
                 "status": "passed",
                 "duration": 1,
-                "start": 1788594909558,
-                "stop": 1788594909559,
+                "start": 1788595010624,
+                "stop": 1788595010625,
                 "retries": 0,
                 "file_path": "test_state.py"
             }

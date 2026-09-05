@@ -1,6 +1,6 @@
 # Local verifier matrix
 
-Date: 2026-09-04T19:21:07Z
+Date: 2026-09-05T07:55:14Z
 
 Real `tests/Dockerfile` verifier, same `test.sh` Harbor uses.
 
