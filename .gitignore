@@ -9,3 +9,4 @@ agent-tools/
 results/summaries/local-verifier/*/hsm/
 results/summaries/local-verifier/*/output/
 
+scratch/
