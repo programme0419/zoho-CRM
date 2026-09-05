@@ -20,7 +20,7 @@ Harbor version: `0.22.0`.
 | Requirement | Status | Evidence |
 |-------------|--------|----------|
 | Static checks | **PASS** (re-run after HSMJ) | this file |
-| Implementation-rubric (`harbor check`) | **blocked** — needs `ANTHROPIC_API_KEY` | mechanical subset **PASS** |
+| Implementation-rubric (`harbor check`) | **blocked** — API key stored; Anthropic returned **credit balance too low** | mechanical subset **PASS** |
 | Docker build | **PASS** | oracle / nop / local matrix |
 | Oracle reward 1.0 | **PASS** (HSMJ job `2026-09-04__19-19-26`) | [oracle.json](results/summaries/oracle.json) |
 | Nop reward 0.0 | **PASS** (HSMJ job `2026-09-04__19-20-04`) | [nop.json](results/summaries/nop.json) |
@@ -78,7 +78,7 @@ Official command:
 harbor check tasks/scan-margin -r docs/task-implementation.toml
 ```
 
-Needs an LLM judge (`ANTHROPIC_API_KEY` / Claude Code). Not run here.
+Needs an LLM judge (`ANTHROPIC_API_KEY` / Claude Code). Attempted 2026-09-05T01:53Z with a host API key (not committed). The check container reached `api.anthropic.com` (docker0 overlay: `--ek extra_docker_compose=["…/docker-compose.bridge.yaml"]`) and failed with `Credit balance is too low`. Mechanical subset still **PASS**.
 
 Mechanical subset (no LLM) of the same rubric: `python3 scripts/check_implementation_rubric_mechanical.py` → **PASS**. Log: [results/summaries/mechanical-rubric.txt](results/summaries/mechanical-rubric.txt).
 

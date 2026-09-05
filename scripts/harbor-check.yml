@@ -1,0 +1,6 @@
+# Local JobConfig for `harbor check`. Same docker0 overlay as run_trials.sh.
+# Official TB3 CI uses Modal; this file is only for nested Docker on this host.
+environment:
+  type: docker
+  extra_docker_compose:
+    - scripts/docker-compose.bridge.yaml

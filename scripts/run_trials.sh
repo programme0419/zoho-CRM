@@ -80,8 +80,16 @@ case "${1:-help}" in
       "--ae CLAUDE_FORCE_OAUTH=1 --ae CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN} --ae CLAUDE_CODE_MAX_OUTPUT_TOKENS=128000" \
       "$OUT/cheat-claude"
     ;;
+  check)
+    : "${ANTHROPIC_API_KEY:?set ANTHROPIC_API_KEY from console.anthropic.com}"
+    export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-0}"
+    harbor check "$TASK" -r "$ROOT/docs/task-implementation.toml" \
+      -e docker -o "$OUT/harbor-check" \
+      --ae "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}" \
+      --ek "extra_docker_compose=[\"$BRIDGE_COMPOSE\"]"
+    ;;
   *)
-    echo "usage: $0 {oracle|nop|run-codex|run-claude|cheat-codex|cheat-claude}"
+    echo "usage: $0 {oracle|nop|run-codex|run-claude|cheat-codex|cheat-claude|check}"
     exit 2
     ;;
 esac
