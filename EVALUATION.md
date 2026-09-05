@@ -27,9 +27,9 @@ Harbor version: `0.22.0`.
 | Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
 | `/run` × 3 Codex genuinely fail | **FAIL — 3/3, then 3/3, then 3/3 after HSMJ** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json) |
-| `/run` × 3 Claude genuinely fail | **not counted** | no `CLAUDE_CODE_OAUTH_TOKEN` |
+| `/run` × 3 Claude genuinely fail | **not met** — 1 genuine **1.0**, 2× `ApiRateLimitError` | [run-claude.json](results/summaries/run-claude.json) |
 | `/cheat` Codex reward 0 | **not a valid 0** | `AgentSafetyRefusalError` on old task |
-| `/cheat` Claude reward 0 | **not counted** | no token |
+| `/cheat` Claude reward 0 | **not run** | session limit after `/run` |
 
 Crashes, API/rate-limit, container, timeout, and network errors do **not** count as model failures. They are recorded below so they are not mistaken for verifier zeros.
 
@@ -157,7 +157,8 @@ Wrapper: `bash scripts/run_trials.sh run-codex` and `run-claude`.
 | Config | Trial | Reward | Error? | Notes |
 |--------|-------|--------|--------|-------|
 | codex / openai/gpt-5.6-sol / xhigh | 1–3 | **1.0 × 3** (three jobs) | none | HSM 1.0 (`18-00-05`), overlays (`18-37-45`), HSMJ journals (`19-21-22`, 41m, ~$4.65). All genuine. **Hiring bar requires all three to fail.** |
-| claude-code / anthropic/claude-opus-5 / max | 1–3 | not run | n/a | `claude auth status` → loggedIn false. No `CLAUDE_CODE_OAUTH_TOKEN`. |
+| claude-code / anthropic/claude-opus-5 / max | 1 | **1.0** | none | Job `2026-09-05__00-49-40` trial `fcmSBjt`. Genuine solve. |
+| claude-code / anthropic/claude-opus-5 / max | 2–3 | 0.0 | **ApiRateLimitError** | Session limit: “resets 5:50am (UTC)”. Infra, not a model fail. |
 
 Earlier Codex jobs (`4960ffb6-…`, `2026-09-04__17-53-20`) died on `NetworkConnectionError` during `apt-get` inside Harbor’s Compose network. That is infra. This host’s user-defined Docker networks cannot NAT IPv4; the default `docker0` bridge can. `scripts/run_trials.sh` now passes `scripts/docker-compose.bridge.yaml` (`network_mode: bridge`). After that overlay, Codex installed and called the API.
 
@@ -166,7 +167,7 @@ Auth used a host `OPENAI_API_KEY` (not committed). `codex login` is still unused
 To complete the table on a subscribed machine:
 
 1. `codex login` then `bash scripts/run_trials.sh run-codex`
-2. Finish `claude setup-token`, `export CLAUDE_CODE_OAUTH_TOKEN=...`, then `bash scripts/run_trials.sh run-claude`
+2. After the Claude session limit resets (5:50am UTC on 2026-09-05), `export CLAUDE_CODE_OAUTH_TOKEN=...` and rerun `bash scripts/run_trials.sh run-claude` until three trials complete without rate-limit/infra errors. The one completed trial already scored 1.0.
 
 Copy each job's `result.json` into `results/summaries/`.
 
