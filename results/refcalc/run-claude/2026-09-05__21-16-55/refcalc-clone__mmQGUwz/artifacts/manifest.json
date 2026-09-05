@@ -1,0 +1,16 @@
+[
+  {
+    "source": "/logs/artifacts",
+    "destination": "artifacts/logs/artifacts",
+    "type": "directory",
+    "status": "empty",
+    "service": null
+  },
+  {
+    "source": "/app/solution/calc.py",
+    "destination": "artifacts/app/solution/calc.py",
+    "type": "file",
+    "status": "ok",
+    "service": null
+  }
+]

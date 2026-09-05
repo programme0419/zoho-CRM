@@ -330,3 +330,23 @@ Unlike scan-margin, this genre is a genuine candidate to fail both configs, but 
 - **Claude** (`claude-opus-5`/max): the OAuth token is present, but the subscription's **5-hour session window is exhausted** (`api_error_status 429`, "resets 9pm UTC"). The 7-day quota is only ~59% used. A one-shot timer is scheduled to auto-retry Claude `/run` x3 + `/cheat` after the window resets; if still throttled it re-arms for +1h.
 
 Expected/target outcome once runnable: `/run` trials score **reward 0** (model fails to fully reverse-engineer the engine) and `/cheat` scores 0. If any model does solve it, the plan is to add further prior-violating quirks (keeping the C reference and Python solution bit-identical, regenerating the hidden corpus) and re-test.
+
+### Result: Claude solved it 3/3 (2026-09-05 `21-16-55`) — and *why hardening is futile*
+
+`claude-opus-5` + `max`, three `/run` trials, all **reward 1.0** (`420 passed` each: trials `EYxPRzf`, `mmQGUwz`, `QtVYMuo`). Not rate-limited; genuine solves.
+
+The transcript shows exactly how, and it is the crux. Claude did **not** try to reason out each quirk. It wrote **fuzz / differential-testing harnesses** (29 "fuzz" / 25 "random" mentions, ~60 throwaway `.py` scripts, 42+ direct invocations of the reference): generate random expressions, run them through `/app/refcalc/refcalc`, compare to its own implementation, fix mismatches, repeat until zero diffs — the *same* cross-check harness used to author the task. Its submitted `calc.py` is a clean 217-line pure reimplementation that recovers **every** rule, including one I never deliberately designed: the reference's `fgets` **4096-byte line buffer** (only the first 4095 chars of a line are seen). It found an *incidental* implementation artifact by probing.
+
+This is the decisive lesson, and it generalizes the earlier conclusion:
+
+> A freely-runnable deterministic reference **is itself a complete oracle**. Any agent that can query it cheaply and without limit can differential-test its way to byte-exact behavior — no matter how many counterintuitive rules it hides. Adding more quirks does not help: the fuzzer discovers them. "Reverse-engineer this black box" is therefore *still* a derivable task, just with the spec delivered as an oracle instead of as prose.
+
+So both the spec genres (1–4) and the black-box-RE genre (5) fall to the same wall: **if the correct behavior is fully observable to the agent, a frontier config reproduces it.** TB3 fairness *requires* full observability (derivable, no hidden-behavior guessing, expert-solvable), so this is not a calibration gap — it is structural.
+
+`/cheat` was not run: a model that solves `/run` trivially solves the identical task under `/cheat` (reward 1), so it cannot produce the required `/cheat = 0` either.
+
+### What is actually left, and the honest recommendation
+
+Meeting a literal "both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max fail 3/3" bar now clearly requires a task whose correct behavior is **not fully observable/derivable within the agent budget** — i.e. long-horizon work in a large, underdocumented system where the bottleneck is navigation and reasoning depth under a time limit, with a visible-but-hard test suite and held-out grading. That is a different domain from "compute/derive a deterministic function," it is a substantially larger build, and even there failing *both* configs on *every* attempt is not guaranteed (top models solve a large fraction of hard TB3 tasks). Iteration is also throttled: Codex is currently unauthenticated on the VM, and Claude allows ~one long trial per 5-hour window.
+
+Both shipped tasks (`scan-margin`, `refcalc-clone`) are rigorous and clear every *automatable* TB3 bar (static checks, Docker build, oracle = 1.0, nop = 0.0, correct-engine-passes / incomplete-fails, cheat-shaped attempts score 0). What no fair, derivable task in either genre can do — now shown across five genres and directly demonstrated for both configs — is force these frontier models to fail.

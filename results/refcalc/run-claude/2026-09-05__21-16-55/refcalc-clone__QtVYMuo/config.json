@@ -1,0 +1,26 @@
+{
+    "task": {
+        "path": "tasks/refcalc-clone"
+    },
+    "trial_name": "refcalc-clone__QtVYMuo",
+    "trials_dir": "results/refcalc/run-claude/2026-09-05__2[REDACTED]-[REDACTED]6-55",
+    "agent": {
+        "name": "claude-code",
+        "model_name": "anthropic/claude-opus-5",
+        "kwargs": {
+            "reasoning_effort": "max"
+        },
+        "env": {
+            "CLAUDE_FORCE_OAUTH": "****",
+            "CLAUDE_CODE_OAUTH_TOKEN": "${CLAUDE_CODE_OAUTH_TOKEN}",
+            "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "****"
+        }
+    },
+    "environment": {
+        "type": "docker",
+        "extra_docker_compose": [
+            "/workspace/scripts/docker-compose.bridge.yaml"
+        ]
+    },
+    "job_id": "572302a6-8944-459d-a790-8ded[REDACTED]2533a28"
+}
