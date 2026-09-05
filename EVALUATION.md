@@ -26,7 +26,7 @@ Harbor version: `0.22.0`.
 | Nop reward 0.0 | **PASS** (HSMJ job `2026-09-04__19-20-04`) | [nop.json](results/summaries/nop.json) |
 | Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **FAIL — 3/3, then 3/3, then 3/3 after HSMJ** | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json) |
+| `/run` × 3 Codex genuinely fail | **not met — 3/3 across four genres** (spec, overlays, HSMJ, optimization) | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json), [run-codex-optimize.json](results/summaries/run-codex-optimize.json) |
 | `/run` × 3 Claude genuinely fail | **not met** — every quota-complete trial solved (3 passes across 2 sessions) | [run-claude.json](results/summaries/run-claude.json), [run-claude-2.json](results/summaries/run-claude-2.json) |
 | `/cheat` Codex reward 0 | **reward 0, via refusal** — `AgentSafetyRefusalError`, not a blocked cheat attempt | [cheat-codex.json](results/summaries/cheat-codex.json) |
 | `/cheat` Claude reward 0 | **reward 0, but infra** — `ApiRateLimitError` at 1m14s (session quota exhausted) | [cheat-claude.json](results/summaries/cheat-claude.json) |
@@ -240,6 +240,14 @@ Positions now arrive as House Scan Margin Journals. The sample is a v1 POS_V1 ta
 Job `2026-09-04__19-21-22` (`53628d4d-…`): **3/3 reward 1.0**, 41m, ~$4.65, no infra errors. Codex read `hsmj.h` / `FORMAT.md` / `ERRATA.txt` and wrote a v1+v2 decoder plus the overlay engine in ~12 minutes per trial.
 
 Three genuine `/run` jobs, three genres, nine trials, nine rewards of 1.0. A complete, fair written spec — math or on-wire format — is not enough to fail `gpt-5.6-sol` + `xhigh`.
+
+### Genre 4: hard combinatorial optimization — still 3/3
+
+Inter-commodity credit was changed from a priority-ordered pairwise pass to the **global margin-minimizing allocation** over overlapping two-leg and three-leg crack spreads with shared per-commodity capacity. The natural SPAN-style implementation (priority order, or greedy-by-credit, or pairwise-only) is now provably suboptimal: on the `crack` book it scores 5100 credit vs the optimal 9900 (margin off by $4800); on `ics_priority`, consuming pairwise first blocks the better crack (1700 vs 3300). The rule is fully specified in methodology §7 and the optimum is unique, so it stays fair and deterministic; two independent correct engines (recursive branch-and-bound and exhaustive-product) agree with the oracle.
+
+Job `2026-09-05__07-57-03`: **3/3 reward 1.0, 0 errors**, 33m. `gpt-5.6-sol` + `xhigh` recognized the requirement as an optimization and implemented it correctly rather than defaulting to the priority-ordered greedy. (`claude-opus-5` + `max` not yet run on this genre — Opus session quota exhausted; given it solved genres 1–3 and Codex solved this one, it is expected to pass.)
+
+**Four genres, twelve genuine Codex trials, twelve rewards of 1.0.** The lever changed each time — written math spec, a nastier binary input codec, and finally a hard combinatorial optimization where the "obvious" implementation is wrong — and the result did not.
 
 ### Claude, same result
 

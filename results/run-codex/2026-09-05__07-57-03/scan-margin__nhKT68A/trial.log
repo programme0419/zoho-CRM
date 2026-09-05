@@ -33,6 +33,6 @@ fi
 Command outputs captured
 Running command: rm -rf /tmp/codex-secrets "$CODEX_HOME"
 Command outputs captured
-Wrote Codex trajectory to /workspace/results/run-codex/2026-09-05__07-57-03/scan-margin__mRD3qX5/agent/trajectory.json
+Wrote Codex trajectory to /workspace/results/run-codex/2026-09-05__07-57-03/scan-margin__nhKT68A/agent/trajectory.json
 Collecting main service artifacts
 Skipping image OS validation for hb__049dc381ecb07fe70b99f68c3c8e11ae: docker inspect returned 1

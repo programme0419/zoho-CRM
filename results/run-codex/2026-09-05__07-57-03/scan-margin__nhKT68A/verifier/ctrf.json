@@ -1,0 +1,251 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-05T08:29:41.700934+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 19,
+            "passed": 19,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1788596981621,
+            "stop": 1788596981700
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 9,
+                "start": 1788596981675,
+                "stop": 1788596981684,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981684,
+                "stop": 1788596981685,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981685,
+                "stop": 1788596981686,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981686,
+                "stop": 1788596981687,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981687,
+                "stop": 1788596981688,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788596981688,
+                "stop": 1788596981688,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788596981689,
+                "stop": 1788596981689,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981689,
+                "stop": 1788596981690,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981690,
+                "stop": 1788596981691,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 2,
+                "start": 1788596981691,
+                "stop": 1788596981693,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981693,
+                "stop": 1788596981694,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981694,
+                "stop": 1788596981695,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788596981695,
+                "stop": 1788596981695,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981695,
+                "stop": 1788596981696,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981696,
+                "stop": 1788596981697,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981697,
+                "stop": 1788596981698,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981698,
+                "stop": 1788596981699,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ]
+            },
+            {
+                "name": "test_state.py::test_visible_artifact_matches_sample",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788596981699,
+                "stop": 1788596981700,
+                "retries": 0,
+                "file_path": "test_state.py"
+            },
+            {
+                "name": "test_state.py::test_sample_not_hardcoded_only",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788596981700,
+                "stop": 1788596981700,
+                "retries": 0,
+                "file_path": "test_state.py"
+            }
+        ]
+    }
+}
