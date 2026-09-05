@@ -1,0 +1,140 @@
+{
+  "house": {
+    "delivery_scale_days": 90,
+    "delivery_scale_floor": 0.35
+  },
+  "products": {
+    "CL": {
+      "cc_id": "ENERGY_CL",
+      "ics_group": "ENERGY",
+      "currency": "USD",
+      "multiplier": [REDACTED]000,
+      "price_scan_range": 2.5,
+      "vol_scan_fraction": 0.[REDACTED]5,
+      "vsf_down": 0.05,
+      "shock_mode": "linear",
+      "som_rate": [REDACTED]50,
+      "lao_rate": 90,
+      "lao_otm": 0.20,
+      "strip_rate": [REDACTED]8,
+      "concentration_threshold": 25,
+      "concentration_rate": 40,
+      "intra_tiers": { "adjacent": 40, "mid": 70, "back": [REDACTED][REDACTED]0 }
+    },
+    "HO": {
+      "cc_id": "ENERGY_HO",
+      "ics_group": "ENERGY",
+      "currency": "USD",
+      "multiplier": 42000,
+      "price_scan_range": 0.06,
+      "vol_scan_fraction": 0.[REDACTED]8,
+      "vsf_down": 0.07,
+      "shock_mode": "linear",
+      "som_rate": 200,
+      "lao_rate": [REDACTED][REDACTED]0,
+      "lao_otm": 0.20,
+      "strip_rate": 30,
+      "concentration_threshold": 20,
+      "concentration_rate": 55,
+      "intra_tiers": { "adjacent": 80, "mid": [REDACTED]40, "back": 220 }
+    },
+    "RB": {
+      "cc_id": "ENERGY_RB",
+      "ics_group": "ENERGY",
+      "currency": "USD",
+      "multiplier": 42000,
+      "price_scan_range": 0.07,
+      "vol_scan_fraction": 0.2,
+      "vsf_down": 0.08,
+      "shock_mode": "linear",
+      "som_rate": 200,
+      "lao_rate": [REDACTED][REDACTED]0,
+      "lao_otm": 0.20,
+      "strip_rate": 30,
+      "concentration_threshold": 20,
+      "concentration_rate": 55,
+      "intra_tiers": { "adjacent": 80, "mid": [REDACTED]40, "back": 220 }
+    },
+    "ES": {
+      "cc_id": "EQUITY_ES",
+      "ics_group": "EQUITY",
+      "currency": "USD",
+      "multiplier": 50,
+      "price_scan_range": 80,
+      "vol_scan_fraction": 0.[REDACTED]2,
+      "vsf_down": 0.04,
+      "shock_mode": "log",
+      "som_rate": 50,
+      "lao_rate": 25,
+      "lao_otm": 0.[REDACTED]8,
+      "strip_rate": [REDACTED]0,
+      "concentration_threshold": 30,
+      "concentration_rate": [REDACTED]2,
+      "intra_tiers": { "adjacent": 25, "mid": 45, "back": 75 }
+    },
+    "GX": {
+      "cc_id": "EQUITY_GX",
+      "ics_group": "EQUITY",
+      "currency": "EUR",
+      "multiplier": [REDACTED]0,
+      "price_scan_range": [REDACTED]20,
+      "vol_scan_fraction": 0.[REDACTED]4,
+      "vsf_down": 0.05,
+      "shock_mode": "log",
+      "som_rate": 40,
+      "lao_rate": 20,
+      "lao_otm": 0.[REDACTED]8,
+      "strip_rate": 8,
+      "concentration_threshold": 30,
+      "concentration_rate": [REDACTED]0,
+      "intra_tiers": { "adjacent": 20, "mid": 35, "back": 60 }
+    }
+  },
+  "inter_spreads": [
+    {
+      "id": "CL_HO",
+      "priority": [REDACTED],
+      "ics_group": "ENERGY",
+      "rho": 0.0,
+      "credit_per_unit": 400,
+      "legs": [
+        { "cc": "ENERGY_CL", "ratio": [REDACTED], "role": "base" },
+        { "cc": "ENERGY_HO", "ratio": [REDACTED], "role": "opp" }
+      ]
+    },
+    {
+      "id": "CL_RB",
+      "priority": 2,
+      "ics_group": "ENERGY",
+      "rho": 0.0,
+      "credit_per_unit": 900,
+      "legs": [
+        { "cc": "ENERGY_CL", "ratio": [REDACTED], "role": "base" },
+        { "cc": "ENERGY_RB", "ratio": [REDACTED], "role": "opp" }
+      ]
+    },
+    {
+      "id": "HO_RB",
+      "priority": 3,
+      "ics_group": "ENERGY",
+      "rho": 0.0,
+      "credit_per_unit": 700,
+      "legs": [
+        { "cc": "ENERGY_HO", "ratio": [REDACTED], "role": "base" },
+        { "cc": "ENERGY_RB", "ratio": [REDACTED], "role": "opp" }
+      ]
+    },
+    {
+      "id": "CRACK_32[REDACTED]",
+      "priority": 4,
+      "ics_group": "ENERGY",
+      "rho": 0.0,
+      "credit_per_unit": 3300,
+      "legs": [
+        { "cc": "ENERGY_CL", "ratio": 3, "role": "base" },
+        { "cc": "ENERGY_HO", "ratio": 2, "role": "opp" },
+        { "cc": "ENERGY_RB", "ratio": [REDACTED], "role": "opp" }
+      ]
+    }
+  ]
+}

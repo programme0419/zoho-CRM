@@ -1,0 +1,630 @@
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+Traceback (most recent call last):
+  File "/tmp/agent-hsm/run_margin.py", line [REDACTED][REDACTED], in <module>
+    from engine import compute_report, load_json, write_report  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/agent-hsm/engine.py", line 27, in <module>
+    MONEY_CTX = Context(prec=400)
+                ^^^^^^^
+NameError: name 'Context' is not defined
+============================= test session starts ==============================
+platform linux -- Python 3.[REDACTED]3.[REDACTED]5, pytest-9.[REDACTED].[REDACTED], pluggy-[REDACTED].6.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected [REDACTED]9 items
+
+tests/test_state.py FFFFFFFFFFFFFFFFF.F                                  [[REDACTED]00%]
+
+=================================== FAILURES ===================================
+_______________ test_case_matches_oracle[sample-portfolio.json] ________________
+
+name = 'sample', filename = 'portfolio.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'sample'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/sample.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/sample.json').is_file
+
+tests/test_state.py:64: AssertionError
+________________ test_case_matches_oracle[som_otm-som_otm.json] ________________
+
+name = 'som_otm', filename = 'som_otm.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'som_otm'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/som_otm.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/som_otm.json').is_file
+
+tests/test_state.py:64: AssertionError
+_______________ test_case_matches_oracle[calendar-calendar.json] _______________
+
+name = 'calendar', filename = 'calendar.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'calendar'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/calendar.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/calendar.json').is_file
+
+tests/test_state.py:64: AssertionError
+__________________ test_case_matches_oracle[crack-crack.json] __________________
+
+name = 'crack', filename = 'crack.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'crack'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/crack.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/crack.json').is_file
+
+tests/test_state.py:64: AssertionError
+_______________ test_case_matches_oracle[nov_long-nov_long.json] _______________
+
+name = 'nov_long', filename = 'nov_long.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'nov_long'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/nov_long.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/nov_long.json').is_file
+
+tests/test_state.py:64: AssertionError
+______________ test_case_matches_oracle[fx_equity-fx_equity.json] ______________
+
+name = 'fx_equity', filename = 'fx_equity.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'fx_equity'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/fx_equity.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/fx_equity.json').is_file
+
+tests/test_state.py:64: AssertionError
+______________ test_case_matches_oracle[mixed_opt-mixed_opt.json] ______________
+
+name = 'mixed_opt', filename = 'mixed_opt.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'mixed_opt'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/mixed_opt.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/mixed_opt.json').is_file
+
+tests/test_state.py:64: AssertionError
+___________ test_case_matches_oracle[ics_priority-ics_priority.json] ___________
+
+name = 'ics_priority', filename = 'ics_priority.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'ics_priority'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/ics_priority.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/ics_priority.json').is_file
+
+tests/test_state.py:64: AssertionError
+________________ test_case_matches_oracle[netting-netting.json] ________________
+
+name = 'netting', filename = 'netting.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'netting'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/netting.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/netting.json').is_file
+
+tests/test_state.py:64: AssertionError
+_______________ test_case_matches_oracle[multi_cc-multi_cc.json] _______________
+
+name = 'multi_cc', filename = 'multi_cc.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'multi_cc'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/multi_cc.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/multi_cc.json').is_file
+
+tests/test_state.py:64: AssertionError
+________________ test_case_matches_oracle[vol_mix-vol_mix.json] ________________
+
+name = 'vol_mix', filename = 'vol_mix.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'vol_mix'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/vol_mix.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/vol_mix.json').is_file
+
+tests/test_state.py:64: AssertionError
+_____________ test_case_matches_oracle[back_month-back_month.json] _____________
+
+name = 'back_month', filename = 'back_month.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'back_month'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/back_month.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/back_month.json').is_file
+
+tests/test_state.py:64: AssertionError
+_____________ test_case_matches_oracle[log_equity-log_equity.json] _____________
+
+name = 'log_equity', filename = 'log_equity.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'log_equity'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/log_equity.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/log_equity.json').is_file
+
+tests/test_state.py:64: AssertionError
+_________________ test_case_matches_oracle[strip3-strip3.json] _________________
+
+name = 'strip3', filename = 'strip3.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'strip3'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/strip3.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/strip3.json').is_file
+
+tests/test_state.py:64: AssertionError
+___________________ test_case_matches_oracle[conc-conc.json] ___________________
+
+name = 'conc', filename = 'conc.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'conc'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/conc.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/conc.json').is_file
+
+tests/test_state.py:64: AssertionError
+_______________ test_case_matches_oracle[lao_deep-lao_deep.json] _______________
+
+name = 'lao_deep', filename = 'lao_deep.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'lao_deep'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/lao_deep.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/lao_deep.json').is_file
+
+tests/test_state.py:64: AssertionError
+______________ test_case_matches_oracle[order_mix-order_mix.json] ______________
+
+name = 'order_mix', filename = 'order_mix.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+>       got = _load_agent(name)
+              ^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'order_mix'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/order_mix.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/order_mix.json').is_file
+
+tests/test_state.py:64: AssertionError
+________________________ test_sample_not_hardcoded_only ________________________
+
+    def test_sample_not_hardcoded_only() -> None:
+        """A CLI that only reproduces the sample book must fail a second book."""
+>       sample = _load_agent("sample")
+                 ^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_state.py:[REDACTED]23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'sample'
+
+    def _load_agent(name: str) -> dict:
+        path = OUT / f"{name}.json"
+>       assert path.is_file(), f"agent did not write {path}"
+E       AssertionError: agent did not write /tmp/agent-out/sample.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/tmp/agent-out/sample.json').is_file
+
+tests/test_state.py:64: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_state.py::test_visible_artifact_matches_sample
+FAILED tests/test_state.py::test_case_matches_oracle[sample-portfolio.json]
+FAILED tests/test_state.py::test_case_matches_oracle[som_otm-som_otm.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[calendar-calendar.json]
+FAILED tests/test_state.py::test_case_matches_oracle[crack-crack.json] - Asse...
+FAILED tests/test_state.py::test_case_matches_oracle[nov_long-nov_long.json]
+FAILED tests/test_state.py::test_case_matches_oracle[fx_equity-fx_equity.json]
+FAILED tests/test_state.py::test_case_matches_oracle[mixed_opt-mixed_opt.json]
+FAILED tests/test_state.py::test_case_matches_oracle[ics_priority-ics_priority.json]
+FAILED tests/test_state.py::test_case_matches_oracle[netting-netting.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[multi_cc-multi_cc.json]
+FAILED tests/test_state.py::test_case_matches_oracle[vol_mix-vol_mix.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[back_month-back_month.json]
+FAILED tests/test_state.py::test_case_matches_oracle[log_equity-log_equity.json]
+FAILED tests/test_state.py::test_case_matches_oracle[strip3-strip3.json] - As...
+FAILED tests/test_state.py::test_case_matches_oracle[conc-conc.json] - Assert...
+FAILED tests/test_state.py::test_case_matches_oracle[lao_deep-lao_deep.json]
+FAILED tests/test_state.py::test_case_matches_oracle[order_mix-order_mix.json]
+FAILED tests/test_state.py::test_sample_not_hardcoded_only - AssertionError: ...
+========================= [REDACTED]8 failed, [REDACTED] passed in 0.[REDACTED]3s =========================

@@ -1,0 +1,12 @@
+{
+  "firstStartTime": "2026-09-05T[REDACTED]2:08:06.323Z",
+  "firstStartVersion": "2.[REDACTED].26[REDACTED]",
+  "machineID": "20b82353d25cbd9c32ffb2407[REDACTED]8ef05277fbc[REDACTED]3593eb269a7eeae8a39[REDACTED]ce[REDACTED]90c",
+  "opusProMigrationComplete": true,
+  "sonnet[REDACTED]m45MigrationComplete": true,
+  "seenNotifications": {},
+  "hasResetAutoModeOptInForDefaultOffer": true,
+  "migrationVersion": [REDACTED]4,
+  "userID": "bd75092b2426cd4a0dfcaf7a6be45e[REDACTED]4cea69978bf60e5d[REDACTED]8a9962bc5ae[REDACTED]0a55",
+  "cachedExtraUsageDisabledReason": "org_level_disabled"
+}

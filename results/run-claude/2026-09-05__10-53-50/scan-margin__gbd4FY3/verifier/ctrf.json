@@ -1,0 +1,305 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-05T[REDACTED]2:07:08.906[REDACTED]63+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.[REDACTED].[REDACTED]"
+        },
+        "summary": {
+            "tests": [REDACTED]9,
+            "passed": [REDACTED],
+            "failed": [REDACTED]8,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": [REDACTED]7886[REDACTED]0028778,
+            "stop": [REDACTED]7886[REDACTED]0028906
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 8,
+                "start": [REDACTED]7886[REDACTED]0028832,
+                "stop": [REDACTED]7886[REDACTED]0028840,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'sample', filename = 'portfolio.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'sample'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/sample.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/sample.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]002884[REDACTED],
+                "stop": [REDACTED]7886[REDACTED]0028844,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'som_otm', filename = 'som_otm.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'som_otm'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/som_otm.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/som_otm.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028844,
+                "stop": [REDACTED]7886[REDACTED]0028847,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'calendar', filename = 'calendar.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'calendar'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/calendar.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/calendar.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028847,
+                "stop": [REDACTED]7886[REDACTED]0028850,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'crack', filename = 'crack.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'crack'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/crack.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/crack.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": [REDACTED]7886[REDACTED]0028850,
+                "stop": [REDACTED]7886[REDACTED]0028854,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'nov_long', filename = 'nov_long.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'nov_long'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/nov_long.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/nov_long.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028854,
+                "stop": [REDACTED]7886[REDACTED]0028857,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'fx_equity', filename = 'fx_equity.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'fx_equity'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/fx_equity.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/fx_equity.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028857,
+                "stop": [REDACTED]7886[REDACTED]0028860,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'mixed_opt', filename = 'mixed_opt.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'mixed_opt'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/mixed_opt.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/mixed_opt.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028860,
+                "stop": [REDACTED]7886[REDACTED]0028863,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'ics_priority', filename = 'ics_priority.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'ics_priority'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/ics_priority.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/ics_priority.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028864,
+                "stop": [REDACTED]7886[REDACTED]0028867,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'netting', filename = 'netting.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'netting'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/netting.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/netting.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028867,
+                "stop": [REDACTED]7886[REDACTED]0028870,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'multi_cc', filename = 'multi_cc.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'multi_cc'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/multi_cc.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/multi_cc.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028870,
+                "stop": [REDACTED]7886[REDACTED]0028873,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'vol_mix', filename = 'vol_mix.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'vol_mix'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/vol_mix.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/vol_mix.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": [REDACTED]7886[REDACTED]0028873,
+                "stop": [REDACTED]7886[REDACTED]0028877,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'back_month', filename = 'back_month.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'back_month'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/back_month.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/back_month.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028877,
+                "stop": [REDACTED]7886[REDACTED]0028880,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'log_equity', filename = 'log_equity.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'log_equity'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/log_equity.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/log_equity.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028880,
+                "stop": [REDACTED]7886[REDACTED]0028883,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'strip3', filename = 'strip3.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'strip3'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/strip3.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/strip3.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028883,
+                "stop": [REDACTED]7886[REDACTED]0028886,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'conc', filename = 'conc.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'conc'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/conc.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/conc.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": [REDACTED]7886[REDACTED]0028886,
+                "stop": [REDACTED]7886[REDACTED]0028890,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'lao_deep', filename = 'lao_deep.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'lao_deep'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/lao_deep.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/lao_deep.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_case_matches_oracle",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028890,
+                "stop": [REDACTED]7886[REDACTED]0028893,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name,filename::[('sample', 'portfolio.json'), ('som_otm', 'som_otm.json'), ('calendar', 'calendar.json'), ('crack', 'crack.json'), ('nov_long', 'nov_long.json'), ('fx_equity', 'fx_equity.json'), ('mixed_opt', 'mixed_opt.json'), ('ics_priority', 'ics_priority.json'), ('netting', 'netting.json'), ('multi_cc', 'multi_cc.json'), ('vol_mix', 'vol_mix.json'), ('back_month', 'back_month.json'), ('log_equity', 'log_equity.json'), ('strip3', 'strip3.json'), ('conc', 'conc.json'), ('lao_deep', 'lao_deep.json'), ('order_mix', 'order_mix.json')]"
+                ],
+                "trace": "name = 'order_mix', filename = 'order_mix.json'\n\n    @pytest.mark.parametrize(\"name,filename\", CASES)\n    def test_case_matches_oracle(name: str, filename: str) -> None:\n        \"\"\"Each book must match the HSM oracle within calibrated cent tolerances.\"\"\"\n        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.\n        portfolio = INPUTS / filename\n>       got = _load_agent(name)\n              ^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'order_mix'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/order_mix.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/order_mix.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_visible_artifact_matches_sample",
+                "status": "passed",
+                "duration": 9,
+                "start": [REDACTED]7886[REDACTED]0028893,
+                "stop": [REDACTED]7886[REDACTED]0028902,
+                "retries": 0,
+                "file_path": "test_state.py"
+            },
+            {
+                "name": "test_state.py::test_sample_not_hardcoded_only",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": [REDACTED]7886[REDACTED]0028902,
+                "stop": [REDACTED]7886[REDACTED]0028905,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "trace": "def test_sample_not_hardcoded_only() -> None:\n        \"\"\"A CLI that only reproduces the sample book must fail a second book.\"\"\"\n>       sample = _load_agent(\"sample\")\n                 ^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_state.py:[REDACTED]23: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nname = 'sample'\n\n    def _load_agent(name: str) -> dict:\n        path = OUT / f\"{name}.json\"\n>       assert path.is_file(), f\"agent did not write {path}\"\nE       AssertionError: agent did not write /tmp/agent-out/sample.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/tmp/agent-out/sample.json').is_file\n\ntests/test_state.py:64: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

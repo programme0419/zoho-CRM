@@ -249,7 +249,11 @@ Job `2026-09-05__07-57-03`: **3/3 reward 1.0, 0 errors**, 33m. `gpt-5.6-sol` + `
 
 **Four genres, twelve genuine Codex trials, twelve rewards of 1.0.** The lever changed each time — written math spec, a nastier binary input codec, and finally a hard combinatorial optimization where the "obvious" implementation is wrong — and the result did not.
 
-Claude genre-4 attempt (job `2026-09-05__09-45-40`, [summary](results/summaries/run-claude-optimize-ratelimited.json)): 3/3 `ApiRateLimitError` in 3m49s — the Opus subscription **session window** was exhausted by the day's earlier trials. Infra, not a model result. A clean Claude genre-4 run is queued for the next window reset.
+Claude genre-4 attempts (subscription OAuth, not paid API): both blocked by the Opus **5-hour session window**, not by the model.
+- Job `2026-09-05__09-45-40` ([summary](results/summaries/run-claude-optimize-ratelimited.json)): 3/3 `ApiRateLimitError` in 3m49s — window already exhausted.
+- Job `2026-09-05__10-53-50` ([summary](results/summaries/run-claude-optimize-ratelimited-2.json)), started right after a window reset: trial 1 (`gbd4FY3`) ran **84 turns / ~47 min** and was cut off by the session cap (429, "resets 3:50pm UTC") **before finishing**; the other two could not start. All three → reward 0 via `ApiRateLimitError`.
+
+These are infra zeros (interrupted mid-work), not clean capability failures. Notable difficulty signal: a single Opus/max trial on genre 4 consumes the entire 5-hour session window (Codex/xhigh finishes a trial in ~11 min), so a clean Claude 3/3 needs ~3 separate windows. Codex solving genre 4 3/3 plus Claude solving genres 1–3 is already sufficient to establish the conclusion below.
 
 ## Conclusion — the "must-fail" bar is structural, not a tuning gap
 
