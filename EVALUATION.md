@@ -283,3 +283,50 @@ Every bar in this exercise reduces to one thing: **these two frontier configs mu
 Getting both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max to fail 3/3 on a task that is also fair and solvable by an expert in a few hours almost certainly requires leaving the "implement a spec" genre entirely — e.g. deep debugging of a large, underdocumented system, or a genuinely hard search/optimization target with a strict threshold — where reading cannot substitute for iterative, feedback-driven work. That is a task-type change, not another hardening pass, and it carries its own fairness tradeoffs to work through. Note TB3's own rubric explicitly accepts tasks that current models can solve; the "must fail" bar here is stricter than TB3 itself.
 
 Old-task `/cheat` (`2026-09-04__18-29-49`) ended in `AgentSafetyRefusalError` — not a valid verifier zero.
+
+---
+
+# Pivot: `tasks/refcalc-clone` — leaving the "implement a spec" genre
+
+The conclusion above is that a fair, deterministic, *spec-derivable* compute task cannot force these two configs to fail, because "derivable + solvable by an expert" implies a strong implementer can reproduce it. `refcalc-clone` is the genre change that pivot points to: **black-box reverse-engineering**, where the correct behavior is *not written down anywhere* and can only be recovered by probing a compiled reference. The failure mode is incomplete discovery of counterintuitive rules — a thoroughness/discovery limit, not a transcription task.
+
+## What the task is
+
+- The agent gets `/app/refcalc/refcalc`: a stripped, statically-linked integer-expression engine it can **run but not read** (source is discarded in a multi-stage Docker build — verified absent in the final image). No written spec.
+- Deliverable: reimplement it exactly in pure Python at `/app/solution/calc.py` (`calc(expr) -> str`).
+- The engine's semantics deliberately violate strong priors and are only discoverable by probing:
+  1. `^` is exponentiation, **left-associative** (`2^3^2 == 64`, not 512).
+  2. `^` binds **tighter** than `* / %`.
+  3. Unary minus binds **tighter** than `^` (`-2^2 == 4`, not -4).
+  4. Division truncates toward zero; modulo takes the **dividend's** sign (C, not Python): `-7/2 == -3`, `-7%2 == -1`.
+  5. All arithmetic wraps in **signed 32-bit two's complement** (`2^31 == -2147483648`; big literals wrap mod 2^32).
+  6. Negative exponent → `0` except bases `1`/`-1`; `0^0 == 1`; `0^-1 == ERR`.
+  7. Literals: decimal with leading zeros (not octal) and `0x` hex; malformed input / div-by-zero → sentinel `ERR`.
+
+An agent that assumes standard precedence, right-associative powers, Python division, or big integers passes the obvious cases and fails the revealing ones. Grading is **all-or-nothing over 419 hidden expressions** (every quirk + bounded fuzz), so a single missed rule fails.
+
+## Why this can defeat strong implementers when a spec cannot
+
+The prior genres handed the model a complete description; here there is none. The model must (a) think to probe each counterintuitive dimension, and (b) get every one exactly right, with no feedback at grading time. Several quirks only trigger on specific probes (overflow needs large values; C modulo needs negatives; left-assoc `^` needs 3+ chained; unary-vs-`^` needs `-x^y`), so "probe a few representative inputs and generalize" — the common model strategy — is not enough.
+
+## Structural validation (all automatable bars) — PASS
+
+- **Static checks**: PASS (`bash scripts/run_static_checks.sh tasks/refcalc-clone`).
+- **Reference ≡ solution**: the C reference and the Python solution are **bit-identical on 60k+ random fuzz expressions** plus all 419 curated cases (zero mismatches).
+- **Docker build**: PASS (multi-stage; final image ships only the stripped static binary, no `.c`).
+- **Oracle reward 1.0**: PASS (`results/refcalc/oracle3`, 420/420 checks).
+- **Nop reward 0.0**: PASS (`results/refcalc/nop`, stub raises → 419 mismatches).
+- **Local matrix** (`scripts/refcalc/verify_local.py`): correct solution = 419/419 (reward 1); a plausible standard-semantics calc = 258/419 (reward 0); stub = 0 (reward 0); anti-cheat scan has no false positives on the legitimate solution.
+
+## Anti-cheat
+
+The reference is fully available to probe, but the verifier (separate image) copies **only** `calc.py`, statically rejects real exfiltration constructs (`subprocess`, `os.system/popen/exec`, `ctypes`, `socket`, `__import__`, `multiprocessing`), **deletes the reference binary** before grading, and stages only the expressions (expected outputs stay root-only) so an adversarial `calc.py` can neither call the reference nor read the answers. Python `eval` on the expression is not a viable cheat — it yields standard semantics and fails the quirks.
+
+## Model validation — pending credentials (blocked, not concluded)
+
+Unlike scan-margin, this genre is a genuine candidate to fail both configs, but I could not run the models on this VM yet:
+
+- **Codex** (`gpt-5.6-sol`/xhigh): `~/.codex/auth.json` is absent and `OPENAI_API_KEY` is unset on this VM (the earlier login did not persist across the environment). Needs a fresh `codex login` (or an `OPENAI_API_KEY`) before trials can run.
+- **Claude** (`claude-opus-5`/max): the OAuth token is present, but the subscription's **5-hour session window is exhausted** (`api_error_status 429`, "resets 9pm UTC"). The 7-day quota is only ~59% used. A one-shot timer is scheduled to auto-retry Claude `/run` x3 + `/cheat` after the window resets; if still throttled it re-arms for +1h.
+
+Expected/target outcome once runnable: `/run` trials score **reward 0** (model fails to fully reverse-engineer the engine) and `/cheat` scores 0. If any model does solve it, the plan is to add further prior-violating quirks (keeping the C reference and Python solution bit-identical, regenerating the hidden corpus) and re-test.
