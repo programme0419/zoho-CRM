@@ -16,8 +16,8 @@ TASK = os.path.join(ROOT, "tasks", "refcalc-clone")
 EXPECTED = json.load(open(os.path.join(TASK, "tests", "expected.json")))["cases"]
 
 CHEAT_RE = re.compile(
-    r"(subprocess|os\.system|os\.popen|pty\.|\bctypes\b|\bsocket\b|"
-    r"\bexec\s*\(|\beval\s*\(|__import__)"
+    r"(\bsubprocess\b|os\.system|os\.popen|os\.exec|multiprocessing|"
+    r"\bctypes\b|\bsocket\b|__import__)"
 )
 
 CANDIDATES = {

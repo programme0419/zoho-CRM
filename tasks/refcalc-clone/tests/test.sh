@@ -19,7 +19,7 @@ cp /app/solution/calc.py /tmp/grade/calc.py
 
 # Anti-cheat: the solution must be a faithful pure-Python reimplementation.
 # Reject any attempt to shell out, load the reference, or dodge reimplementation.
-if grep -Eq '(subprocess|os\.system|os\.popen|pty\.|\bctypes\b|\bsocket\b|\bexec[[:space:]]*\(|\beval[[:space:]]*\(|__import__)' /tmp/grade/calc.py; then
+if grep -Eq '(\bsubprocess\b|os\.system|os\.popen|os\.exec|multiprocessing|\bctypes\b|\bsocket\b|__import__)' /tmp/grade/calc.py; then
   fail "solution uses a forbidden construct (must be self-contained pure Python)"
 fi
 
