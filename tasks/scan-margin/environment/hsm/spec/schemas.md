@@ -37,20 +37,21 @@ Paths below are examples. The CLI accepts any paths that contain objects of thes
   },
   "inter_spreads": [
     {
+      "id": "<string>",
       "priority": <int>,
       "ics_group": "<string>",
-      "leg_a": "<cc_id>",
-      "leg_b": "<cc_id>",
-      "ratio_a": <number>,
-      "ratio_b": <number>,
+      "rho": <number>,
       "credit_per_unit": <number>,
-      "rho": <number>
+      "legs": [
+        { "cc": "<cc_id>", "ratio": <int>, "role": "base" },
+        { "cc": "<cc_id>", "ratio": <int>, "role": "opp" }
+      ]
     }
   ]
 }
 ```
 
-`intra_tiers` rates are native-currency money per matched delta-equivalent contract, before the \(\sqrt{d/365}\) factor. `som_rate`, `lao_rate`, `strip_rate`, `concentration_rate`, and `credit_per_unit` are native-currency money. `priority` is unique and processed ascending. `vol_scan_fraction` is the **up** vol fraction; `vsf_down` is the down fraction. `rho` is in \([0,1]\).
+`intra_tiers` rates are native-currency money per matched delta-equivalent contract, before the \(\sqrt{d/365}\) factor. `som_rate`, `lao_rate`, `strip_rate`, `concentration_rate`, and `credit_per_unit` are native-currency money. A spread row has one `base` leg and one or more `opp` legs; `ratio` is contracts consumed per unit. `priority` is a deterministic tie-break only — inter-commodity credit is the global margin-minimizing allocation (methodology §7), not a priority-ordered pass. `vol_scan_fraction` is the **up** vol fraction; `vsf_down` is the down fraction. `rho` is in \([0,1]\).
 
 ## Market (`market.json`)
 

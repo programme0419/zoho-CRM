@@ -213,11 +213,16 @@ def main() -> None:
             extra.append(chunk(POS_V2, pos_v2("CL-2026-12", 100), 2, corrupt=True))
         plans[name] = simple_v2(j(name)["positions"], extra or None)
 
-    # Crack: 8-unit combo CL vs HO, plus a NOTE and a bad CRC fill.
+    # Crack: 3-unit 3-leg crack combo (CL:3 / HO:-2 / RB:-1) -> CL+9 HO-6 RB-3,
+    # plus a NOTE and a bad-CRC fill that must be skipped.
     plans["crack"] = file(
         2,
         [
-            chunk(COMBO, combo(8, [("CL-2026-06", 1), ("HO-2026-06", -1)]), 2),
+            chunk(
+                COMBO,
+                combo(3, [("CL-2026-06", 3), ("HO-2026-06", -2), ("RB-2026-06", -1)]),
+                2,
+            ),
             chunk(NOTE, b"ignore me", 2),
             chunk(POS_V2, pos_v2("HO-2026-06", 40), 2, corrupt=True),
         ],

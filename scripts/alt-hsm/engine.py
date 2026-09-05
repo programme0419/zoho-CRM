@@ -161,6 +161,78 @@ def strip_credit(remaining: dict[str, float], rate: Decimal) -> Decimal:
     return q2(total)
 
 
+def optimize_inter(
+    residual: dict[str, float],
+    spreads_cfg: list,
+    cc_prod: dict,
+    currency_of: dict,
+) -> tuple[dict, dict]:
+    """Margin-minimizing inter-commodity credit via exhaustive feasible search.
+
+    Independent of the reference engine's branch-and-bound: enumerate every
+    feasible integer unit vector and keep the one with the greatest total credit
+    (ties broken toward more units on earlier config rows).
+    """
+    from itertools import product as iproduct
+
+    sign = {cc: (1 if v > 1e-9 else -1 if v < -1e-9 else 0) for cc, v in residual.items()}
+    cap = {cc: int(round(abs(v))) for cc, v in residual.items()}
+    cand: list = []
+    for sp in spreads_cfg:
+        legs = sp["legs"]
+        if any(l["cc"] not in residual for l in legs):
+            continue
+        base = next((l for l in legs if l.get("role") == "base"), None)
+        if base is None:
+            continue
+        sb = sign.get(base["cc"], 0)
+        if sb == 0:
+            continue
+        if any(sign.get(l["cc"], 0) != -sb for l in legs if l is not base):
+            continue
+        if len({currency_of[l["cc"]] for l in legs}) != 1:
+            continue
+        if any(cc_prod[l["cc"]]["ics_group"] != sp["ics_group"] for l in legs):
+            continue
+        cand.append(sp)
+
+    creditval = [D(sp["credit_per_unit"]) * (D(1) - D(sp["rho"])) for sp in cand]
+    ranges = [
+        range(min(cap[l["cc"]] // int(l["ratio"]) for l in sp["legs"]), -1, -1)
+        for sp in cand
+    ]
+    best_key = None
+    best_combo = tuple(0 for _ in cand)
+    for combo in (iproduct(*ranges) if cand else [()]):
+        used: dict[str, int] = defaultdict(int)
+        for u, sp in zip(combo, cand):
+            for l in sp["legs"]:
+                used[l["cc"]] += u * int(l["ratio"])
+        if any(used[cc] > cap[cc] for cc in used):
+            continue
+        tot = sum((D(u) * cv for u, cv in zip(combo, creditval)), Decimal("0"))
+        key = (tot, combo)
+        if best_key is None or key > best_key:
+            best_key = key
+            best_combo = combo
+
+    credit_by_cc: dict[str, Decimal] = defaultdict(lambda: Decimal("0.00"))
+    resid = dict(residual)
+    for u, sp in zip(best_combo, cand):
+        if u <= 0:
+            continue
+        legs = sp["legs"]
+        C = q2(D(u) * (D(sp["credit_per_unit"]) * (D(1) - D(sp["rho"]))))
+        k = len(legs)
+        share = q2(C / k)
+        shares = [share] * (k - 1) + [C - share * (k - 1)]
+        for l, sh in zip(legs, shares):
+            credit_by_cc[l["cc"]] = q2(credit_by_cc[l["cc"]] + sh)
+            s = 1.0 if resid[l["cc"]] > 0 else -1.0
+            resid[l["cc"]] -= s * u * int(l["ratio"])
+    return dict(credit_by_cc), resid
+
+
 def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
     val_date = parse_date(market["valuation_date"])
     fx = {k: D(v) for k, v in market["fx_to_usd"].items()}
@@ -356,45 +428,20 @@ def compute_report(portfolio: dict, market: dict, config: dict) -> dict:
             }
         )
 
-    # inter-commodity credits in priority order
+    # inter-commodity credits: global margin-minimizing spread allocation
     by_id = {r["cc_id"]: r for r in cc_rows}
-    deltas = {r["cc_id"]: r["_outright"] for r in cc_rows}
-    spreads = sorted(config.get("inter_spreads", []), key=lambda s: int(s["priority"]))
     cc_meta = {}
     for iid, spec in parsed.items():
         cc_meta[spec["cc_id"]] = spec["prod"]
-
-    for sp in spreads:
-        a, b = sp["leg_a"], sp["leg_b"]
-        if a not in by_id or b not in by_id:
-            continue
-        pa, pb = cc_meta[a], cc_meta[b]
-        if pa["ics_group"] != sp["ics_group"] or pb["ics_group"] != sp["ics_group"]:
-            continue
-        if pa["currency"] != pb["currency"]:
-            continue
-        if pa["currency"] != by_id[a]["currency"]:
-            continue
-        ra, rb = float(sp["ratio_a"]), float(sp["ratio_b"])
-        da, db = deltas.get(a, 0.0), deltas.get(b, 0.0)
-        if abs(da) < 1e-15 or abs(db) < 1e-15 or ra == 0 or rb == 0:
-            continue
-        ua, ub = da / ra, db / rb
-        if ua * ub >= 0:
-            continue
-        p = min(abs(ua), abs(ub))
-        C = q2(D(p) * D(sp["credit_per_unit"]) * (D(1) - D(sp["rho"])))
-        half_b = q2(C / 2)
-        half_a = C - half_b
-        by_id[a]["inter_credit"] = q2(by_id[a]["inter_credit"] + half_a)
-        by_id[b]["inter_credit"] = q2(by_id[b]["inter_credit"] + half_b)
-        # reduce deltas toward zero
-        if da > 0:
-            deltas[a] = da - p * ra
-            deltas[b] = db + p * rb  # db < 0
-        else:
-            deltas[a] = da + p * ra
-            deltas[b] = db - p * rb
+    currency_of = {cc: cc_meta[cc]["currency"] for cc in cc_meta}
+    residual_in = {r["cc_id"]: r["_outright"] for r in cc_rows}
+    credit_by_cc, deltas = optimize_inter(
+        residual_in, config.get("inter_spreads", []), cc_meta, currency_of
+    )
+    for cc, cr in credit_by_cc.items():
+        by_id[cc]["inter_credit"] = q2(cr)
+    for r in cc_rows:
+        deltas.setdefault(r["cc_id"], r["_outright"])
 
     out_ccs = []
     total = Decimal("0.00")

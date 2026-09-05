@@ -113,21 +113,25 @@ Remaining unmatched delta of the CC (sum of leftover bucket deltas, which will a
 
 ## 7. Inter-commodity spread credit
 
-Inter-commodity spreads are listed in config in **priority order** (strictly increasing `priority`). Only pairs whose two CCs share `ics_group` **and** `currency` are valid; ignore any other pair.
+Each `inter_spreads` row is a **spread template** with an `id`, an `ics_group`, a `rho`, a `credit_per_unit` \(c\), and a `legs` list. Each leg names a CC (`cc`), an integer `ratio`, and a `role` of `base` or `opp`. A row may have two legs (a pair) or three or more (e.g. a crack). `priority` is retained **only** as a deterministic tie-break (see below); it is **not** an application order.
 
-Credits apply only to **offsetting** outright deltas (opposite signs). Same-sign remaining deltas in correlated products do not receive a credit.
+**Admissibility.** Using the §6 leftover outright deltas \(\delta\), a row is admissible only if every leg's CC is present with a non-zero delta, all legs share one `ics_group` (equal to the row's) and one `currency`, and the sign pattern offsets: the `base` leg's delta sign is opposite to every `opp` leg's delta sign (all `opp` legs therefore share the base's opposite sign). Correlated same-sign legs are not offsetting and the row is inadmissible.
 
-For a pair \((A, B)\) with ratios \(r_A, r_B\) and `credit_per_unit` \(c\) (money per paired unit, native currency of the pair):
+**Units and capacity.** A row is applied in a non-negative **integer** number of units \(u\). One unit consumes `ratio` contracts of \(|\delta|\) from each of its legs (moving each leg toward zero). A CC's outright delta is a shared resource: the total consumed across every applied row may not exceed \(|\delta|\) for that CC. The maximum units of a single row in isolation is \(\lfloor \min_{\text{legs}} |\delta_{cc}| / \text{ratio} \rfloor\).
+
+**Per-unit credit.** Applying \(u\) units of a row yields, in the legs' native currency,
 
 \[
-u_A = \delta_A / r_A,\qquad u_B = \delta_B / r_B
+C = \mathrm{round\_half\_even}\bigl(u \cdot c \cdot (1 - \rho),\ 0.01\bigr)
 \]
 
-If \(u_A\) and \(u_B\) have opposite signs, paired units \(p = \min(|u_A|, |u_B|)\). Credit \(C = p \cdot c\). Reduce \(\delta_A\) by \(p \cdot r_A\) toward zero and \(\delta_B\) by \(p \cdot r_B\) toward zero so a later pair sees the residual.
+\(\rho = 0\) is a full credit; \(\rho = 1\) is no credit. Omitting \(\rho\) when it is non-zero is wrong.
 
-Split \(C\) across the two CCs: \(C_B = \mathrm{round\_half\_even}(C/2,\ 0.01)\), \(C_A = C - C_B\). Add those amounts to each CC's `inter_credit`. Later pairs do not undo earlier credits.
+**The house grants the credit-maximizing allocation.** Choose the integer unit count for every admissible row so that the **sum of all row credits is maximal** — equivalently, so that **total portfolio margin is minimal** — subject to the shared per-CC capacity constraints above. This is a global optimization over all rows at once. Applying rows one at a time in `priority` order (or greedily by largest credit) is **not** guaranteed to reach the maximum and is not the rule: a lower-`priority` two-leg row or a multi-leg crack may be worth more than the units it would block. When more than one allocation attains the same maximal total credit, pick the one that assigns more units to earlier rows in config order, then by `priority` — so the reported per-CC split is deterministic.
 
-If either outright delta is zero, the pair contributes nothing.
+**Split across legs.** For each applied row, split its credit \(C\) evenly across its \(k\) legs: each of the first \(k-1\) legs (in the row's leg order) gets \(\mathrm{round\_half\_even}(C/k,\ 0.01)\) and the last leg gets the remainder \(C - (k-1)\cdot\mathrm{round\_half\_even}(C/k,\ 0.01)\). Add each leg's share to its CC's `inter_credit`.
+
+**Residual.** After the optimal allocation, reduce each CC's outright delta by the total contracts consumed across all applied rows (toward zero). This residual \(\delta^{\ast}\) is what §16 concentration uses.
 
 ## 8. Short option minimum (SOM)
 
@@ -209,13 +213,7 @@ Skip this if `strip_rate` is 0 or there is no run of length 3.
 
 ## 15. ICS correlation \(\rho\)
 
-§7 credit is
-
-\[
-C = p \cdot c \cdot (1 - \rho)
-\]
-
-then rounded to 0.01 half-even, then split as in §7. \(\rho\) is `rho` on that inter-spread row. \(\rho = 0\) is a full credit; \(\rho = 1\) is no credit. Omitting \(\rho\) (treating it as 0) is wrong whenever the row's \(\rho\) is not 0.
+The \((1 - \rho)\) haircut is already part of the per-unit credit in §7: a row's credit for \(u\) units is \(\mathrm{round\_half\_even}(u \cdot c \cdot (1 - \rho),\ 0.01)\). \(\rho\) is the `rho` field on that inter-spread row. \(\rho = 0\) is a full credit; \(\rho = 1\) is no credit. Treating a non-zero \(\rho\) as 0 over-credits the book. The optimizer in §7 maximizes total **post-haircut** credit.
 
 ## 16. NOV cap, concentration, liquidity — order is mandatory
 

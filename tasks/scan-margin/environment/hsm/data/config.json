@@ -92,34 +92,49 @@
   },
   "inter_spreads": [
     {
+      "id": "CL_HO",
       "priority": 1,
       "ics_group": "ENERGY",
-      "leg_a": "ENERGY_CL",
-      "leg_b": "ENERGY_HO",
-      "ratio_a": 1.0,
-      "ratio_b": 1.0,
-      "credit_per_unit": 800,
-      "rho": 0.25
+      "rho": 0.0,
+      "credit_per_unit": 400,
+      "legs": [
+        { "cc": "ENERGY_CL", "ratio": 1, "role": "base" },
+        { "cc": "ENERGY_HO", "ratio": 1, "role": "opp" }
+      ]
     },
     {
+      "id": "CL_RB",
       "priority": 2,
       "ics_group": "ENERGY",
-      "leg_a": "ENERGY_CL",
-      "leg_b": "ENERGY_RB",
-      "ratio_a": 1.0,
-      "ratio_b": 1.0,
-      "credit_per_unit": 600,
-      "rho": 0.20
+      "rho": 0.0,
+      "credit_per_unit": 900,
+      "legs": [
+        { "cc": "ENERGY_CL", "ratio": 1, "role": "base" },
+        { "cc": "ENERGY_RB", "ratio": 1, "role": "opp" }
+      ]
     },
     {
+      "id": "HO_RB",
       "priority": 3,
       "ics_group": "ENERGY",
-      "leg_a": "ENERGY_HO",
-      "leg_b": "ENERGY_RB",
-      "ratio_a": 1.0,
-      "ratio_b": 1.0,
-      "credit_per_unit": 500,
-      "rho": 0.15
+      "rho": 0.0,
+      "credit_per_unit": 700,
+      "legs": [
+        { "cc": "ENERGY_HO", "ratio": 1, "role": "base" },
+        { "cc": "ENERGY_RB", "ratio": 1, "role": "opp" }
+      ]
+    },
+    {
+      "id": "CRACK_321",
+      "priority": 4,
+      "ics_group": "ENERGY",
+      "rho": 0.0,
+      "credit_per_unit": 3300,
+      "legs": [
+        { "cc": "ENERGY_CL", "ratio": 3, "role": "base" },
+        { "cc": "ENERGY_HO", "ratio": 2, "role": "opp" },
+        { "cc": "ENERGY_RB", "ratio": 1, "role": "opp" }
+      ]
     }
   ]
 }
