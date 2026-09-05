@@ -249,6 +249,22 @@ Job `2026-09-05__07-57-03`: **3/3 reward 1.0, 0 errors**, 33m. `gpt-5.6-sol` + `
 
 **Four genres, twelve genuine Codex trials, twelve rewards of 1.0.** The lever changed each time — written math spec, a nastier binary input codec, and finally a hard combinatorial optimization where the "obvious" implementation is wrong — and the result did not.
 
+Claude genre-4 attempt (job `2026-09-05__09-45-40`, [summary](results/summaries/run-claude-optimize-ratelimited.json)): 3/3 `ApiRateLimitError` in 3m49s — the Opus subscription **session window** was exhausted by the day's earlier trials. Infra, not a model result. A clean Claude genre-4 run is queued for the next window reset.
+
+## Conclusion — the "must-fail" bar is structural, not a tuning gap
+
+Every requirement in this exercise reduces to one thing: both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max must be **unable** to solve the task (`/cheat=0` included — a model that can solve the task just solves it under `/cheat` and scores 1).
+
+The evidence, across four independent hardening genres, is that this is not reachable for a **fair, deterministic, expert-solvable compute task**:
+
+- TB3 fairness requires the tested behavior to be *derivable* by the agent (documented methodology / code-as-spec / visible tests; no hidden-behaviour guessing; no process grading).
+- "Derivable + deterministic + expert-solvable in hours" ⟹ a complete-enough description exists ⟹ a strong *implementer* can produce a correct solution.
+- These two configs are excellent implementers. Even a hard combinatorial optimization where the natural implementation is provably wrong (genre 4) was recognized and solved correctly by Codex 3/3.
+
+This is consistent with TB3's own rubric, which explicitly accepts tasks that current models can solve. The scan-margin task is rigorous and clears every automatable bar (static checks, Docker build, oracle=1, nop=0, "any correct engine passes / incomplete fails", cheat-shaped engines score 0). What it cannot do — and what no fair task in this genre can do — is force these frontier configs to fail.
+
+**To meet a literal "both models fail 3/3" bar, the task must leave the compute-a-spec domain** for a large broken-codebase / long-horizon debugging task with a *visible-but-hard* test suite and held-out grading — the genre where frontier models still fail a real fraction. That is a different task in a different domain, and even there, failing *both* models on every attempt is not guaranteed.
+
 ### Claude, same result
 
 `claude-opus-5` + `max` was run twice (2026-09-05 `00-49-40` and `05-51-58`). Every trial that had enough Opus session quota to finish solved the task (3 genuine reward-1.0 passes: `fcmSBjt`, `aJ2TqSS`, `EUpi3rs`). The only Claude zeros are `ApiRateLimitError` cutoffs, which are infra, not model failures.

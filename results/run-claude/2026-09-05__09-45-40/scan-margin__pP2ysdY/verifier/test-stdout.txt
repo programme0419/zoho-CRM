@@ -1,0 +1,552 @@
+============================= test session starts ==============================
+platform linux -- Python 3.[REDACTED]3.[REDACTED]5, pytest-9.[REDACTED].[REDACTED], pluggy-[REDACTED].6.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected [REDACTED]9 items
+
+tests/test_state.py FFFFFFFFFFFFFFFFFF.                                  [[REDACTED]00%]
+
+=================================== FAILURES ===================================
+_______________ test_case_matches_oracle[sample-portfolio.json] ________________
+
+name = 'sample', filename = 'portfolio.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+        _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+    
+        got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
+        exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
+        assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
+    
+        for cc_id, erow in exp_ccs.items():
+            grow = got_ccs[cc_id]
+            assert grow.get("currency") == erow["currency"], f"{name}.{cc_id}.currency"
+            assert int(grow["worst_scenario_id"]) == int(erow["worst_scenario_id"]), (
+                f"{name}.{cc_id}.worst_scenario_id: {grow.get('worst_scenario_id')} != {erow['worst_scenario_id']}"
+            )
+            for key in MONEY_KEYS:
+>               _assert_money(f"{name}.{cc_id}", key, grow[key], erow[key], COMP_TOL)
+                                                      ^^^^^^^^^
+E               KeyError: 'strip_credit'
+
+tests/test_state.py:[REDACTED]06: KeyError
+________________ test_case_matches_oracle[som_otm-som_otm.json] ________________
+
+name = 'som_otm', filename = 'som_otm.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'som_otm', key = 'total_margin_usd', got = 0.0, exp = 5[REDACTED]040.39
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: som_otm.total_margin_usd: got 0.0 expected 5[REDACTED]040.39 (tol [REDACTED].00)
+E       assert Decimal('5[REDACTED]040.39') <= Decimal('[REDACTED].00')
+E        +  where Decimal('5[REDACTED]040.39') = abs((Decimal('0.0') - Decimal('5[REDACTED]040.39')))
+
+tests/test_state.py:80: AssertionError
+_______________ test_case_matches_oracle[calendar-calendar.json] _______________
+
+name = 'calendar', filename = 'calendar.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'calendar', key = 'total_margin_usd', got = 0.0, exp = 248[REDACTED].2[REDACTED]
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: calendar.total_margin_usd: got 0.0 expected 248[REDACTED].2[REDACTED] (tol [REDACTED].00)
+E       assert Decimal('248[REDACTED].2[REDACTED]') <= Decimal('[REDACTED].00')
+E        +  where Decimal('248[REDACTED].2[REDACTED]') = abs((Decimal('0.0') - Decimal('248[REDACTED].2[REDACTED]')))
+
+tests/test_state.py:80: AssertionError
+__________________ test_case_matches_oracle[crack-crack.json] __________________
+
+name = 'crack', filename = 'crack.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'crack', key = 'total_margin_usd', got = 0.0, exp = 36540.0
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: crack.total_margin_usd: got 0.0 expected 36540.0 (tol [REDACTED].00)
+E       assert Decimal('36540.0') <= Decimal('[REDACTED].00')
+E        +  where Decimal('36540.0') = abs((Decimal('0.0') - Decimal('36540.0')))
+
+tests/test_state.py:80: AssertionError
+_______________ test_case_matches_oracle[nov_long-nov_long.json] _______________
+
+name = 'nov_long', filename = 'nov_long.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+        _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+    
+        got_ccs = {row["cc_id"]: row for row in got.get("combined_commodities", [])}
+        exp_ccs = {row["cc_id"]: row for row in exp["combined_commodities"]}
+>       assert set(got_ccs) == set(exp_ccs), f"{name}: CC set {sorted(got_ccs)} != {sorted(exp_ccs)}"
+E       AssertionError: nov_long: CC set [] != ['ENERGY_CL']
+E       assert set() == {'ENERGY_CL'}
+E         
+E         Extra items in the right set:
+E         'ENERGY_CL'
+E         Use -v to get more diff
+
+tests/test_state.py:97: AssertionError
+______________ test_case_matches_oracle[fx_equity-fx_equity.json] ______________
+
+name = 'fx_equity', filename = 'fx_equity.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'fx_equity', key = 'total_margin_usd', got = 0.0, exp = [REDACTED]93[REDACTED]5.39
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: fx_equity.total_margin_usd: got 0.0 expected [REDACTED]93[REDACTED]5.39 (tol [REDACTED].00)
+E       assert Decimal('[REDACTED]93[REDACTED]5.39') <= Decimal('[REDACTED].00')
+E        +  where Decimal('[REDACTED]93[REDACTED]5.39') = abs((Decimal('0.0') - Decimal('[REDACTED]93[REDACTED]5.39')))
+
+tests/test_state.py:80: AssertionError
+______________ test_case_matches_oracle[mixed_opt-mixed_opt.json] ______________
+
+name = 'mixed_opt', filename = 'mixed_opt.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'mixed_opt', key = 'total_margin_usd', got = 0.0, exp = 20502.79
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: mixed_opt.total_margin_usd: got 0.0 expected 20502.79 (tol [REDACTED].00)
+E       assert Decimal('20502.79') <= Decimal('[REDACTED].00')
+E        +  where Decimal('20502.79') = abs((Decimal('0.0') - Decimal('20502.79')))
+
+tests/test_state.py:80: AssertionError
+___________ test_case_matches_oracle[ics_priority-ics_priority.json] ___________
+
+name = 'ics_priority', filename = 'ics_priority.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'ics_priority', key = 'total_margin_usd', got = 0.0, exp = [REDACTED]2[REDACTED]80.0
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: ics_priority.total_margin_usd: got 0.0 expected [REDACTED]2[REDACTED]80.0 (tol [REDACTED].00)
+E       assert Decimal('[REDACTED]2[REDACTED]80.0') <= Decimal('[REDACTED].00')
+E        +  where Decimal('[REDACTED]2[REDACTED]80.0') = abs((Decimal('0.0') - Decimal('[REDACTED]2[REDACTED]80.0')))
+
+tests/test_state.py:80: AssertionError
+________________ test_case_matches_oracle[netting-netting.json] ________________
+
+name = 'netting', filename = 'netting.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'netting', key = 'total_margin_usd', got = 0.0, exp = 5000.0
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: netting.total_margin_usd: got 0.0 expected 5000.0 (tol [REDACTED].00)
+E       assert Decimal('5000.0') <= Decimal('[REDACTED].00')
+E        +  where Decimal('5000.0') = abs((Decimal('0.0') - Decimal('5000.0')))
+
+tests/test_state.py:80: AssertionError
+_______________ test_case_matches_oracle[multi_cc-multi_cc.json] _______________
+
+name = 'multi_cc', filename = 'multi_cc.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'multi_cc', key = 'total_margin_usd', got = 0.0, exp = [REDACTED]0[REDACTED][REDACTED][REDACTED]0.0[REDACTED]
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: multi_cc.total_margin_usd: got 0.0 expected [REDACTED]0[REDACTED][REDACTED][REDACTED]0.0[REDACTED] (tol [REDACTED].00)
+E       assert Decimal('[REDACTED]0[REDACTED][REDACTED][REDACTED]0.0[REDACTED]') <= Decimal('[REDACTED].00')
+E        +  where Decimal('[REDACTED]0[REDACTED][REDACTED][REDACTED]0.0[REDACTED]') = abs((Decimal('0.0') - Decimal('[REDACTED]0[REDACTED][REDACTED][REDACTED]0.0[REDACTED]')))
+
+tests/test_state.py:80: AssertionError
+________________ test_case_matches_oracle[vol_mix-vol_mix.json] ________________
+
+name = 'vol_mix', filename = 'vol_mix.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'vol_mix', key = 'total_margin_usd', got = 0.0, exp = 24003.64
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: vol_mix.total_margin_usd: got 0.0 expected 24003.64 (tol [REDACTED].00)
+E       assert Decimal('24003.64') <= Decimal('[REDACTED].00')
+E        +  where Decimal('24003.64') = abs((Decimal('0.0') - Decimal('24003.64')))
+
+tests/test_state.py:80: AssertionError
+_____________ test_case_matches_oracle[back_month-back_month.json] _____________
+
+name = 'back_month', filename = 'back_month.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'back_month', key = 'total_margin_usd', got = 0.0, exp = 8374.78
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: back_month.total_margin_usd: got 0.0 expected 8374.78 (tol [REDACTED].00)
+E       assert Decimal('8374.78') <= Decimal('[REDACTED].00')
+E        +  where Decimal('8374.78') = abs((Decimal('0.0') - Decimal('8374.78')))
+
+tests/test_state.py:80: AssertionError
+_____________ test_case_matches_oracle[log_equity-log_equity.json] _____________
+
+name = 'log_equity', filename = 'log_equity.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'log_equity', key = 'total_margin_usd', got = 0.0, exp = 79439.26
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: log_equity.total_margin_usd: got 0.0 expected 79439.26 (tol [REDACTED].00)
+E       assert Decimal('79439.26') <= Decimal('[REDACTED].00')
+E        +  where Decimal('79439.26') = abs((Decimal('0.0') - Decimal('79439.26')))
+
+tests/test_state.py:80: AssertionError
+_________________ test_case_matches_oracle[strip3-strip3.json] _________________
+
+name = 'strip3', filename = 'strip3.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'strip3', key = 'total_margin_usd', got = 0.0, exp = 44892.0
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: strip3.total_margin_usd: got 0.0 expected 44892.0 (tol [REDACTED].00)
+E       assert Decimal('44892.0') <= Decimal('[REDACTED].00')
+E        +  where Decimal('44892.0') = abs((Decimal('0.0') - Decimal('44892.0')))
+
+tests/test_state.py:80: AssertionError
+___________________ test_case_matches_oracle[conc-conc.json] ___________________
+
+name = 'conc', filename = 'conc.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'conc', key = 'total_margin_usd', got = 0.0, exp = [REDACTED]00600.0
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: conc.total_margin_usd: got 0.0 expected [REDACTED]00600.0 (tol [REDACTED].00)
+E       assert Decimal('[REDACTED]00600.0') <= Decimal('[REDACTED].00')
+E        +  where Decimal('[REDACTED]00600.0') = abs((Decimal('0.0') - Decimal('[REDACTED]00600.0')))
+
+tests/test_state.py:80: AssertionError
+_______________ test_case_matches_oracle[lao_deep-lao_deep.json] _______________
+
+name = 'lao_deep', filename = 'lao_deep.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'lao_deep', key = 'total_margin_usd', got = 0.0, exp = 8[REDACTED]66.46
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: lao_deep.total_margin_usd: got 0.0 expected 8[REDACTED]66.46 (tol [REDACTED].00)
+E       assert Decimal('8[REDACTED]66.46') <= Decimal('[REDACTED].00')
+E        +  where Decimal('8[REDACTED]66.46') = abs((Decimal('0.0') - Decimal('8[REDACTED]66.46')))
+
+tests/test_state.py:80: AssertionError
+______________ test_case_matches_oracle[order_mix-order_mix.json] ______________
+
+name = 'order_mix', filename = 'order_mix.json'
+
+    @pytest.mark.parametrize("name,filename", CASES)
+    def test_case_matches_oracle(name: str, filename: str) -> None:
+        """Each book must match the HSM oracle within calibrated cent tolerances."""
+        # Agent is fed the sibling .hsmj tape; oracle recomputes from this JSON.
+        portfolio = INPUTS / filename
+        got = _load_agent(name)
+        exp = _expected(portfolio)
+    
+        assert got.get("valuation_date") == exp["valuation_date"]
+        assert got.get("currency") == "USD"
+>       _assert_money(name, "total_margin_usd", got["total_margin_usd"], exp["total_margin_usd"], TOTAL_TOL)
+
+tests/test_state.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'order_mix', key = 'total_margin_usd', got = 0.0, exp = [REDACTED]30758.46
+tol = Decimal('[REDACTED].00')
+
+    def _assert_money(name: str, key: str, got, exp, tol: Decimal) -> None:
+        g, e = _dec(got), _dec(exp)
+>       assert abs(g - e) <= tol, f"{name}.{key}: got {g} expected {e} (tol {tol})"
+E       AssertionError: order_mix.total_margin_usd: got 0.0 expected [REDACTED]30758.46 (tol [REDACTED].00)
+E       assert Decimal('[REDACTED]30758.46') <= Decimal('[REDACTED].00')
+E        +  where Decimal('[REDACTED]30758.46') = abs((Decimal('0.0') - Decimal('[REDACTED]30758.46')))
+
+tests/test_state.py:80: AssertionError
+_____________________ test_visible_artifact_matches_sample _____________________
+
+    def test_visible_artifact_matches_sample() -> None:
+        """The required sample report at /app/output/margin_report.json matches the sample book."""
+        artifact = Path("/app/output/margin_report.json")
+>       assert artifact.is_file(), "missing /app/output/margin_report.json"
+E       AssertionError: missing /app/output/margin_report.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/app/output/margin_report.json').is_file
+
+tests/test_state.py:[REDACTED][REDACTED]2: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_state.py::test_sample_not_hardcoded_only
+FAILED tests/test_state.py::test_case_matches_oracle[sample-portfolio.json]
+FAILED tests/test_state.py::test_case_matches_oracle[som_otm-som_otm.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[calendar-calendar.json]
+FAILED tests/test_state.py::test_case_matches_oracle[crack-crack.json] - Asse...
+FAILED tests/test_state.py::test_case_matches_oracle[nov_long-nov_long.json]
+FAILED tests/test_state.py::test_case_matches_oracle[fx_equity-fx_equity.json]
+FAILED tests/test_state.py::test_case_matches_oracle[mixed_opt-mixed_opt.json]
+FAILED tests/test_state.py::test_case_matches_oracle[ics_priority-ics_priority.json]
+FAILED tests/test_state.py::test_case_matches_oracle[netting-netting.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[multi_cc-multi_cc.json]
+FAILED tests/test_state.py::test_case_matches_oracle[vol_mix-vol_mix.json] - ...
+FAILED tests/test_state.py::test_case_matches_oracle[back_month-back_month.json]
+FAILED tests/test_state.py::test_case_matches_oracle[log_equity-log_equity.json]
+FAILED tests/test_state.py::test_case_matches_oracle[strip3-strip3.json] - As...
+FAILED tests/test_state.py::test_case_matches_oracle[conc-conc.json] - Assert...
+FAILED tests/test_state.py::test_case_matches_oracle[lao_deep-lao_deep.json]
+FAILED tests/test_state.py::test_case_matches_oracle[order_mix-order_mix.json]
+FAILED tests/test_state.py::test_visible_artifact_matches_sample - AssertionE...
+========================= [REDACTED]8 failed, [REDACTED] passed in 0.[REDACTED]4s =========================
