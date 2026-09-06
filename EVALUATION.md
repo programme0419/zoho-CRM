@@ -15,6 +15,18 @@ Environment backend used here: `docker` (CI default is `modal`; docker is the do
 
 Harbor version: `0.22.0`.
 
+## Hiring-bar status (read this first)
+
+**The hiring fail-bar is not met.** Every other automatable TB3 bar is.
+
+Required by this repo's README: both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max must score reward `< 1` on every completed `/run` trial (3 each) and reward `0` on `/cheat`. Infra errors do not count.
+
+What actually happened: both configs **solve** every fair task we shipped (`scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session`). Latest: Codex solved the streaming-incident task `gap-session` in **3 minutes 37 seconds** (9/9).
+
+What does pass: static checks, Docker build, oracle=1.0, nop=0.0, separate verifier, correct-engine-passes / incomplete-fails — on all four tasks.
+
+---
+
 ## Requirement status
 
 | Requirement | Status | Evidence |
@@ -353,6 +365,23 @@ Meeting a literal "both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max fail 3/3" ba
 
 `gpt-5.6-sol` / `xhigh`, one `/run` (`2026-09-06__00-10-09`, trial `QM6ewky`): **14/14 passed, reward 1.0**, wall time 10m55s. Auth was the provided `OPENAI_API_KEY` (stored off-repo). Codex read `FORMAT.md` and repaired newest-wins, half-open scans, tombstones, empty PUTs, and compact. A complete, fair format note plus a small snapshot is still a derivable repair; this config one-shots it.
 
-So the debug genre *with a complete written contract* is in the same bucket as the spec genres. The remaining TB3-hard pattern (session-window / streaming incidents) is one where every function looks right and the defects only exist in how components interact over time — agents patch the first symptom and stop. That is `tasks/gap-session`.
+So the debug genre *with a complete written contract* is in the same bucket as the spec genres.
+
+### Genre 7: `gap-session` — Codex solved it in 3m37s
+
+`gpt-5.6-sol` / `xhigh`, one `/run` (`2026-09-06__00-28-24`, trial `aR5EZNC`): **9/9 passed, reward 1.0**. This is the TB3 streaming-incident pattern (coupled watermark / inclusive-gap / merge / late-open bugs; sample is a false green). Sol read `design.md` and repaired the snapshot in one pass. Agents do **not** stop at the first symptom when the contract is written down and the engine is small.
+
+## Hiring-bar verdict (current)
+
+**Not met.** The requirement in README is: every completed `/run` trial reward `< 1`, and every `/cheat` trial reward `0`, for both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max. Crashes and rate limits do not count.
+
+| Bar | Status |
+|-----|--------|
+| Original TB3-shaped task, static checks, Docker, oracle=1.0, nop=0.0, separate verifier | **PASS** on `scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session` |
+| `/run` Codex 3/3 fail | **FAIL** — Sol solved every genre we could run, including oakleaf (11 min) and gap-session (3.5 min) |
+| `/run` Claude 3/3 fail | **FAIL** — every quota-complete Claude trial on scan-margin and refcalc-clone was reward 1.0 |
+| `/cheat` both reward 0 because the task is unsolvable | **FAIL** — a model that solves `/run` solves `/cheat`; earlier 0s were refusal / rate-limit |
+
+This is not a missing overlay. Across seven genres (written spec, overlays, binary blotter, integer optimization, black-box RE, storage-engine repair, streaming incident) a fair, expert-solvable, fully observable contract is reproduced by these two configs. TB3's own rubric accepts tasks current models can solve; the "must fail 3/3" bar is stricter than TB3 and, on the evidence, is not reachable without making the task unfair (hidden behavior) or leaving the "small deterministic engine" size class for a much larger underdocumented system with no guarantee.
 
 Both shipped tasks (`scan-margin`, `refcalc-clone`) are rigorous and clear every *automatable* TB3 bar (static checks, Docker build, oracle = 1.0, nop = 0.0, correct-engine-passes / incomplete-fails, cheat-shaped attempts score 0). What no fair, derivable task in either genre can do — now shown across five genres and directly demonstrated for both configs — is force these frontier models to fail.

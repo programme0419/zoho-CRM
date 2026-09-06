@@ -1,0 +1,134 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-06T00:31:51.884621+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1788654711833,
+            "stop": 1788654711884
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_state.py::test_results_present",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654711880,
+                "stop": 1788654711880,
+                "retries": 0,
+                "file_path": "test_state.py"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654711880,
+                "stop": 1788654711881,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654711881,
+                "stop": 1788654711881,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654711881,
+                "stop": 1788654711882,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654711882,
+                "stop": 1788654711882,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654711882,
+                "stop": 1788654711883,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654711883,
+                "stop": 1788654711883,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654711883,
+                "stop": 1788654711884,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654711884,
+                "stop": 1788654711884,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            }
+        ]
+    }
+}
