@@ -1,0 +1,106 @@
+{
+  "cases": [
+    {
+      "name": "sample_get",
+      "lines": [
+        "1",
+        "2",
+        "NOTFOUND"
+      ]
+    },
+    {
+      "name": "sample_scan_exclusive",
+      "lines": [
+        "alpha=1\nbeta=2",
+        "EMPTY"
+      ]
+    },
+    {
+      "name": "overlap_get",
+      "lines": [
+        "new",
+        "keep"
+      ]
+    },
+    {
+      "name": "tomb_get_and_scan",
+      "lines": [
+        "NOTFOUND",
+        "yes",
+        "keep=yes"
+      ]
+    },
+    {
+      "name": "delete_after_flush",
+      "lines": [
+        "OK",
+        "NOTFOUND",
+        "1"
+      ]
+    },
+    {
+      "name": "empty_put_is_live",
+      "lines": [
+        "",
+        "OK",
+        ""
+      ]
+    },
+    {
+      "name": "highbyte_order",
+      "lines": [
+        "\u007f=lo\nhex:80=hi",
+        "hex:80=hi\nhex:ff=top"
+      ]
+    },
+    {
+      "name": "highseq_wins",
+      "lines": [
+        "king",
+        "ok"
+      ]
+    },
+    {
+      "name": "compact_drops_tomb",
+      "lines": [
+        "OK",
+        "NOTFOUND",
+        "yes"
+      ]
+    },
+    {
+      "name": "update_then_flush_then_get",
+      "lines": [
+        "OK",
+        "OK",
+        "1b",
+        "alpha=1b"
+      ]
+    },
+    {
+      "name": "put_delete_put",
+      "lines": [
+        "OK",
+        "OK",
+        "back",
+        "OK",
+        "back"
+      ]
+    },
+    {
+      "name": "oracle_reopen_after_writes",
+      "lines": [
+        "OK",
+        "OK",
+        "OK",
+        "newer",
+        "NOTFOUND"
+      ],
+      "reopen_lines": [
+        "newer",
+        "NOTFOUND",
+        "k=newer"
+      ]
+    }
+  ]
+}

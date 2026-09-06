@@ -1,0 +1,13 @@
+{
+    "jobs_dir": "results/oakleaf/nop",
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/oakleaf-repair"
+        }
+    ]
+}

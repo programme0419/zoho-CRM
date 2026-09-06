@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "tasks/oakleaf-repair"
+    },
+    "trial_name": "oakleaf-repair__y9eREkJ",
+    "trials_dir": "results/oakleaf/nop/2026-09-06__00-08-34",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "7dafd1d8-d78b-4b9f-9d0a-f91ba14fcb1d"
+}

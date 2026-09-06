@@ -1,0 +1,119 @@
+{
+  "cases": [
+    {
+      "name": "sample_get",
+      "preset": "simple",
+      "ops": [
+        ["get", "alpha"],
+        ["get", "beta"],
+        ["get", "missing"]
+      ]
+    },
+    {
+      "name": "sample_scan_exclusive",
+      "preset": "simple",
+      "ops": [
+        ["scan", "alpha", "gamma"],
+        ["scan", "beta", "beta"]
+      ]
+    },
+    {
+      "name": "overlap_get",
+      "preset": "overlap",
+      "ops": [
+        ["get", "k"],
+        ["get", "z"]
+      ]
+    },
+    {
+      "name": "tomb_get_and_scan",
+      "preset": "tomb",
+      "ops": [
+        ["get", "gone"],
+        ["get", "keep"],
+        ["scan", "", ""]
+      ]
+    },
+    {
+      "name": "delete_after_flush",
+      "preset": "simple",
+      "ops": [
+        ["delete", "beta"],
+        ["get", "beta"],
+        ["get", "alpha"]
+      ]
+    },
+    {
+      "name": "empty_put_is_live",
+      "preset": "emptyval",
+      "ops": [
+        ["get", "blank"],
+        ["put", "blank2", ""],
+        ["get", "blank2"]
+      ]
+    },
+    {
+      "name": "highbyte_order",
+      "preset": "highbyte",
+      "ops": [
+        ["scan", "hex:7f", "hex:ff"],
+        ["scan", "hex:80", ""]
+      ]
+    },
+    {
+      "name": "highseq_wins",
+      "preset": "highseq",
+      "ops": [
+        ["get", "crown"],
+        ["get", "pawn"]
+      ]
+    },
+    {
+      "name": "compact_drops_tomb",
+      "preset": "tomb",
+      "ops": [
+        ["compact"],
+        ["get", "gone"],
+        ["get", "keep"]
+      ]
+    },
+    {
+      "name": "update_then_flush_then_get",
+      "preset": "simple",
+      "ops": [
+        ["put", "alpha", "1b"],
+        ["flush"],
+        ["get", "alpha"],
+        ["scan", "alpha", "beta"]
+      ]
+    },
+    {
+      "name": "put_delete_put",
+      "preset": "simple",
+      "ops": [
+        ["delete", "gamma"],
+        ["put", "gamma", "back"],
+        ["get", "gamma"],
+        ["compact"],
+        ["get", "gamma"]
+      ]
+    },
+    {
+      "name": "oracle_reopen_after_writes",
+      "preset": "overlap",
+      "ops": [
+        ["put", "k", "newer"],
+        ["delete", "z"],
+        ["flush"],
+        ["get", "k"],
+        ["get", "z"]
+      ],
+      "reopen": true,
+      "reopen_ops": [
+        ["get", "k"],
+        ["get", "z"],
+        ["scan", "", ""]
+      ]
+    }
+  ]
+}

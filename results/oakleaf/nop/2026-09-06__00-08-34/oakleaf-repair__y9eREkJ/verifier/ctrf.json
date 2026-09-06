@@ -1,0 +1,227 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-06T00:08:58.716686+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 14,
+            "passed": 3,
+            "failed": 11,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1788653338630,
+            "stop": 1788653338716
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_state.py::test_results_present",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788653338683,
+                "stop": 1788653338683,
+                "retries": 0,
+                "file_path": "test_state.py"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 7,
+                "start": 1788653338683,
+                "stop": 1788653338690,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'compact_drops_tomb'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: compact_drops_tomb: expected ['OK', 'NOTFOUND', 'yes'] got ['OK', '', 'yes']\nE       assert ['OK', '', 'yes'] == ['OK', 'NOTFOUND', 'yes']\nE         \nE         At index 1 diff: '' != 'NOTFOUND'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": 1788653338690,
+                "stop": 1788653338693,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'delete_after_flush'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: delete_after_flush: expected ['OK', 'NOTFOUND', '1'] got ['OK', '2', '1']\nE       assert ['OK', '2', '1'] == ['OK', 'NOTFOUND', '1']\nE         \nE         At index 1 diff: '2' != 'NOTFOUND'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338693,
+                "stop": 1788653338695,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'empty_put_is_live'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: empty_put_is_live: expected ['', 'OK', ''] got ['', 'OK', 'NOTFOUND']\nE       assert ['', 'OK', 'NOTFOUND'] == ['', 'OK', '']\nE         \nE         At index 2 diff: 'NOTFOUND' != ''\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338695,
+                "stop": 1788653338697,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'highbyte_order'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: highbyte_order: expected ['\\x7f=lo\\nhex:80=hi', 'hex:80=hi\\nhex:ff=top'] got ['EMPTY', '\\x7f=lo\\nhex:80=hi\\nhex:ff=top']\nE       assert ['EMPTY', '\\x...\\nhex:ff=top'] == ['\\x7f=lo\\nhe...\\nhex:ff=top']\nE         \nE         At index 0 diff: 'EMPTY' != '\\x7f=lo\\nhex:80=hi'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338697,
+                "stop": 1788653338699,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'highseq_wins'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: highseq_wins: expected ['king', 'ok'] got ['NOTFOUND', 'ok']\nE       assert ['NOTFOUND', 'ok'] == ['king', 'ok']\nE         \nE         At index 0 diff: 'NOTFOUND' != 'king'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": 1788653338699,
+                "stop": 1788653338702,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'oracle_reopen_after_writes'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: oracle_reopen_after_writes: expected ['OK', 'OK', 'OK', 'newer', 'NOTFOUND'] got ['OK', 'OK', 'OK', 'old', 'NOTFOUND']\nE       assert ['OK', 'OK', ...', 'NOTFOUND'] == ['OK', 'OK', ...', 'NOTFOUND']\nE         \nE         At index 3 diff: 'old' != 'newer'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338702,
+                "stop": 1788653338704,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'overlap_get'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: overlap_get: expected ['new', 'keep'] got ['old', 'keep']\nE       assert ['old', 'keep'] == ['new', 'keep']\nE         \nE         At index 0 diff: 'old' != 'new'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338704,
+                "stop": 1788653338706,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'put_delete_put'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: put_delete_put: expected ['OK', 'OK', 'back', 'OK', 'back'] got ['OK', 'OK', '3', 'OK', 'back']\nE       assert ['OK', 'OK', ... 'OK', 'back'] == ['OK', 'OK', ... 'OK', 'back']\nE         \nE         At index 2 diff: '3' != 'back'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788653338706,
+                "stop": 1788653338707,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338707,
+                "stop": 1788653338709,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'sample_scan_exclusive'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: sample_scan_exclusive: expected ['alpha=1\\nbeta=2', 'EMPTY'] got ['alpha=1\\nbeta=2\\ngamma=3', 'beta=2']\nE       assert ['alpha=1\\nbe...=3', 'beta=2'] == ['alpha=1\\nbeta=2', 'EMPTY']\nE         \nE         At index 0 diff: 'alpha=1\\nbeta=2\\ngamma=3' != 'alpha=1\\nbeta=2'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338709,
+                "stop": 1788653338711,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'tomb_get_and_scan'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: tomb_get_and_scan: expected ['NOTFOUND', 'yes', 'keep=yes'] got ['no', 'yes', 'keep=yes']\nE       assert ['no', 'yes', 'keep=yes'] == ['NOTFOUND', ...', 'keep=yes']\nE         \nE         At index 0 diff: 'no' != 'NOTFOUND'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788653338711,
+                "stop": 1788653338713,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ],
+                "trace": "name = 'update_then_flush_then_get'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_cli_matches(name: str) -> None:\n        assert name in RESULTS, f\"missing {name}\"\n>       assert RESULTS[name][\"lines\"] == EXPECTED[name][\"lines\"], (\n            f\"{name}: expected {EXPECTED[name]['lines']!r} got {RESULTS[name]['lines']!r}\"\n        )\nE       AssertionError: update_then_flush_then_get: expected ['OK', 'OK', '1b', 'alpha=1b'] got ['OK', 'OK', '1', 'alpha=1b\\nbeta=2']\nE       assert ['OK', 'OK', ...a=1b\\nbeta=2'] == ['OK', 'OK', '1b', 'alpha=1b']\nE         \nE         At index 2 diff: '1' != '1b'\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_oracle_reopen",
+                "status": "passed",
+                "duration": 2,
+                "start": 1788653338714,
+                "stop": 1788653338716,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['oracle_reopen_after_writes']"
+                ]
+            }
+        ]
+    }
+}
