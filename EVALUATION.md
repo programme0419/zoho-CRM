@@ -371,6 +371,10 @@ So the debug genre *with a complete written contract* is in the same bucket as t
 
 `gpt-5.6-sol` / `xhigh`, one `/run` (`2026-09-06__00-28-24`, trial `aR5EZNC`): **9/9 passed, reward 1.0**. This is the TB3 streaming-incident pattern (coupled watermark / inclusive-gap / merge / late-open bugs; sample is a false green). Sol read `design.md` and repaired the snapshot in one pass. Agents do **not** stop at the first symptom when the contract is written down and the engine is small.
 
+### Genre 7b: hardened `gap-session` (SDS1 + short instruction) — Codex solved it in 5m
+
+`gpt-5.6-sol` / `xhigh` (`2026-09-06__00-52-10`, trial `2CJTTpd`): **10/10 passed, reward 1.0**, wall time 5m04s. The on-call-style instruction and the BE `src_max` snapshot did not matter: Sol read `design.md` + `SNAP.md` and repaired both the sessionizer and the reader.
+
 ## Hiring-bar verdict (current)
 
 **Not met.** The requirement in README is: every completed `/run` trial reward `< 1`, and every `/cheat` trial reward `0`, for both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max. Crashes and rate limits do not count.
