@@ -116,8 +116,53 @@ def main() -> None:
         else:
             dump(dest, events)
         rows = expected(events, gap, lat)
-        baked.append({"name": name, "gap": gap, "lateness": lat, "file": dest.name if name != "sample" else "sample.jsonl", "expected": rows})
+        baked.append(
+            {
+                "name": name,
+                "gap": gap,
+                "lateness": lat,
+                "file": dest.name if name != "sample" else "sample.jsonl",
+                "expected": rows,
+            }
+        )
         print(name, "->", rows)
+
+    # Production snapshot: prefix written by the correct engine, then more events.
+    from pipeline.snap import write_snap  # noqa: E402
+
+    prefix = [
+        ev("slow", "k", 0, 1),
+        ev("fast", "k", 5, 1),
+    ]
+    rest = [
+        ev("fast", "k", 500, 1),
+        ev("slow", "k", 50, 5),
+    ]
+    eng = Engine(100, 0)
+    for e in prefix:
+        eng.ingest(e["src"], e["key"], e["ts"], e["val"])
+    snap_hid = TASK / "tests/snaps/resume.sds1"
+    snap_env = TASK / "environment/pipeline/samples/resume.sds1"
+    snap_hid.parent.mkdir(parents=True, exist_ok=True)
+    write_snap(snap_hid, eng.src_max, eng.open, eng.watermark())
+    snap_env.write_bytes(snap_hid.read_bytes())
+    dump(hid / "resume.jsonl", rest)
+    eng2 = Engine(100, 0)
+    eng2.load_snap(snap_hid)
+    for e in rest:
+        eng2.ingest(e["src"], e["key"], e["ts"], e["val"])
+    rows = eng2.finish()
+    baked.append(
+        {
+            "name": "resume",
+            "gap": 100,
+            "lateness": 0,
+            "file": "resume.jsonl",
+            "snap": "resume.sds1",
+            "expected": rows,
+        }
+    )
+    print("resume ->", rows)
 
     (TASK / "tests/expected.json").write_text(json.dumps({"cases": baked}, indent=2) + "\n")
     print("wrote expected")

@@ -1,0 +1,13 @@
+{
+    "jobs_dir": "results/gap-session/nop2",
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/gap-session"
+        }
+    ]
+}

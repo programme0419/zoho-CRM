@@ -1,0 +1,4 @@
+{"src": "a", "key": "u1", "ts": 0, "val": 1}
+{"src": "a", "key": "u2", "ts": 5, "val": 3}
+{"src": "a", "key": "u1", "ts": 20, "val": 2}
+{"src": "a", "key": "u1", "ts": 300, "val": 4}

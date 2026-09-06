@@ -20,8 +20,11 @@ source. `key` is the session key. `val` is a signed integer contribution.
 CLI:
 
 ```
-python -m pipeline --events IN.jsonl --gap G --lateness L --output OUT.jsonl
+python -m pipeline --events IN.jsonl --gap G --lateness L --output OUT.jsonl [--snap SNAP]
 ```
+
+`--snap` restores a production SDS1 file (see `SNAP.md`) before ingesting `IN.jsonl`.
+Production snapshots must open; a self-roundtrip that cannot read house files is wrong.
 
 `G` and `L` are milliseconds. Both are non-negative integers.
 

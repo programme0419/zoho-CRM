@@ -20,6 +20,9 @@ cp /tests/expected.json /tmp/grade-in/expected.json
 cp /tests/runner.py /tmp/grade-in/runner.py
 cp /tests/invoke.py /tmp/grade-in/invoke.py
 cp -a /tests/streams /tmp/grade-in/streams
+if [ -d /tests/snaps ]; then
+  cp -a /tests/snaps /tmp/grade-in/snaps
+fi
 
 chmod 700 /tests
 chmod -R a+rX /tmp/grade /tmp/grade-in
