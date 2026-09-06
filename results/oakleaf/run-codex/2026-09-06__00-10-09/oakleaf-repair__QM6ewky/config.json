@@ -1,0 +1,21 @@
+{
+    "task": {
+        "path": "tasks/oakleaf-repair"
+    },
+    "trial_name": "oakleaf-repair__QM6ewky",
+    "trials_dir": "results/oakleaf/run-codex/2026-09-06__00-10-09",
+    "agent": {
+        "name": "codex",
+        "model_name": "openai/gpt-5.6-sol",
+        "kwargs": {
+            "reasoning_effort": "xhigh"
+        }
+    },
+    "environment": {
+        "type": "docker",
+        "extra_docker_compose": [
+            "scripts/docker-compose.bridge.yaml"
+        ]
+    },
+    "job_id": "795beee0-e14a-44bf-93a4-763f8fc2c8bc"
+}

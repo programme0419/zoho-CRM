@@ -1,0 +1,14 @@
+{
+    "job_name": "2026-09-06__00-26-49",
+    "jobs_dir": "results/gap-session/nop",
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/gap-session"
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-06T00:27:08.920912+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 2,
+            "failed": 7,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1788654428854,
+            "stop": 1788654428920
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_state.py::test_results_present",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654428901,
+                "stop": 1788654428901,
+                "retries": 0,
+                "file_path": "test_state.py"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 7,
+                "start": 1788654428901,
+                "stop": 1788654428908,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'combo'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: combo: expected [{'key': 'a', 'start': 0, 'last': 100, 'count': 3, 'total': 4}, {'key': 'a', 'start': 250, 'last': 250, 'count': 1, 'total': 5}, {'key': 'a', 'start': 400, 'last': 400, 'count': 1, 'total': 4}, {'key': 'b', 'start': 50, 'last': 50, 'count': 1, 'total': 3}] got [{'key': 'a', 'start': 0, 'last': 100, 'count': 2, 'total': 2}, {'key': 'a', 'start': 250, 'last': 250, 'count': 1, 'total': 5}, {'key': 'a', 'start': 400, 'last': 400, 'count': 1, 'total': 4}, {'key': 'b', 'start': 50, 'last': 50, 'count': 1, 'total': 3}]\nE       assert [{'key': 'a',...unt': 1, ...}] == [{'key': 'a',...unt': 1, ...}]\nE         \nE         At index 0 diff: {'key': 'a', 'start': 0, 'last': 100, 'count': 2, 'total': 2} != {'key': 'a', 'start': 0, 'last': 100, 'count': 3, 'total': 4}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788654428908,
+                "stop": 1788654428910,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'emit_eq'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: emit_eq: expected [{'key': 'k', 'start': 0, 'last': 110, 'count': 3, 'total': 3}, {'key': 'z', 'start': 110, 'last': 110, 'count': 1, 'total': 1}] got [{'key': 'k', 'start': 0, 'last': 10, 'count': 2, 'total': 2}, {'key': 'k', 'start': 110, 'last': 110, 'count': 1, 'total': 1}, {'key': 'z', 'start': 110, 'last': 110, 'count': 1, 'total': 1}]\nE       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 1, ...}]\nE         \nE         At index 0 diff: {'key': 'k', 'start': 0, 'last': 10, 'count': 2, 'total': 2} != {'key': 'k', 'start': 0, 'last': 110, 'count': 3, 'total': 3}\nE         Left contains one more item: {'key': 'z', 'start': 110, 'last': 110, 'count': 1, ...}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788654428910,
+                "stop": 1788654428912,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'exact_gap'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: exact_gap: expected [{'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 3}, {'key': 'k', 'start': 201, 'last': 201, 'count': 1, 'total': 3}] got [{'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 2}, {'key': 'k', 'start': 201, 'last': 201, 'count': 1, 'total': 3}]\nE       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 1, ...}]\nE         \nE         At index 0 diff: {'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 2} != {'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 3}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788654428912,
+                "stop": 1788654428914,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'late_drop'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: late_drop: expected [{'key': 'k', 'start': 0, 'last': 0, 'count': 1, 'total': 1}, {'key': 'k', 'start': 480, 'last': 500, 'count': 2, 'total': 2}] got [{'key': 'k', 'start': 0, 'last': 0, 'count': 1, 'total': 1}, {'key': 'k', 'start': 480, 'last': 500, 'count': 2, 'total': 2}, {'key': 'orphan', 'start': 10, 'last': 10, 'count': 1, 'total': 9}]\nE       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 2, ...}]\nE         \nE         Left contains one more item: {'key': 'orphan', 'start': 10, 'last': 10, 'count': 1, ...}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788654428914,
+                "stop": 1788654428916,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'merge_bridge'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: merge_bridge: expected [{'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 47}] got [{'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 27}]\nE       assert [{'key': 'k',...unt': 5, ...}] == [{'key': 'k',...unt': 5, ...}]\nE         \nE         At index 0 diff: {'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 27} != {'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 47}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788654428916,
+                "stop": 1788654428918,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'same_ts'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: same_ts: expected [{'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 6}] got [{'key': 'k', 'start': 0, 'last': 50, 'count': 2, 'total': 4}]\nE       assert [{'key': 'k',...unt': 2, ...}] == [{'key': 'k',...unt': 3, ...}]\nE         \nE         At index 0 diff: {'key': 'k', 'start': 0, 'last': 50, 'count': 2, 'total': 4} != {'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 6}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654428918,
+                "stop": 1788654428918,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_stream",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2,
+                "start": 1788654428918,
+                "stop": 1788654428920,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['combo', 'emit_eq', 'exact_gap', 'late_drop', 'merge_bridge', 'same_ts', 'sample', 'two_sources']"
+                ],
+                "trace": "name = 'two_sources'\n\n    @pytest.mark.parametrize(\"name\", sorted(EXPECTED))\n    def test_stream(name: str) -> None:\n        assert name in RESULTS\n        r = RESULTS[name]\n        assert r[\"rc\"] == 0, f\"{name} cli failed: {r.get('err')}\"\n        got = _norm(r[\"rows\"])\n        exp = _norm(EXPECTED[name][\"expected\"])\n>       assert got == exp, f\"{name}: expected {exp!r} got {got!r}\"\nE       AssertionError: two_sources: expected [{'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 7}, {'key': 'k', 'start': 500, 'last': 500, 'count': 1, 'total': 1}] got [{'key': 'k', 'start': 0, 'last': 5, 'count': 2, 'total': 2}, {'key': 'k', 'start': 50, 'last': 50, 'count': 1, 'total': 5}, {'key': 'k', 'start': 500, 'last': 500, 'count': 1, 'total': 1}]\nE       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 1, ...}]\nE         \nE         At index 0 diff: {'key': 'k', 'start': 0, 'last': 5, 'count': 2, 'total': 2} != {'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 7}\nE         Left contains one more item: {'key': 'k', 'start': 500, 'last': 500, 'count': 1, ...}\nE         Use -v to get more diff\n\ntests/test_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

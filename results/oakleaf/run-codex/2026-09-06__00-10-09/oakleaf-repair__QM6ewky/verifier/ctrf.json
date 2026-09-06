@@ -1,0 +1,194 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-09-06T00:20:53.971041+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 14,
+            "passed": 14,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1788654053908,
+            "stop": 1788654053970
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_state.py::test_results_present",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053962,
+                "stop": 1788654053962,
+                "retries": 0,
+                "file_path": "test_state.py"
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053963,
+                "stop": 1788654053963,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053963,
+                "stop": 1788654053963,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053964,
+                "stop": 1788654053964,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053964,
+                "stop": 1788654053964,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654053964,
+                "stop": 1788654053965,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053965,
+                "stop": 1788654053965,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654053965,
+                "stop": 1788654053966,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053966,
+                "stop": 1788654053966,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654053966,
+                "stop": 1788654053967,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053967,
+                "stop": 1788654053967,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 0,
+                "start": 1788654053967,
+                "stop": 1788654053967,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_cli_matches",
+                "status": "passed",
+                "duration": 1,
+                "start": 1788654053967,
+                "stop": 1788654053968,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['compact_drops_tomb', 'delete_after_flush', 'empty_put_is_live', 'highbyte_order', 'highseq_wins', 'oracle_reopen_after_writes', 'overlap_get', 'put_delete_put', 'sample_get', 'sample_scan_exclusive', 'tomb_get_and_scan', 'update_then_flush_then_get']"
+                ]
+            },
+            {
+                "name": "test_state.py::test_oracle_reopen",
+                "status": "passed",
+                "duration": 2,
+                "start": 1788654053968,
+                "stop": 1788654053970,
+                "retries": 0,
+                "file_path": "test_state.py",
+                "tags": [
+                    "parametrize::name::['oracle_reopen_after_writes']"
+                ]
+            }
+        ]
+    }
+}

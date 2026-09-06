@@ -1,0 +1,5 @@
+{"src": "a", "key": "k", "ts": 0, "val": 10}
+{"src": "a", "key": "k", "ts": 10, "val": 10}
+{"src": "a", "key": "k", "ts": 200, "val": 10}
+{"src": "a", "key": "k", "ts": 210, "val": 10}
+{"src": "a", "key": "k", "ts": 105, "val": 7}

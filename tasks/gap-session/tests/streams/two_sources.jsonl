@@ -1,0 +1,4 @@
+{"src": "slow", "key": "k", "ts": 0, "val": 1}
+{"src": "fast", "key": "k", "ts": 5, "val": 1}
+{"src": "fast", "key": "k", "ts": 500, "val": 1}
+{"src": "slow", "key": "k", "ts": 50, "val": 5}

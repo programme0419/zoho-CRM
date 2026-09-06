@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "tasks/gap-session"
+    },
+    "trial_name": "gap-session__N56ArgW",
+    "trials_dir": "results/gap-session/nop/2026-09-06__00-26-49",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "7cd162ca-c4a0-4b1e-b2bc-f3f29b72e23a"
+}

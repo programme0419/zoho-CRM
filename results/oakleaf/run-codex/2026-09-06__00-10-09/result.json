@@ -1,0 +1,39 @@
+{
+    "id": "795beee0-e14a-44bf-93a4-763f8fc2c8bc",
+    "started_at": "2026-09-06T00:10:09.363007",
+    "updated_at": "2026-09-06T00:21:04.701778",
+    "finished_at": "2026-09-06T00:21:04.701778",
+    "n_total_trials": 1,
+    "stats": {
+        "n_completed_trials": 1,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "codex__gpt-5.6-sol__adhoc": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 1.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "oakleaf-repair__QM6ewky"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": 859103,
+        "n_cache_tokens": 796146,
+        "n_output_tokens": 34410,
+        "cost_usd": 1.3213773999999998
+    }
+}

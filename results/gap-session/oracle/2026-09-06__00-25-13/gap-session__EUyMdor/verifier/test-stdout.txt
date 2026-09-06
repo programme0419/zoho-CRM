@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected 9 items
+
+tests/test_state.py .........                                            [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_state.py::test_results_present
+PASSED tests/test_state.py::test_stream[combo]
+PASSED tests/test_state.py::test_stream[emit_eq]
+PASSED tests/test_state.py::test_stream[exact_gap]
+PASSED tests/test_state.py::test_stream[late_drop]
+PASSED tests/test_state.py::test_stream[merge_bridge]
+PASSED tests/test_state.py::test_stream[same_ts]
+PASSED tests/test_state.py::test_stream[sample]
+PASSED tests/test_state.py::test_stream[two_sources]
+============================== 9 passed in 0.05s ===============================

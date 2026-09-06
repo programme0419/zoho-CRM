@@ -1,0 +1,156 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected 9 items
+
+tests/test_state.py .FFFFFF.F                                            [100%]
+
+=================================== FAILURES ===================================
+______________________________ test_stream[combo] ______________________________
+
+name = 'combo'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: combo: expected [{'key': 'a', 'start': 0, 'last': 100, 'count': 3, 'total': 4}, {'key': 'a', 'start': 250, 'last': 250, 'count': 1, 'total': 5}, {'key': 'a', 'start': 400, 'last': 400, 'count': 1, 'total': 4}, {'key': 'b', 'start': 50, 'last': 50, 'count': 1, 'total': 3}] got [{'key': 'a', 'start': 0, 'last': 100, 'count': 2, 'total': 2}, {'key': 'a', 'start': 250, 'last': 250, 'count': 1, 'total': 5}, {'key': 'a', 'start': 400, 'last': 400, 'count': 1, 'total': 4}, {'key': 'b', 'start': 50, 'last': 50, 'count': 1, 'total': 3}]
+E       assert [{'key': 'a',...unt': 1, ...}] == [{'key': 'a',...unt': 1, ...}]
+E         
+E         At index 0 diff: {'key': 'a', 'start': 0, 'last': 100, 'count': 2, 'total': 2} != {'key': 'a', 'start': 0, 'last': 100, 'count': 3, 'total': 4}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+_____________________________ test_stream[emit_eq] _____________________________
+
+name = 'emit_eq'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: emit_eq: expected [{'key': 'k', 'start': 0, 'last': 110, 'count': 3, 'total': 3}, {'key': 'z', 'start': 110, 'last': 110, 'count': 1, 'total': 1}] got [{'key': 'k', 'start': 0, 'last': 10, 'count': 2, 'total': 2}, {'key': 'k', 'start': 110, 'last': 110, 'count': 1, 'total': 1}, {'key': 'z', 'start': 110, 'last': 110, 'count': 1, 'total': 1}]
+E       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 1, ...}]
+E         
+E         At index 0 diff: {'key': 'k', 'start': 0, 'last': 10, 'count': 2, 'total': 2} != {'key': 'k', 'start': 0, 'last': 110, 'count': 3, 'total': 3}
+E         Left contains one more item: {'key': 'z', 'start': 110, 'last': 110, 'count': 1, ...}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+____________________________ test_stream[exact_gap] ____________________________
+
+name = 'exact_gap'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: exact_gap: expected [{'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 3}, {'key': 'k', 'start': 201, 'last': 201, 'count': 1, 'total': 3}] got [{'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 2}, {'key': 'k', 'start': 201, 'last': 201, 'count': 1, 'total': 3}]
+E       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 1, ...}]
+E         
+E         At index 0 diff: {'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 2} != {'key': 'k', 'start': 0, 'last': 100, 'count': 2, 'total': 3}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+____________________________ test_stream[late_drop] ____________________________
+
+name = 'late_drop'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: late_drop: expected [{'key': 'k', 'start': 0, 'last': 0, 'count': 1, 'total': 1}, {'key': 'k', 'start': 480, 'last': 500, 'count': 2, 'total': 2}] got [{'key': 'k', 'start': 0, 'last': 0, 'count': 1, 'total': 1}, {'key': 'k', 'start': 480, 'last': 500, 'count': 2, 'total': 2}, {'key': 'orphan', 'start': 10, 'last': 10, 'count': 1, 'total': 9}]
+E       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 2, ...}]
+E         
+E         Left contains one more item: {'key': 'orphan', 'start': 10, 'last': 10, 'count': 1, ...}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+__________________________ test_stream[merge_bridge] ___________________________
+
+name = 'merge_bridge'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: merge_bridge: expected [{'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 47}] got [{'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 27}]
+E       assert [{'key': 'k',...unt': 5, ...}] == [{'key': 'k',...unt': 5, ...}]
+E         
+E         At index 0 diff: {'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 27} != {'key': 'k', 'start': 0, 'last': 210, 'count': 5, 'total': 47}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+_____________________________ test_stream[same_ts] _____________________________
+
+name = 'same_ts'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: same_ts: expected [{'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 6}] got [{'key': 'k', 'start': 0, 'last': 50, 'count': 2, 'total': 4}]
+E       assert [{'key': 'k',...unt': 2, ...}] == [{'key': 'k',...unt': 3, ...}]
+E         
+E         At index 0 diff: {'key': 'k', 'start': 0, 'last': 50, 'count': 2, 'total': 4} != {'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 6}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+___________________________ test_stream[two_sources] ___________________________
+
+name = 'two_sources'
+
+    @pytest.mark.parametrize("name", sorted(EXPECTED))
+    def test_stream(name: str) -> None:
+        assert name in RESULTS
+        r = RESULTS[name]
+        assert r["rc"] == 0, f"{name} cli failed: {r.get('err')}"
+        got = _norm(r["rows"])
+        exp = _norm(EXPECTED[name]["expected"])
+>       assert got == exp, f"{name}: expected {exp!r} got {got!r}"
+E       AssertionError: two_sources: expected [{'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 7}, {'key': 'k', 'start': 500, 'last': 500, 'count': 1, 'total': 1}] got [{'key': 'k', 'start': 0, 'last': 5, 'count': 2, 'total': 2}, {'key': 'k', 'start': 50, 'last': 50, 'count': 1, 'total': 5}, {'key': 'k', 'start': 500, 'last': 500, 'count': 1, 'total': 1}]
+E       assert [{'key': 'k',...unt': 1, ...}] == [{'key': 'k',...unt': 1, ...}]
+E         
+E         At index 0 diff: {'key': 'k', 'start': 0, 'last': 5, 'count': 2, 'total': 2} != {'key': 'k', 'start': 0, 'last': 50, 'count': 3, 'total': 7}
+E         Left contains one more item: {'key': 'k', 'start': 500, 'last': 500, 'count': 1, ...}
+E         Use -v to get more diff
+
+tests/test_state.py:38: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_state.py::test_results_present
+PASSED tests/test_state.py::test_stream[sample]
+FAILED tests/test_state.py::test_stream[combo] - AssertionError: combo: expec...
+FAILED tests/test_state.py::test_stream[emit_eq] - AssertionError: emit_eq: e...
+FAILED tests/test_state.py::test_stream[exact_gap] - AssertionError: exact_ga...
+FAILED tests/test_state.py::test_stream[late_drop] - AssertionError: late_dro...
+FAILED tests/test_state.py::test_stream[merge_bridge] - AssertionError: merge...
+FAILED tests/test_state.py::test_stream[same_ts] - AssertionError: same_ts: e...
+FAILED tests/test_state.py::test_stream[two_sources] - AssertionError: two_so...
+========================= 7 failed, 2 passed in 0.07s ==========================

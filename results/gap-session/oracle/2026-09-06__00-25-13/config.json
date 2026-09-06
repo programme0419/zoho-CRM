@@ -1,0 +1,8 @@
+{
+    "jobs_dir": "results/gap-session/oracle",
+    "tasks": [
+        {
+            "path": "tasks/gap-session"
+        }
+    ]
+}

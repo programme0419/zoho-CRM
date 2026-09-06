@@ -1,0 +1,6 @@
+{"src": "s1", "key": "a", "ts": 0, "val": 1}
+{"src": "s1", "key": "a", "ts": 0, "val": 1}
+{"src": "s2", "key": "a", "ts": 100, "val": 2}
+{"src": "s1", "key": "b", "ts": 50, "val": 3}
+{"src": "s2", "key": "a", "ts": 400, "val": 4}
+{"src": "s1", "key": "a", "ts": 250, "val": 5}
