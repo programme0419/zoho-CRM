@@ -6,16 +6,19 @@ This repository is a self-contained submission. It is not a PR to the Terminal-B
 
 ## Task
 
-Path: [`tasks/scan-margin`](tasks/scan-margin)
+Latest: [`tasks/nds-desk`](tasks/nds-desk) — repair a house settlement / accrual desk (HOL1 packs, tenors, IMM, day-count, schedules). Hidden verifier books; smoke tape is a false green.
 
-The agent is dropped into `/app/hsm` with a methodology, an HSMJ journal spec, schemas, market/config data, one sample tape, and a starter that already margins that v1 sample. The starter is a v1-only blotter plus a futures-only scanner. A correct engine has to decode production journals and implement the 16-scenario array, house overlays, and FX conversion — in that order.
+Earlier tasks in this repo: [`tasks/scan-margin`](tasks/scan-margin), [`tasks/refcalc-clone`](tasks/refcalc-clone), [`tasks/oakleaf-repair`](tasks/oakleaf-repair), [`tasks/gap-session`](tasks/gap-session).
 
-The verifier never grades the sample book alone. After the agent finishes, a separate verifier container runs the submitted CLI as `nobody` on the sample tape plus sixteen hidden HSMJ books and compares each report to an independent oracle.
+For `nds-desk` the agent is dropped into `/app/nds` with `HANDBOOK.md`, `HOLSPEC.md`, `ERRATA.md`, production holiday packs, and a shipping snapshot that already runs a weekday smoke batch. A correct engine has to honour 0-origin HOL1 months, intersecting joined calendars, settlement-day ON/TN/SN, third-Wednesday IMM, EOM month-add, H30, half-away rounding, and unadjusted schedule accrual.
+
+The verifier never grades the smoke batch alone. After the agent finishes, a separate verifier container runs the submitted CLI as `nobody` on twelve hidden books.
 
 ## Layout
 
 ```
-tasks/scan-margin/
+tasks/nds-desk/             # latest (settlement desk)
+tasks/scan-margin/          # HSM margin engine
   instruction.md
   task.toml
   README.md                 # reviewer-facing explanations
@@ -45,15 +48,15 @@ Nested-container hosts (overlay-on-overlay) should run the daemon with `"storage
 ### Static checks (CI)
 
 ```bash
-bash scripts/run_static_checks.sh tasks/scan-margin
+bash scripts/run_static_checks.sh tasks/nds-desk
 ```
 
 ### Oracle and nop (CI validation)
 
 ```bash
 export DOCKER_BUILDKIT=0
-harbor run -p tasks/scan-margin --agent oracle --env docker --yes -o results/oracle
-harbor run -p tasks/scan-margin --agent nop    --env docker --yes -o results/nop
+TASK=tasks/nds-desk bash scripts/run_trials.sh oracle
+TASK=tasks/nds-desk bash scripts/run_trials.sh nop
 ```
 
 Oracle must report reward `1.0`. Nop must report reward `0.0`.

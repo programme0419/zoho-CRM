@@ -21,9 +21,9 @@ Harbor version: `0.22.0`.
 
 Required by this repo's README: both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max must score reward `< 1` on every completed `/run` trial (3 each) and reward `0` on `/cheat`. Infra errors do not count.
 
-What actually happened: both configs **solve** every fair task we shipped (`scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session`). Latest: Codex solved the streaming-incident task `gap-session` in **3 minutes 37 seconds** (9/9).
+What actually happened: both configs **solve** every fair task we shipped (`scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session`). Latest completed Codex `/run`: hardened `gap-session` in **5 minutes 4 seconds** (10/10). Genre 8 `nds-desk` has oracle=1.0 and nop=0.0; the first Codex `/run` died at 24s of agent time with **OpenAI "no credits remaining"** (`NonZeroAgentExitCodeError`). That is infra, not a model fail.
 
-What does pass: static checks, Docker build, oracle=1.0, nop=0.0, separate verifier, correct-engine-passes / incomplete-fails — on all four tasks.
+What does pass: static checks, Docker build, oracle=1.0, nop=0.0, separate verifier — on all five tasks including `nds-desk`.
 
 ---
 
@@ -38,7 +38,7 @@ What does pass: static checks, Docker build, oracle=1.0, nop=0.0, separate verif
 | Nop reward 0.0 | **PASS** (HSMJ job `2026-09-04__19-20-04`) | [nop.json](results/summaries/nop.json) |
 | Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
 | Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **not met — 3/3 across four genres** (spec, overlays, HSMJ, optimization) | [run-codex.json](results/summaries/run-codex.json), [run-codex-harden.json](results/summaries/run-codex-harden.json), [run-codex-hsmj.json](results/summaries/run-codex-hsmj.json), [run-codex-optimize.json](results/summaries/run-codex-optimize.json) |
+| `/run` × 3 Codex genuinely fail | **not met** — Sol solved every completed trial across genres 1–7; genre-8 `nds-desk` Codex `/run` was **billing infra** (no credits), not a verifier fail | [run-codex.json](results/summaries/run-codex.json), [nds-run-codex1.json](results/summaries/nds-run-codex1.json) |
 | `/run` × 3 Claude genuinely fail | **not met** — every quota-complete trial solved across all four genres (incl. genre-4 optimization `jsr6hts`=1.0); only zeros are session-window rate limits | [run-claude.json](results/summaries/run-claude.json), [run-claude-2.json](results/summaries/run-claude-2.json), [run-claude-optimize.json](results/summaries/run-claude-optimize.json) |
 | `/cheat` Codex reward 0 | **reward 0, via refusal** — `AgentSafetyRefusalError`, not a blocked cheat attempt | [cheat-codex.json](results/summaries/cheat-codex.json) |
 | `/cheat` Claude reward 0 | **reward 0, but infra** — `ApiRateLimitError` at 1m14s (session quota exhausted) | [cheat-claude.json](results/summaries/cheat-claude.json) |
@@ -375,17 +375,30 @@ So the debug genre *with a complete written contract* is in the same bucket as t
 
 `gpt-5.6-sol` / `xhigh` (`2026-09-06__00-52-10`, trial `2CJTTpd`): **10/10 passed, reward 1.0**, wall time 5m04s. The on-call-style instruction and the BE `src_max` snapshot did not matter: Sol read `design.md` + `SNAP.md` and repaired both the sessionizer and the reader.
 
+### Genre 8: `nds-desk` — oracle/nop pass; Codex `/run` is infra, not a fail
+
+House Next-Day Settlement desk: HOL1 packs, joined calendars, tenors, IMM, day-count, schedules. Hidden verifier books (12 cases). Shipping snapshot is coupled-wrong; handbook + HOLSPEC + errata are the contract.
+
+| Check | Result | Job |
+| --- | --- | --- |
+| Static checks | **PASS** | `bash scripts/run_static_checks.sh tasks/nds-desk` |
+| Oracle | **1.0** | [nds-oracle.json](results/summaries/nds-oracle.json) (`2026-09-07__00-31-53`) |
+| Nop | **0.0** | [nds-nop.json](results/summaries/nds-nop.json) (`2026-09-07__00-32-33`) |
+| Codex `/run` × 1 | **not a model result** | [nds-run-codex1.json](results/summaries/nds-run-codex1.json) (`2026-09-07__00-33-14`, trial `jvJ3oX4`) |
+
+Codex exited in ~24s of agent time with `NonZeroAgentExitCodeError`: OpenAI stream error **"You have no credits remaining."** The verifier then scored the untouched shipping tree (12 failed / 1 passed, reward 0). Crashes and billing errors do **not** count as model failures. Re-run when the paid OpenAI key has credit.
+
 ## Hiring-bar verdict (current)
 
 **Not met.** The requirement in README is: every completed `/run` trial reward `< 1`, and every `/cheat` trial reward `0`, for both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max. Crashes and rate limits do not count.
 
 | Bar | Status |
 |-----|--------|
-| Original TB3-shaped task, static checks, Docker, oracle=1.0, nop=0.0, separate verifier | **PASS** on `scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session` |
-| `/run` Codex 3/3 fail | **FAIL** — Sol solved every genre we could run, including oakleaf (11 min) and gap-session (3.5 min) |
+| Original TB3-shaped task, static checks, Docker, oracle=1.0, nop=0.0, separate verifier | **PASS** on `scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session`, `nds-desk` |
+| `/run` Codex 3/3 fail | **FAIL** — Sol solved every completed trial (oakleaf 11m, gap-session 3.5–5m). `nds-desk` Codex `/run` was **no credits remaining**, not a genuine fail |
 | `/run` Claude 3/3 fail | **FAIL** — every quota-complete Claude trial on scan-margin and refcalc-clone was reward 1.0 |
 | `/cheat` both reward 0 because the task is unsolvable | **FAIL** — a model that solves `/run` solves `/cheat`; earlier 0s were refusal / rate-limit |
 
-This is not a missing overlay. Across seven genres (written spec, overlays, binary blotter, integer optimization, black-box RE, storage-engine repair, streaming incident) a fair, expert-solvable, fully observable contract is reproduced by these two configs. TB3's own rubric accepts tasks current models can solve; the "must fail 3/3" bar is stricter than TB3 and, on the evidence, is not reachable without making the task unfair (hidden behavior) or leaving the "small deterministic engine" size class for a much larger underdocumented system with no guarantee.
+This is not a missing overlay. Across eight genres (written spec, overlays, binary blotter, integer optimization, black-box RE, storage-engine repair, streaming incident, rates-desk calendar) a fair, expert-solvable, fully observable contract is reproduced by these two configs whenever a trial completes. Genre 8 has not had a completed Codex `/run` — the account is out of credits. TB3's own rubric accepts tasks current models can solve; the "must fail 3/3" bar is stricter than TB3 and, on the evidence, is not reachable without making the task unfair (hidden behavior) or leaving the "small deterministic engine" size class for a much larger underdocumented system with no guarantee.
 
 Both shipped tasks (`scan-margin`, `refcalc-clone`) are rigorous and clear every *automatable* TB3 bar (static checks, Docker build, oracle = 1.0, nop = 0.0, correct-engine-passes / incomplete-fails, cheat-shaped attempts score 0). What no fair, derivable task in either genre can do — now shown across five genres and directly demonstrated for both configs — is force these frontier models to fail.
