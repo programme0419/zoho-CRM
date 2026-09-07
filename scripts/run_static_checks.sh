@@ -3,7 +3,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-TASK="${1:-tasks/scan-margin}"
+TASK="${1:-tasks/nds-desk}"
 FAILED=0
 for check in "$ROOT"/scripts/checks/check-*.sh; do
   echo "===== $(basename "$check") ====="

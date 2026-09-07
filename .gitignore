@@ -11,3 +11,7 @@ results/summaries/local-verifier/*/output/
 
 scratch/
 .secrets/
+
+results/nds-desk/
+results/**/sessions/
+*.key

@@ -1,5 +1,11 @@
 # NDS desk — Terminal-Bench 3 task
 
+**This is the submission repo.** Send reviewers this GitHub URL:
+
+https://github.com/programme0419/Klavis-test
+
+Task path: [`tasks/nds-desk`](tasks/nds-desk). Harbor scan will see only that task.
+
 Original Terminal-Bench 3 task: repair a **house Next-Day Settlement (NDS) desk** — calendars, tenors, IMM dates, day-count conventions, and coupon schedules. The shipping snapshot already runs a weekday smoke batch. The contract is the handbook, not the comments in the Python tree.
 
 This repository is a self-contained submission. It is not a PR to the Terminal-Bench project.
@@ -33,6 +39,7 @@ scripts/run_static_checks.sh
 scripts/run_trials.sh
 scripts/nds/                # local verifier + mechanical rubric
 results/summaries/
+archive/                    # earlier drafts, not the submission
 ```
 
 ## Run locally

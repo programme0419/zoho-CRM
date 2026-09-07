@@ -14,7 +14,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-0}"
-TASK="${TASK:-tasks/scan-margin}"
+TASK="${TASK:-tasks/nds-desk}"
 OUT="${OUT:-$ROOT/results}"
 
 # Nested Docker here: Harbor's default Compose network cannot NAT IPv4.

@@ -21,7 +21,7 @@ Harbor version: `0.22.0`.
 
 TB3 / Klavis CI runs `/run` and `/cheat` on the evaluator side with subscription login (`codex login`, `claude setup-token`) and Modal, per [`docs/harbor-run-defaults.yml`](docs/harbor-run-defaults.yml). The author delivers a task that passes static checks, oracle=1.0, nop=0.0, separate verifier, and “correct engine = 1 / incomplete = 0”.
 
-Submission task: [`tasks/nds-desk`](tasks/nds-desk).
+**Submit this repo:** https://github.com/programme0419/Klavis-test — task [`tasks/nds-desk`](tasks/nds-desk). Earlier drafts are under `archive/` and are not part of the submission.
 
 | Author check | Status | Evidence |
 | --- | --- | --- |
