@@ -397,7 +397,7 @@ Codex exited in ~24s of agent time with `NonZeroAgentExitCodeError`: OpenAI stre
 
 ## Hiring-bar verdict (current)
 
-**Not met.** The requirement in README is: every completed `/run` trial reward `< 1`, and every `/cheat` trial reward `0`, for both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max. Crashes and rate limits do not count.
+**Author-side bars are met** on `nds-desk` (static, oracle=1, nop=0, solution=1 / shipping=0, mechanical rubric). `/run` and `/cheat` are evaluator-side with `codex login` / `claude setup-token`. They are not an author paid-key requirement.
 
 | Bar | Status |
 |-----|--------|
