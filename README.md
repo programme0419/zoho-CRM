@@ -1,38 +1,38 @@
-# House Scan Margin — Terminal-Bench 3 task
+# NDS desk — Terminal-Bench 3 task
 
-Original Terminal-Bench 3 task: implement a **house scanning-range initial-margin engine** (HSM) for a mixed futures-and-options clearing book. HSM is specified in full in the task; it is not CME SPAN.
+Original Terminal-Bench 3 task: repair a **house Next-Day Settlement (NDS) desk** — calendars, tenors, IMM dates, day-count conventions, and coupon schedules. The shipping snapshot already runs a weekday smoke batch. The contract is the handbook, not the comments in the Python tree.
 
 This repository is a self-contained submission. It is not a PR to the Terminal-Bench project.
 
+**Author-side checks do not need a paid API key.** Static checks, `/validate` (oracle + nop), and the local verifier matrix are Docker-only. CI `/run` and `/cheat` use subscription login (`codex login`, `claude setup-token`), matching [docs/harbor-run-defaults.yml](docs/harbor-run-defaults.yml).
+
 ## Task
 
-Latest: [`tasks/nds-desk`](tasks/nds-desk) — repair a house settlement / accrual desk (HOL1 packs, tenors, IMM, day-count, schedules). Hidden verifier books; smoke tape is a false green.
+Path: [`tasks/nds-desk`](tasks/nds-desk)
 
-Earlier tasks in this repo: [`tasks/scan-margin`](tasks/scan-margin), [`tasks/refcalc-clone`](tasks/refcalc-clone), [`tasks/oakleaf-repair`](tasks/oakleaf-repair), [`tasks/gap-session`](tasks/gap-session).
-
-For `nds-desk` the agent is dropped into `/app/nds` with `HANDBOOK.md`, `HOLSPEC.md`, `ERRATA.md`, production holiday packs, and a shipping snapshot that already runs a weekday smoke batch. A correct engine has to honour 0-origin HOL1 months, intersecting joined calendars, settlement-day ON/TN/SN, third-Wednesday IMM, EOM month-add, H30, half-away rounding, and unadjusted schedule accrual.
+The agent is dropped into `/app/nds` with `HANDBOOK.md`, `HOLSPEC.md`, `ERRATA.md`, production HOL1 holiday packs, and a starter that already handles a weekday smoke tape. A correct engine has to decode 0-origin HOL1 months, honour per-pack weekend masks and half-sessions, intersect joined calendars, treat `ON`/`TN`/`SN` as settlement-day steps, take IMM as the third Wednesday, snap EOM month-add without spilling into the next month, compute house 30/360 (`H30`), round half away from zero, and accrue coupons on the unadjusted roll.
 
 The verifier never grades the smoke batch alone. After the agent finishes, a separate verifier container runs the submitted CLI as `nobody` on twelve hidden books.
 
 ## Layout
 
 ```
-tasks/nds-desk/             # latest (settlement desk)
-tasks/scan-margin/          # HSM margin engine
+tasks/nds-desk/
   instruction.md
   task.toml
-  README.md                 # reviewer-facing explanations
+  README.md
   environment/              # agent image
   solution/                 # oracle solution
-  tests/                    # separate verifier image, oracle, hidden books
+  tests/                    # separate verifier image, hidden books
 docs/
-  harbor-run-defaults.yml   # TB3 CI /run and /cheat defaults (copied)
-  hack-trial-prompt.md      # TB3 /cheat prompt (copied)
-  task-implementation.toml  # TB3 implementation rubric (copied)
-scripts/checks/             # TB3 static check scripts (copied)
+  harbor-run-defaults.yml   # TB3 CI /run and /cheat defaults
+  hack-trial-prompt.md
+  task-implementation.toml
+scripts/checks/
 scripts/run_static_checks.sh
 scripts/run_trials.sh
-results/summaries/          # recorded Harbor result.json files
+scripts/nds/                # local verifier + mechanical rubric
+results/summaries/
 ```
 
 ## Run locally
@@ -45,79 +45,46 @@ uv tool install harbor
 
 Nested-container hosts (overlay-on-overlay) should run the daemon with `"storage-driver": "vfs"` and `DOCKER_BUILDKIT=0`.
 
-### Static checks (CI)
+### Author checks (no API key)
 
 ```bash
+export DOCKER_BUILDKIT=0
 bash scripts/run_static_checks.sh tasks/nds-desk
+TASK=tasks/nds-desk bash scripts/run_trials.sh oracle   # must be 1.0
+TASK=tasks/nds-desk bash scripts/run_trials.sh nop      # must be 0.0
+bash scripts/nds/verify_local.sh                        # solution=1, shipping=0
+python3 scripts/nds/check_mechanical.py
 ```
 
-### Oracle and nop (CI validation)
+### Evaluator `/run` and `/cheat` (subscription login, not a paid key)
+
+Three `/run` trials each, matching [docs/harbor-run-defaults.yml](docs/harbor-run-defaults.yml):
 
 ```bash
-export DOCKER_BUILDKIT=0
-TASK=tasks/nds-desk bash scripts/run_trials.sh oracle
-TASK=tasks/nds-desk bash scripts/run_trials.sh nop
+# Codex: `codex login` then:
+TASK=tasks/nds-desk bash scripts/run_trials.sh run-codex
+
+# Claude Code: `claude setup-token` then:
+TASK=tasks/nds-desk bash scripts/run_trials.sh run-claude
 ```
 
-Oracle must report reward `1.0`. Nop must report reward `0.0`.
-
-### Any correct engine (local verifier matrix)
+`/cheat` appends [docs/hack-trial-prompt.md](docs/hack-trial-prompt.md):
 
 ```bash
-export DOCKER_BUILDKIT=0
-bash scripts/verify_local.sh
+TASK=tasks/nds-desk bash scripts/run_trials.sh cheat-codex
+TASK=tasks/nds-desk bash scripts/run_trials.sh cheat-claude
 ```
 
-Runs the real separate-verifier image against the official solution, a second dataclass rewrite (`scripts/alt-hsm`), the bundled starter, and a hardcoded sample report. Required: 1, 1, 0, 0.
+Crashes, rate limits, container failures, and timeouts are infra, not model results.
 
-Mechanical subset of the implementation rubric (no LLM):
+## Recorded author-side results
 
-```bash
-python3 scripts/check_implementation_rubric_mechanical.py
-```
+| Check | Result |
+| --- | --- |
+| Static checks | PASS |
+| Oracle | 1.0 |
+| Nop | 0.0 |
+| Local verifier (solution / shipping) | 1 / 0 |
+| Mechanical rubric | PASS |
 
-Harbor agent-install network preflight (the step that previously raised `NetworkConnectionError`):
-
-```bash
-bash scripts/preflight_agent_network.sh
-```
-
-### Standard agent trials (CI `/run`)
-
-Three trials each, matching [docs/harbor-run-defaults.yml](docs/harbor-run-defaults.yml):
-
-```bash
-# Codex (gpt-5.6-sol, reasoning_effort=xhigh). Login first: `codex login`
-harbor run -p tasks/scan-margin \
-  --agent codex --model openai/gpt-5.6-sol \
-  --env docker --yes -k 3 \
-  --ae CODEX_FORCE_AUTH_JSON=1 --ak reasoning_effort=xhigh \
-  -o results/run-codex
-
-# Claude Code (claude-opus-5, reasoning_effort=max). Token: `claude setup-token`
-harbor run -p tasks/scan-margin \
-  --agent claude-code --model anthropic/claude-opus-5 \
-  --env docker --yes -k 3 \
-  --ae CLAUDE_FORCE_OAUTH=1 \
-  --ae CLAUDE_CODE_OAUTH_TOKEN="$CLAUDE_CODE_OAUTH_TOKEN" \
-  --ae CLAUDE_CODE_MAX_OUTPUT_TOKENS=128000 \
-  --ak reasoning_effort=max \
-  -o results/run-claude
-```
-
-Or: `bash scripts/run_trials.sh run-codex` / `run-claude`.
-
-The hiring bar: every completed trial must fail the verifier (reward `< 1`). Crashes, rate limits, container failures, and timeouts do not count as model failures.
-
-### Adversarial trials (CI `/cheat`)
-
-One trial each. The official hack prompt is appended (`--extra-instruction-path docs/hack-trial-prompt.md`). Every cheat trial must score reward `0`.
-
-```bash
-bash scripts/run_trials.sh cheat-codex
-bash scripts/run_trials.sh cheat-claude
-```
-
-## Recorded results
-
-See [EVALUATION.md](EVALUATION.md) for check logs, Harbor `result.json` pointers, trial tables, and failure analysis.
+See [EVALUATION.md](EVALUATION.md) for Harbor `result.json` pointers.

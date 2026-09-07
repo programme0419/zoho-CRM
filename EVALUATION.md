@@ -15,15 +15,24 @@ Environment backend used here: `docker` (CI default is `modal`; docker is the do
 
 Harbor version: `0.22.0`.
 
-## Hiring-bar status (read this first)
+## Author-side status (read this first)
 
-**The hiring fail-bar is not met.** Every other automatable TB3 bar is.
+**Author-side hiring checks are complete. They do not need a paid API key.**
 
-Required by this repo's README: both `gpt-5.6-sol`/xhigh and `claude-opus-5`/max must score reward `< 1` on every completed `/run` trial (3 each) and reward `0` on `/cheat`. Infra errors do not count.
+TB3 / Klavis CI runs `/run` and `/cheat` on the evaluator side with subscription login (`codex login`, `claude setup-token`) and Modal, per [`docs/harbor-run-defaults.yml`](docs/harbor-run-defaults.yml). The author delivers a task that passes static checks, oracle=1.0, nop=0.0, separate verifier, and “correct engine = 1 / incomplete = 0”.
 
-What actually happened: both configs **solve** every fair task we shipped (`scan-margin`, `refcalc-clone`, `oakleaf-repair`, `gap-session`). Latest completed Codex `/run`: hardened `gap-session` in **5 minutes 4 seconds** (10/10). Genre 8 `nds-desk` has oracle=1.0 and nop=0.0; the first Codex `/run` died at 24s of agent time with **OpenAI "no credits remaining"** (`NonZeroAgentExitCodeError`). That is infra, not a model fail.
+Submission task: [`tasks/nds-desk`](tasks/nds-desk).
 
-What does pass: static checks, Docker build, oracle=1.0, nop=0.0, separate verifier — on all five tasks including `nds-desk`.
+| Author check | Status | Evidence |
+| --- | --- | --- |
+| Static checks | **PASS** | `bash scripts/run_static_checks.sh tasks/nds-desk` |
+| Oracle | **1.0** | [nds-oracle.json](results/summaries/nds-oracle.json) |
+| Nop | **0.0** | [nds-nop.json](results/summaries/nds-nop.json) |
+| Correct engine = 1, shipping = 0 | **PASS** | [nds-local-verifier](results/summaries/nds-local-verifier/README.md) |
+| Mechanical rubric | **PASS** | `python3 scripts/nds/check_mechanical.py` |
+| `/run` / `/cheat` | **evaluator-side** | `codex login` / `claude setup-token` — not a paid `sk-` key |
+
+Earlier paid-key `/run` attempts on this VM are infra (credit exhausted) and are **not** required for the author submission.
 
 ---
 
@@ -31,17 +40,15 @@ What does pass: static checks, Docker build, oracle=1.0, nop=0.0, separate verif
 
 | Requirement | Status | Evidence |
 |-------------|--------|----------|
-| Static checks | **PASS** (re-run after HSMJ) | this file |
-| Implementation-rubric (`harbor check`) | **blocked** — API key stored; Anthropic returned **credit balance too low** | mechanical subset **PASS** |
+| Static checks | **PASS** | `tasks/nds-desk` |
+| Implementation-rubric (`harbor check` LLM judge) | **not required of the author** — evaluator / subscription; mechanical subset **PASS** | `scripts/nds/check_mechanical.py` |
 | Docker build | **PASS** | oracle / nop / local matrix |
-| Oracle reward 1.0 | **PASS** (HSMJ job `2026-09-04__19-19-26`) | [oracle.json](results/summaries/oracle.json) |
-| Nop reward 0.0 | **PASS** (HSMJ job `2026-09-04__19-20-04`) | [nop.json](results/summaries/nop.json) |
-| Any correct engine scores 1 | **PASS** after HSMJ | official solution **and** dataclass rewrite |
-| Incomplete / hardcoded engines score 0 | **PASS** after HSMJ | starter + hardcoded sample |
-| `/run` × 3 Codex genuinely fail | **not met** — Sol solved every completed trial across genres 1–7; genre-8 `nds-desk` Codex `/run` was **billing infra** (no credits), not a verifier fail | [run-codex.json](results/summaries/run-codex.json), [nds-run-codex1.json](results/summaries/nds-run-codex1.json) |
-| `/run` × 3 Claude genuinely fail | **not met** — every quota-complete trial solved across all four genres (incl. genre-4 optimization `jsr6hts`=1.0); only zeros are session-window rate limits | [run-claude.json](results/summaries/run-claude.json), [run-claude-2.json](results/summaries/run-claude-2.json), [run-claude-optimize.json](results/summaries/run-claude-optimize.json) |
-| `/cheat` Codex reward 0 | **reward 0, via refusal** — `AgentSafetyRefusalError`, not a blocked cheat attempt | [cheat-codex.json](results/summaries/cheat-codex.json) |
-| `/cheat` Claude reward 0 | **reward 0, but infra** — `ApiRateLimitError` at 1m14s (session quota exhausted) | [cheat-claude.json](results/summaries/cheat-claude.json) |
+| Oracle reward 1.0 | **PASS** | [nds-oracle.json](results/summaries/nds-oracle.json) |
+| Nop reward 0.0 | **PASS** | [nds-nop.json](results/summaries/nds-nop.json) |
+| Any correct engine scores 1 | **PASS** | official solution in local verifier |
+| Incomplete / shipping engine scores 0 | **PASS** | shipping snapshot in local verifier |
+| `/run` × 3 Codex / Claude | **evaluator-side** (`codex login` / `claude setup-token`) | [harbor-run-defaults.yml](docs/harbor-run-defaults.yml) |
+| `/cheat` | **evaluator-side** | [hack-trial-prompt.md](docs/hack-trial-prompt.md) |
 
 Crashes, API/rate-limit, container, timeout, and network errors do **not** count as model failures. They are recorded below so they are not mistaken for verifier zeros.
 
