@@ -1,0 +1,32 @@
+{
+  "jobs": [
+    {
+      "id": "a1",
+      "op": "adjust",
+      "date": "2026-03-16",
+      "cal": "NYB",
+      "conv": "F"
+    },
+    {
+      "id": "a2",
+      "op": "adjust",
+      "date": "2026-03-16",
+      "cal": "NYB",
+      "conv": "P"
+    },
+    {
+      "id": "a3",
+      "op": "adjust",
+      "date": "2026-03-16",
+      "cal": "NYB",
+      "conv": "MF"
+    },
+    {
+      "id": "a4",
+      "op": "adjust",
+      "date": "2026-03-16",
+      "cal": "NYB",
+      "conv": "U"
+    }
+  ]
+}

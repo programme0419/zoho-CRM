@@ -1,0 +1,26 @@
+{
+  "jobs": [
+    {
+      "id": "h1",
+      "op": "adjust",
+      "date": "2026-11-27",
+      "cal": "NYB",
+      "conv": "F"
+    },
+    {
+      "id": "h2",
+      "op": "adjust",
+      "date": "2026-11-27",
+      "cal": "NYB",
+      "conv": "P"
+    },
+    {
+      "id": "h3",
+      "op": "add_tenor",
+      "date": "2026-11-25",
+      "tenor": "ON",
+      "cal": "NYB",
+      "conv": "U"
+    }
+  ]
+}

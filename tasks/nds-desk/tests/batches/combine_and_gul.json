@@ -1,0 +1,47 @@
+{
+  "jobs": [
+    {
+      "id": "c1",
+      "op": "adjust",
+      "date": "2026-04-23",
+      "cal": "NYB+LNB",
+      "conv": "F"
+    },
+    {
+      "id": "c2",
+      "op": "adjust",
+      "date": "2026-04-23",
+      "cal": "NYB",
+      "conv": "F"
+    },
+    {
+      "id": "c3",
+      "op": "adjust",
+      "date": "2026-04-23",
+      "cal": "LNB",
+      "conv": "F"
+    },
+    {
+      "id": "c4",
+      "op": "adjust",
+      "date": "2026-02-20",
+      "cal": "GUL",
+      "conv": "F"
+    },
+    {
+      "id": "c5",
+      "op": "adjust",
+      "date": "2026-02-22",
+      "cal": "GUL",
+      "conv": "F"
+    },
+    {
+      "id": "c6",
+      "op": "add_tenor",
+      "date": "2026-02-19",
+      "tenor": "ON",
+      "cal": "GUL",
+      "conv": "U"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "jobs": [
+    {
+      "id": "e1",
+      "op": "add_tenor",
+      "date": "2026-05-31",
+      "tenor": "1M",
+      "cal": "NYB",
+      "conv": "MF-EOM"
+    },
+    {
+      "id": "e2",
+      "op": "add_tenor",
+      "date": "2026-05-29",
+      "tenor": "1M",
+      "cal": "NYB",
+      "conv": "MF-EOM"
+    },
+    {
+      "id": "e3",
+      "op": "adjust",
+      "date": "2026-02-28",
+      "cal": "NYB",
+      "conv": "MF-EOM"
+    }
+  ]
+}

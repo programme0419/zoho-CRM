@@ -1,0 +1,44 @@
+{
+  "jobs": [
+    {
+      "id": "m1",
+      "op": "add_tenor",
+      "date": "2026-01-31",
+      "tenor": "1M",
+      "cal": "NYB",
+      "conv": "U"
+    },
+    {
+      "id": "m2",
+      "op": "add_tenor",
+      "date": "2026-01-30",
+      "tenor": "1M",
+      "cal": "NYB",
+      "conv": "U"
+    },
+    {
+      "id": "m3",
+      "op": "add_tenor",
+      "date": "2026-01-31",
+      "tenor": "1M",
+      "cal": "NYB",
+      "conv": "MF"
+    },
+    {
+      "id": "m4",
+      "op": "add_tenor",
+      "date": "2026-01-31",
+      "tenor": "3M",
+      "cal": "NYB",
+      "conv": "U"
+    },
+    {
+      "id": "m5",
+      "op": "add_tenor",
+      "date": "2026-11-30",
+      "tenor": "1M",
+      "cal": "NYB",
+      "conv": "U"
+    }
+  ]
+}
