@@ -18,6 +18,7 @@ import { CreateLeadDialog } from "@/components/records/create-lead-dialog"
 import { EmptyState } from "@/components/records/empty-state"
 import { OwnerChip } from "@/components/records/owner-chip"
 import { PageHeader } from "@/components/records/page-header"
+import { ScoreMeter } from "@/components/records/score-meter"
 import { StatusBadge } from "@/components/records/status-badge"
 import { useCrm } from "@/lib/crm-store"
 import { formatDate, moneyCompact } from "@/lib/format"
@@ -42,7 +43,7 @@ export function LeadsView() {
       <PageHeader
         eyebrow="Leads module"
         title="Inbound before it becomes pipeline."
-        description="Zoho Leads with scoring, sources, and one-click conversion to Account + Contact + Deal."
+        description="Zoho Leads with a live scoring engine — firmographics, intent, activity — then convert to Account + Contact + Deal."
         actions={
           <Button onClick={() => setOpen(true)}>
             <Plus data-icon="inline-start" />
@@ -103,7 +104,9 @@ export function LeadsView() {
                   <TableCell>
                     <StatusBadge value={lead.status} />
                   </TableCell>
-                  <TableCell className="font-medium">{lead.score}</TableCell>
+                  <TableCell>
+                    <ScoreMeter score={lead.score} size="sm" />
+                  </TableCell>
                   <TableCell>{lead.source}</TableCell>
                   <TableCell>{lead.annualRevenue ? moneyCompact(lead.annualRevenue) : "—"}</TableCell>
                   <TableCell>

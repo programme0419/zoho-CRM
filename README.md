@@ -16,7 +16,8 @@ Open [http://localhost:43123](http://localhost:43123).
 ## What to show a client
 
 - **Command center** — Q3 pipeline, weighted forecast, quota, win rate
-- **Leads** — scoring, capture, convert to Account + Contact + Deal
+- **Scoring** — live Zoho-style rules (firmographic, intent, behavioral, negative). Toggle a rule and every lead recalculates; Rating / Hot status follow thresholds.
+- **Leads** — capture with a live score preview, then convert to Account + Contact + Deal
 - **Pipeline** — drag deals between stages; Blueprint blocks invalid moves (discovery call, PO number, lost reason)
 - **Blueprints** — workflow rules and a Deluge closed-won handoff
 - **Zoho API v8** — scopes, endpoints, field map, COQL, convert body, sync log

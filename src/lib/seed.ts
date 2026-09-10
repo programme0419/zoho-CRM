@@ -1,4 +1,5 @@
 import type { CrmState } from "./types"
+import { EMPTY_TOUCHPOINTS, type LeadTouchpoints } from "./scoring"
 
 export const ORG = {
   name: "Helios Industrial",
@@ -10,7 +11,7 @@ export const ORG = {
   quota: 4_200_000,
 }
 
-export const seed: CrmState = {
+const rawSeed = {
   currentUserId: "usr_elena",
   users: [
     {
@@ -1185,3 +1186,75 @@ export const seed: CrmState = {
     },
   ],
 }
+
+const TOUCHPOINTS: Record<string, LeadTouchpoints> = {
+  led_sabine: {
+    websiteSessions: 5,
+    usedChpCalculator: true,
+    emailOpens: 4,
+    emailClicks: 2,
+  },
+  led_rafael: {
+    websiteSessions: 3,
+    usedChpCalculator: false,
+    emailOpens: 2,
+    emailClicks: 1,
+  },
+  led_mei: {
+    websiteSessions: 2,
+    usedChpCalculator: false,
+    emailOpens: 1,
+    emailClicks: 0,
+  },
+  led_dario: {
+    websiteSessions: 1,
+    usedChpCalculator: false,
+    emailOpens: 0,
+    emailClicks: 0,
+  },
+  led_ines: {
+    websiteSessions: 4,
+    usedChpCalculator: false,
+    emailOpens: 3,
+    emailClicks: 1,
+  },
+  led_harun: {
+    websiteSessions: 4,
+    usedChpCalculator: false,
+    emailOpens: 2,
+    emailClicks: 1,
+  },
+  led_clare: {
+    websiteSessions: 2,
+    usedChpCalculator: true,
+    emailOpens: 1,
+    emailClicks: 0,
+  },
+  led_jonas: {
+    websiteSessions: 1,
+    usedChpCalculator: false,
+    emailOpens: 0,
+    emailClicks: 0,
+  },
+  led_amina: {
+    websiteSessions: 3,
+    usedChpCalculator: false,
+    emailOpens: 2,
+    emailClicks: 1,
+  },
+  led_piotr: {
+    websiteSessions: 1,
+    usedChpCalculator: false,
+    emailOpens: 0,
+    emailClicks: 0,
+  },
+}
+
+export const seed = {
+  ...rawSeed,
+  disabledScoringRuleIds: [] as string[],
+  leads: rawSeed.leads.map((lead) => ({
+    ...lead,
+    touchpoints: TOUCHPOINTS[lead.id] ?? EMPTY_TOUCHPOINTS,
+  })),
+} as CrmState

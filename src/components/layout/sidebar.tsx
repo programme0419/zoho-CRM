@@ -6,6 +6,7 @@ import {
   Activity,
   Building2,
   Contact,
+  Gauge,
   GitBranch,
   Handshake,
   LayoutDashboard,
@@ -19,6 +20,7 @@ import { ORG } from "@/lib/seed"
 const nav = [
   { href: "/", label: "Command center", icon: LayoutDashboard },
   { href: "/leads", label: "Leads", icon: UserPlus },
+  { href: "/scoring", label: "Scoring", icon: Gauge },
   { href: "/accounts", label: "Accounts", icon: Building2 },
   { href: "/contacts", label: "Contacts", icon: Contact },
   { href: "/deals", label: "Pipeline", icon: Handshake },

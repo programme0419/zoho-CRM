@@ -11,6 +11,7 @@ import {
 import { canMoveDeal } from "./blueprint"
 import { id, nowIso } from "./format"
 import { seed } from "./seed"
+import { EMPTY_TOUCHPOINTS, nextLeadStatus, scoreLead, type ScoreResult } from "./scoring"
 import type {
   Account,
   Activity,
@@ -29,17 +30,36 @@ type Action =
   | { type: "convert-lead"; leadId: string; account: Account; contact: Contact; deal: Deal }
   | { type: "move-deal"; dealId: string; stage: DealStage }
   | { type: "patch-deal"; dealId: string; patch: Partial<Deal> }
+  | { type: "patch-lead"; leadId: string; patch: Partial<Lead> }
   | { type: "complete-activity"; activityId: string }
   | { type: "add-note"; note: Note }
   | { type: "add-activity"; activity: Activity }
+  | { type: "toggle-scoring-rule"; ruleId: string }
   | { type: "add-sync"; module: string; action: CrmState["syncLog"][number]["action"]; endpoint: string }
+
+function rescore(state: CrmState): CrmState {
+  const now = new Date()
+  const leads = state.leads.map((lead) => {
+    const result = scoreLead(
+      { lead, activities: state.activities, notes: state.notes, now },
+      state.disabledScoringRuleIds
+    )
+    return {
+      ...lead,
+      score: result.total,
+      rating: result.rating,
+      status: nextLeadStatus(lead, result.total),
+    }
+  })
+  return { ...state, leads }
+}
 
 function reducer(state: CrmState, action: Action): CrmState {
   switch (action.type) {
     case "add-lead":
-      return { ...state, leads: [action.lead, ...state.leads] }
+      return rescore({ ...state, leads: [action.lead, ...state.leads] })
     case "convert-lead":
-      return {
+      return rescore({
         ...state,
         leads: state.leads.map((lead) =>
           lead.id === action.leadId
@@ -56,7 +76,7 @@ function reducer(state: CrmState, action: Action): CrmState {
         accounts: [action.account, ...state.accounts],
         contacts: [action.contact, ...state.contacts],
         deals: [action.deal, ...state.deals],
-      }
+      })
     case "move-deal":
       return {
         ...state,
@@ -73,17 +93,30 @@ function reducer(state: CrmState, action: Action): CrmState {
           deal.id === action.dealId ? { ...deal, ...action.patch } : deal
         ),
       }
+    case "patch-lead":
+      return rescore({
+        ...state,
+        leads: state.leads.map((lead) =>
+          lead.id === action.leadId ? { ...lead, ...action.patch } : lead
+        ),
+      })
     case "complete-activity":
-      return {
+      return rescore({
         ...state,
         activities: state.activities.map((activity) =>
           activity.id === action.activityId ? { ...activity, status: "Completed" } : activity
         ),
-      }
+      })
     case "add-note":
-      return { ...state, notes: [action.note, ...state.notes] }
+      return rescore({ ...state, notes: [action.note, ...state.notes] })
     case "add-activity":
-      return { ...state, activities: [action.activity, ...state.activities] }
+      return rescore({ ...state, activities: [action.activity, ...state.activities] })
+    case "toggle-scoring-rule": {
+      const disabled = state.disabledScoringRuleIds.includes(action.ruleId)
+        ? state.disabledScoringRuleIds.filter((ruleId) => ruleId !== action.ruleId)
+        : [...state.disabledScoringRuleIds, action.ruleId]
+      return rescore({ ...state, disabledScoringRuleIds: disabled })
+    }
     case "add-sync":
       return {
         ...state,
@@ -112,6 +145,8 @@ type CrmContextValue = CrmState & {
   userById: (id: string) => CrmState["users"][number] | undefined
   accountById: (id: string) => Account | undefined
   contactById: (id: string) => Contact | undefined
+  scoreFor: (leadId: string) => ScoreResult | null
+  toggleScoringRule: (ruleId: string) => void
   convertLead: (leadId: string, dealName: string) => {
     ok: boolean
     message: string
@@ -124,13 +159,16 @@ type CrmContextValue = CrmState & {
     company: string
     email: string
     source: LeadSource
-  }) => void
+    title?: string
+    industry?: string
+    annualRevenue?: number
+  }) => ScoreResult
 }
 
 const CrmContext = createContext<CrmContextValue | null>(null)
 
 export function CrmProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, seed)
+  const [state, dispatch] = useReducer(reducer, seed, rescore)
 
   const value = useMemo<CrmContextValue>(() => {
     const userById = (userId: string) => state.users.find((user) => user.id === userId)
@@ -140,6 +178,15 @@ export function CrmProvider({ children }: { children: ReactNode }) {
       state.contacts.find((contact) => contact.id === contactId)
     const currentUser = userById(state.currentUserId) ?? state.users[0]
 
+    const scoreFor = (leadId: string) => {
+      const lead = state.leads.find((item) => item.id === leadId)
+      if (!lead) return null
+      return scoreLead(
+        { lead, activities: state.activities, notes: state.notes, now: new Date() },
+        state.disabledScoringRuleIds
+      )
+    }
+
     return {
       ...state,
       dispatch,
@@ -147,27 +194,45 @@ export function CrmProvider({ children }: { children: ReactNode }) {
       userById,
       accountById,
       contactById,
+      scoreFor,
+      toggleScoringRule: (ruleId) => {
+        dispatch({ type: "toggle-scoring-rule", ruleId })
+        dispatch({
+          type: "add-sync",
+          module: "Scoring",
+          action: "PUT",
+          endpoint: "PUT /crm/v8/settings/automation/scoring_rules",
+        })
+      },
       addLead: (input) => {
         const lead: Lead = {
           id: id("led"),
           firstName: input.firstName,
           lastName: input.lastName,
           company: input.company,
-          title: "New inquiry",
+          title: input.title || "New inquiry",
           email: input.email,
           phone: "",
           status: "Not Contacted",
           source: input.source,
-          industry: "Unknown",
-          annualRevenue: 0,
-          rating: "Warm",
+          industry: input.industry || "Unknown",
+          annualRevenue: input.annualRevenue ?? 0,
+          rating: "Cold",
           ownerId: currentUser.id,
-          score: 35,
+          score: 0,
           city: "",
           country: "",
           createdTime: nowIso(),
           converted: false,
+          touchpoints: {
+            ...EMPTY_TOUCHPOINTS,
+            websiteSessions: input.source === "Website" ? 1 : 0,
+          },
         }
+        const scored = scoreLead(
+          { lead, activities: state.activities, notes: state.notes, now: new Date() },
+          state.disabledScoringRuleIds
+        )
         dispatch({ type: "add-lead", lead })
         dispatch({
           type: "add-sync",
@@ -175,6 +240,7 @@ export function CrmProvider({ children }: { children: ReactNode }) {
           action: "POST",
           endpoint: "POST /crm/v8/Leads",
         })
+        return scored
       },
       convertLead: (leadId, dealName) => {
         const lead = state.leads.find((item) => item.id === leadId)

@@ -16,6 +16,7 @@ import { formatDateTime } from "@/lib/format"
 import {
   FIELD_MAP,
   SAMPLE_COQL,
+  SAMPLE_SCORE_COQL,
   SAMPLE_CONVERT,
   SAMPLE_LEAD_PAYLOAD,
   ZOHO_ENDPOINTS,
@@ -131,6 +132,16 @@ export function IntegrationView() {
           <CardContent>
             <pre className="overflow-x-auto rounded-xl bg-[oklch(0.22_0.02_50)] p-4 font-mono text-[12px] leading-6 text-[oklch(0.93_0.02_90)]">
               {SAMPLE_COQL}
+            </pre>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="border-b">
+            <CardTitle>COQL — hot scored leads</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <pre className="overflow-x-auto rounded-xl bg-[oklch(0.22_0.02_50)] p-4 font-mono text-[12px] leading-6 text-[oklch(0.93_0.02_90)]">
+              {SAMPLE_SCORE_COQL}
             </pre>
           </CardContent>
         </Card>

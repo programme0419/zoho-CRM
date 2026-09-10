@@ -48,9 +48,14 @@ export const ZOHO_ENDPOINTS = [
     purpose: "Forecast and stale-proposal queries without full module scans",
   },
   {
-    method: "POST",
-    path: "/crm/v8/actions/watch",
-    purpose: "Webhook notifications for create/edit on core modules",
+    method: "GET",
+    path: "/crm/v8/settings/automation/scoring_rules",
+    purpose: "Read the Helios lead scoring rule set (positive / negative)",
+  },
+  {
+    method: "PUT",
+    path: "/crm/v8/Leads/{id}",
+    purpose: "Write Lead_Score and Rating after the engine recalculates",
   },
 ]
 
@@ -58,7 +63,10 @@ export const FIELD_MAP = [
   { ui: "Company", zoho: "Company", module: "Leads" },
   { ui: "Lead status", zoho: "Lead_Status", module: "Leads" },
   { ui: "Lead source", zoho: "Lead_Source", module: "Leads" },
-  { ui: "Lead score", zoho: "Lead_Score (custom)", module: "Leads" },
+  { ui: "Lead score", zoho: "Lead_Score", module: "Leads" },
+  { ui: "Rating", zoho: "Rating", module: "Leads" },
+  { ui: "CHP calculator used", zoho: "CHP_Calculator_Used (custom)", module: "Leads" },
+  { ui: "Website sessions", zoho: "Website_Sessions (custom)", module: "Leads" },
   { ui: "Annual revenue", zoho: "Annual_Revenue", module: "Leads / Accounts" },
   { ui: "Account name", zoho: "Account_Name", module: "Accounts" },
   { ui: "Deal name", zoho: "Deal_Name", module: "Deals" },
@@ -76,6 +84,12 @@ from Deals
 where Stage not in ('Closed Won', 'Closed Lost')
   and Closing_Date between '2026-09-01' and '2026-09-30'
 order by Amount desc`
+
+export const SAMPLE_SCORE_COQL = `select Last_Name, Company, Lead_Score, Rating, Annual_Revenue
+from Leads
+where Lead_Score >= 70
+  and Lead_Status not in ('Lost Lead', 'Unqualified')
+order by Lead_Score desc`
 
 export const SAMPLE_CONVERT = `{
   "data": [

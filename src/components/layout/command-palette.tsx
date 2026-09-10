@@ -86,6 +86,17 @@ export function CommandPalette({
         />
         <CommandList>
           <CommandEmpty>No matching Zoho records.</CommandEmpty>
+          <CommandGroup heading="Workspace">
+            <CommandItem value="scoring rules" onSelect={() => go("/scoring")}>
+              Scoring rules
+            </CommandItem>
+            <CommandItem value="leads module" onSelect={() => go("/leads")}>
+              Leads
+            </CommandItem>
+            <CommandItem value="pipeline deals" onSelect={() => go("/deals")}>
+              Pipeline
+            </CommandItem>
+          </CommandGroup>
           <CommandGroup heading="Leads">
             {results.leads.map((lead) => (
               <CommandItem

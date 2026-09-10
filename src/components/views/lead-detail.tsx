@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { FieldList } from "@/components/records/field-list"
 import { OwnerChip } from "@/components/records/owner-chip"
 import { PageHeader } from "@/components/records/page-header"
+import { ScoreBreakdown } from "@/components/records/score-breakdown"
 import { StatusBadge } from "@/components/records/status-badge"
 import { useCrm } from "@/lib/crm-store"
 import { formatDateTime, id, money, nowIso } from "@/lib/format"
@@ -45,6 +46,7 @@ export function LeadDetail({ leadId }: { leadId: string }) {
 
   const notes = crm.notes.filter((item) => item.recordId === lead.id)
   const activities = crm.activities.filter((item) => item.relatedId === lead.id)
+  const breakdown = crm.scoreFor(lead.id)
 
   function convert() {
     const result = crm.convertLead(lead!.id, dealName)
@@ -108,7 +110,6 @@ export function LeadDetail({ leadId }: { leadId: string }) {
                 { label: "Company", value: lead.company },
                 { label: "Industry", value: lead.industry },
                 { label: "Lead source", value: lead.source },
-                { label: "Lead score", value: String(lead.score) },
                 { label: "Annual revenue", value: lead.annualRevenue ? money(lead.annualRevenue) : "—" },
                 { label: "Owner", value: <OwnerChip user={crm.userById(lead.ownerId)} /> },
               ]}
@@ -118,21 +119,73 @@ export function LeadDetail({ leadId }: { leadId: string }) {
 
         <Card>
           <CardHeader className="border-b">
-            <CardTitle>Conversion</CardTitle>
+            <CardTitle>Lead score</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 text-sm">
-            {lead.converted ? (
-              <p>
-                Already converted. Account, contact, and deal were written in one Zoho convert
-                transaction.
-              </p>
-            ) : (
-              <p>
-                Convert writes Account, Contact, and Deal via POST /crm/v8/Leads/{"{id}"}/actions/convert
-                and fires the “Lead conversion writes Account 360” workflow.
-              </p>
-            )}
-            <p className="text-muted-foreground">Scoring rule applied on create. Current score {lead.score}.</p>
+          <CardContent className="space-y-4">
+            {breakdown ? <ScoreBreakdown result={breakdown} /> : null}
+            <div className="flex flex-wrap gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  crm.dispatch({
+                    type: "patch-lead",
+                    leadId,
+                    patch: {
+                      touchpoints: {
+                        ...lead.touchpoints,
+                        websiteSessions: lead.touchpoints.websiteSessions + 1,
+                      },
+                    },
+                  })
+                  toast.success("Website session logged. Scoring engine re-ran.")
+                }}
+              >
+                + Website session
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                disabled={lead.touchpoints.usedChpCalculator}
+                onClick={() => {
+                  crm.dispatch({
+                    type: "patch-lead",
+                    leadId,
+                    patch: {
+                      touchpoints: { ...lead.touchpoints, usedChpCalculator: true },
+                    },
+                  })
+                  toast.success("CHP calculator touchpoint set. +16 if the rule is active.")
+                }}
+              >
+                Used CHP calculator
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  crm.dispatch({
+                    type: "patch-lead",
+                    leadId,
+                    patch: {
+                      touchpoints: {
+                        ...lead.touchpoints,
+                        emailClicks: lead.touchpoints.emailClicks + 1,
+                        emailOpens: lead.touchpoints.emailOpens + 1,
+                      },
+                    },
+                  })
+                  toast.success("Campaign click logged.")
+                }}
+              >
+                + Email click
+              </Button>
+            </div>
+            <p className="text-muted-foreground text-xs">
+              {lead.touchpoints.websiteSessions} sessions ·{" "}
+              {lead.touchpoints.usedChpCalculator ? "calculator used" : "no calculator"} ·{" "}
+              {lead.touchpoints.emailClicks} email clicks
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -176,7 +229,21 @@ export function LeadDetail({ leadId }: { leadId: string }) {
                       <p className="text-sm font-medium">{activity.subject}</p>
                       <p className="text-muted-foreground text-xs">{activity.type}</p>
                     </div>
-                    <StatusBadge value={activity.status} />
+                    <div className="flex items-center gap-2">
+                      <StatusBadge value={activity.status} />
+                      {activity.status !== "Completed" ? (
+                        <Button
+                          size="xs"
+                          variant="outline"
+                          onClick={() => {
+                            crm.dispatch({ type: "complete-activity", activityId: activity.id })
+                            toast.success("Activity completed. Behavioral scoring re-ran.")
+                          }}
+                        >
+                          Complete
+                        </Button>
+                      ) : null}
+                    </div>
                   </li>
                 ))}
               </ul>

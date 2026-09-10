@@ -108,6 +108,12 @@ export type Lead = {
   convertedContactId?: ContactId
   convertedAccountId?: AccountId
   convertedDealId?: DealId
+  touchpoints: {
+    websiteSessions: number
+    usedChpCalculator: boolean
+    emailOpens: number
+    emailClicks: number
+  }
 }
 
 export type Deal = {
@@ -185,6 +191,7 @@ export type CrmState = {
   workflows: WorkflowRule[]
   syncLog: SyncEvent[]
   currentUserId: UserId
+  disabledScoringRuleIds: string[]
 }
 
 export const STAGE_ORDER: DealStage[] = [

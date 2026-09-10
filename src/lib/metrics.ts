@@ -51,6 +51,17 @@ export function pipelineMetrics(state: CrmState) {
     return acc
   }, {})
 
+  const scores = state.leads.filter((lead) => !lead.converted).map((lead) => lead.score)
+  const scoring = {
+    hot: scores.filter((value) => value >= 70).length,
+    warm: scores.filter((value) => value >= 40 && value < 70).length,
+    cold: scores.filter((value) => value < 40).length,
+    average:
+      scores.length === 0
+        ? 0
+        : Math.round(scores.reduce((sum, value) => sum + value, 0) / scores.length),
+  }
+
   return {
     openDeals,
     won,
@@ -67,5 +78,6 @@ export function pipelineMetrics(state: CrmState) {
     closingSoon,
     byOwner,
     sourceCounts,
+    scoring,
   }
 }

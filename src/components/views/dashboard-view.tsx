@@ -185,13 +185,19 @@ export function DashboardView() {
       <div className="mt-4 grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader>
-            <CardTitle>Open leads</CardTitle>
+            <CardTitle>Lead scoring</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="font-heading text-4xl">{metrics.openLeads.length}</p>
+            <p className="font-heading text-4xl">{metrics.scoring.hot} hot</p>
             <p className="text-muted-foreground mt-1 text-sm">
-              {crm.leads.filter((lead) => lead.status === "Hot").length} marked Hot — scoring rule is live.
+              {metrics.scoring.warm} warm · {metrics.scoring.cold} cold · avg {metrics.scoring.average}
             </p>
+            <Link
+              href="/scoring"
+              className="text-primary mt-3 inline-flex items-center gap-1 text-sm font-medium"
+            >
+              Open scoring rules <ArrowUpRight className="size-3.5" />
+            </Link>
           </CardContent>
         </Card>
         <Card>
