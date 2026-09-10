@@ -1,8 +1,0 @@
-{
-    "jobs_dir": "results/oakleaf/oracle6",
-    "tasks": [
-        {
-            "path": "tasks/oakleaf-repair"
-        }
-    ]
-}

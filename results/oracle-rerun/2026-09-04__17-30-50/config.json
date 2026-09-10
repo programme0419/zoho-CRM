@@ -1,8 +1,0 @@
-{
-    "jobs_dir": "/workspace/results/oracle-rerun",
-    "tasks": [
-        {
-            "path": "tasks/scan-margin"
-        }
-    ]
-}
